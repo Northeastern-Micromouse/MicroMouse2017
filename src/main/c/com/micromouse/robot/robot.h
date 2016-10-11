@@ -5,8 +5,8 @@
 #include "src/main/c/com/micromouse/location/location.h"
 
 typedef struct Robot {
-	struct Location location_;
-	struct Cell maze_[16][16];
+	location location_;
+	cell maze_[16][16];
 } robot;
 
 #endif  // MICROMOUSE_ROBOT_ROBOT_H_

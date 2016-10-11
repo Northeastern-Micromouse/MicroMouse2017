@@ -7,6 +7,6 @@
 typedef struct Location {
     int x;
     int y;
-} loc;
+} location;
 
 #endif  // MICROMOUSE_LOCATION_LOCATION_H_
