@@ -27,13 +27,3 @@
 *.exe
 *.out
 *.app
-
-# Bazel
-/bazel-bazel
-/bazel-bin
-/bazel-genfiles
-/bazel-out
-/bazel-testlogs
-/bazel.iml
-/output/
-/bazel-MicroMouse2017
