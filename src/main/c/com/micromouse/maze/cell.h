@@ -7,6 +7,7 @@
 
 typedef struct Cell {
 	struct Location location;
+	bool open; 
 	bool top;
 	bool bottom;
 	bool right;
