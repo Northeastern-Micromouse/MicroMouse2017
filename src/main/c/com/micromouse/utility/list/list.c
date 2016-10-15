@@ -45,7 +45,19 @@ Cell * back(List * list) {
 }
 
 void PushBack(Cell * data, List * list) {
-	// TODO: Implement
+	if (list == NULL) {
+		list = InitializeList(data);
+		return;
+	}
+	if (list->next_ == NULL) {
+		list->next_ = InitializeList(data);
+		return;
+	}
+	List * head = list->next_;
+	while (head->next_ != NULL) {
+		head = head->next_;
+	}
+	head->next_ = InitializeList(data);
 }
 
 void Append(Cell * data, List * list) {
@@ -63,8 +75,16 @@ bool in(Cell * data, List * list) {
 }
 
 int length(List * list) {
-	// TODO: Implement
-	return 0;
+	if (list == NULL) {
+		return 0;
+	}
+	int count = 1;
+	List * head = list;
+	while (head->next_ != NULL) {
+		count++;
+		head = head->next_;
+	}
+	return count;
 }
 
 bool empty(List * list) {
