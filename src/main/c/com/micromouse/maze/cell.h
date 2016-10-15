@@ -11,7 +11,7 @@
 // The top position in the cell (0,0) is the cell (0,1).
 typedef struct Cell {
 	// The coordinates of the cell relative to the world.
-	Location location;
+	Location * location;
 	// Whether or not it is possible to reach the cell. 
 	// I.e if a cell is surronded by 4 walls.
 	bool open; 
@@ -34,6 +34,9 @@ typedef struct Cell {
 
 // Determines if the cell is open. Returns true if it is open, false otherwise.
 bool DetermineIfOpen(Cell * cell);
+
+// Returns the cells location.
+Location * GetLocation(Cell * cell);
 
 // Initializes a cell to all of the default values.
 Cell * InitializeCell(int x, int y);
