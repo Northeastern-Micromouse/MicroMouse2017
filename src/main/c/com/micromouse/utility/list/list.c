@@ -1,12 +1,37 @@
 #include "list.h"
 
 List * InitializeList(Cell * data) {
-	// TODO: Implement
-	return NULL;
+	// Create the List struct.
+	List * new_list;
+
+	// Request the memory from the heap.
+	new_list = (List *)malloc(sizeof(List));
+
+	// Check if the request was successful
+	if (new_list == 0) {
+		printf("Error creating the list node, out of memory\n");
+		return NULL;
+	}
+
+	// Initialize the values
+	new_list->prev_ = NULL;
+	new_list->next_ = NULL;
+	new_list->data_ = data;
+
+	return new_list;
 }
 
 void ListDestructor(List * list) {
-	// TODO: Implement
+	// Check if you are at the end of the list.
+	if (list == NULL) {
+		return;
+	}
+	// Free the memory for the cell.
+	CellDestructor(list->data_);
+	ListDestructor(list->next_);
+
+	// Free the memory for this node.
+	free(list);
 }
 
 Cell * front(List * list) {
