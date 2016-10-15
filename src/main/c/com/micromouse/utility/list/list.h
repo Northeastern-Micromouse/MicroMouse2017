@@ -19,19 +19,19 @@ List * InitializeList(Cell * data);
 
 // Free all of the memory associated with the list. Goes through all of the 
 // nodes after this node in the list and frees their memory.
-void ListDestructor(List * list);
+void ListDestructor(List ** list);
 
 // Returns the first element of the list.
-Cell * front(List * list);
+Cell * front(List ** list);
 
 // Returns the last element of the list.
-Cell * back(List * list);
+Cell * back(List ** list);
 
 // Pushes the element onto the end of the list.
-void PushBack(Cell * data, List * list);
+void PushBack(Cell * data, List ** list);
 
 // Appends the element to the front of the list.
-void Append(Cell * data, List * list);
+void Append(Cell * data, List ** list);
 
 // Gets the element at index in the list. Return NULL if not found.
 Cell * get(int index, List * list);
@@ -46,12 +46,12 @@ int length(List * list);
 bool empty(List * list);
 
 // Clears the list, does not free the memory associated with the list.
-void clear(List * list);
+void clear(List ** list);
 
 // Erases the first element to match the data in the list.
-void erase(Cell * data, List * list);
+void erase(Cell * data, List ** list);
 
 // Reverses the list.
-List * reverse(List * list);
+List * reverse(List ** list);
 
 #endif  // MICROMOUSE_UTILITY_LIST_LIST_H_

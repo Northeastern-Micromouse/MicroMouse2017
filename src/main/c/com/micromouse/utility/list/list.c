@@ -5,25 +5,25 @@ List * InitializeList(Cell * data) {
 	return NULL;
 }
 
-void ListDestructor(List * list) {
+void ListDestructor(List ** list) {
 	// TODO: Implement
 }
 
-Cell * front(List * list) {
-	// TODO: Implement
-	return NULL;
-}
-
-Cell * back(List * list) {
+Cell * front(List ** list) {
 	// TODO: Implement
 	return NULL;
 }
 
-void PushBack(Cell * data, List * list) {
+Cell * back(List ** list) {
+	// TODO: Implement
+	return NULL;
+}
+
+void PushBack(Cell * data, List ** list) {
 	// TODO: Implement
 }
 
-void Append(Cell * data, List * list) {
+void Append(Cell * data, List ** list) {
 	// TODO: Implement
 }
 
@@ -47,15 +47,15 @@ bool empty(List * list) {
 	return false;
 }
 
-void clear(List * list) {
+void clear(List ** list) {
 	// TODO: Implement
 }
 
-void erase(Cell * data, List * list) {
+void erase(Cell * data, List ** list) {
 	// TODO: Implement
 }
 
-List * reverse(List * list) {
+List * reverse(List ** list) {
 	// TODO: Implement
 	return NULL;
 }
