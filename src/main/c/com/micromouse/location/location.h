@@ -3,10 +3,9 @@
 
 // A struct for representing a location
 // A location has a x and y position  
-
 typedef struct Location {
     int x;
     int y;
-} location;
+} Location;
 
 #endif  // MICROMOUSE_LOCATION_LOCATION_H_
