@@ -26,7 +26,7 @@ void ListDestructor(List * list) {
 	if (list == NULL) {
 		return;
 	}
-	// Free the memory for the cell.
+	// Frees the memory for the cell.
 	CellDestructor(list->data_);
 	ListDestructor(list->next_);
 
