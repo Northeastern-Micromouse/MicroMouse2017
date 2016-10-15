@@ -14,6 +14,9 @@ TEST(LocationTests, ShouldInitializeALocationWithTheCorrectValues) {
 	// Then: the values should have been initialized correctly.
 	EXPECT_EQ(x, location->x);
 	EXPECT_EQ(y, location->y);
+
+	// Free up the memory.
+	LocationDestructor(location);
 }
 
 TEST(LocationTests, ShouldSeeWarningWhenInitializingLocationWithTwoNegativeValues) {
@@ -34,6 +37,9 @@ TEST(LocationTests, ShouldSeeWarningWhenInitializingLocationWithTwoNegativeValue
 	// And: A warning should be printed.
 	std::string output = testing::internal::GetCapturedStdout();
 	EXPECT_EQ("Initializing a location with invalid inputs. x: -10, y: -10. \n", output);
+
+	// Free up the memory.
+	LocationDestructor(location);
 }
 
 TEST(LocationTests, ShouldSeeWarningWhenInitializingLocationWithOneNegativeValues) {
@@ -54,4 +60,7 @@ TEST(LocationTests, ShouldSeeWarningWhenInitializingLocationWithOneNegativeValue
 	// And: A warning should be printed.
 	std::string output = testing::internal::GetCapturedStdout();
 	EXPECT_EQ("Initializing a location with invalid inputs. x: -10, y: 0. \n", output);
+
+	// Free up the memory.
+	LocationDestructor(location);
 }
