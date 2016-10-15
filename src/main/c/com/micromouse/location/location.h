@@ -2,6 +2,7 @@
 #define MICROMOUSE_LOCATION_LOCATION_H_
 
 #include <stdio.h>
+#include <stdlib.h>
 
 // A struct for representing a location
 // A location has a x and y position  
