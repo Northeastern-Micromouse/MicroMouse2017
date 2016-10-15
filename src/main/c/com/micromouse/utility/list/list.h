@@ -28,16 +28,16 @@ Cell * front(List * list);
 Cell * back(List * list);
 
 // Pushes the element onto the end of the list.
-void PushBack(Cell * data);
+void PushBack(Cell * data, List * list);
 
 // Appends the element to the front of the list.
-void Append(Cell * data);
+void Append(Cell * data, List * list);
 
 // Gets the element at index in the list. Return NULL if not found.
-Cell * get(int index);
+Cell * get(int index, List * list);
 
 // Returns if the element is in the list.
-bool in(Cell * data);
+bool in(Cell * data, List * list);
 
 // Returns the length of the list.
 int length(List * list);
@@ -49,7 +49,7 @@ bool empty(List * list);
 void clear(List * list);
 
 // Erases the first element to match the data in the list.
-void erase(Cell * data);
+void erase(Cell * data, List * list);
 
 // Reverses the list.
 List * reverse(List * list);

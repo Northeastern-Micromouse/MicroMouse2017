@@ -19,20 +19,20 @@ Cell * back(List * list) {
 	return NULL;
 }
 
-void PushBack(Cell * data) {
+void PushBack(Cell * data, List * list) {
 	// TODO: Implement
 }
 
-void Append(Cell * data) {
+void Append(Cell * data, List * list) {
 	// TODO: Implement
 }
 
-Cell * get(int index) {
+Cell * get(int index, List * list) {
 	// TODO: Implement
 	return NULL;
 }
 
-bool in(Cell * data) {
+bool in(Cell * data, List * list) {
 	// TODO: Implement
 	return false;
 }
@@ -51,7 +51,7 @@ void clear(List * list) {
 	// TODO: Implement
 }
 
-void erase(Cell * data) {
+void erase(Cell * data, List * list) {
 	// TODO: Implement
 }
 
