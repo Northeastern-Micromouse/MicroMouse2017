@@ -63,7 +63,23 @@ void PushBack(Cell * data, List * list) {
 }
 
 void Append(Cell * data, List ** list) {
-	// TODO: Implement
+	if ((*list) == NULL) {
+		(*list) = InitializeList(data);
+		return;
+	}
+	if ((*list)->prev_ == NULL) {
+		(*list)->prev_ = InitializeList(data);
+		(*list)->prev_->next_ = (*list);
+		(*list) = (*list)->prev_;
+		return;
+	}
+	List * head = (*list)->prev_;
+	while (head->prev_ != NULL) {
+		head = head->prev_;
+	}
+	head->prev_ = InitializeList(data);
+	head->prev_->next_ = head;
+	head = head->prev_;
 }
 
 Cell * get(int index, List * list) {
@@ -105,4 +121,18 @@ void erase(Cell * data, List ** list) {
 List * reverse(List ** list) {
 	// TODO: Implement
 	return NULL;
+}
+
+void resetList(List ** list) {
+	if ((*list) == NULL) {
+		return;
+	}
+	if ((*list)->prev_ == NULL) {
+		return;
+	}
+	List * head = (*list);
+	while (head->prev_ != NULL) {
+		head = head->prev_;
+	}
+	(*list) = head;
 }
