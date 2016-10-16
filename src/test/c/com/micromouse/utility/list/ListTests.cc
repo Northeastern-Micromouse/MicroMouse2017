@@ -109,6 +109,7 @@ TEST(ListTests, ChangingACellChangesItsValueInTheList) {
 	ListDestructor(list);
 }
 
+<<<<<<< HEAD
 TEST(ListTests, AppendingToAnEmptyListShouldHaveAListOfSizeOne) {
 	// Given: an empty list and some data
 	List * list = NULL;
@@ -183,6 +184,8 @@ TEST(ListTests, AppendingToAListOfSizeOneShouldWork) {
 	ListDestructor(list);	
 }
 
+=======
+>>>>>>> c1e53c34bd08aa04e2ce4df23e50fe2f631dc297
 TEST(ListTests, PushingBackToAListOfSizeOneShouldWorkCorrectly) {
 	// Given: a list of size one and some data.
 	Cell * cell_one = InitializeCell(1, 1);
