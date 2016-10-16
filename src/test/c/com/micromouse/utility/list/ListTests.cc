@@ -59,3 +59,26 @@ TEST(ListTests, AListOfSizeTwoShouldHaveSizeTwo) {
 	// Free the memory.
 	ListDestructor(list);
 }
+
+TEST(ListTests, ShouldRecieveWarningWhenPushingBackToAnEmptyList) {
+	// Given: an empty list and some data
+	List * list = NULL;
+	Cell * cell_one = InitializeCell(1, 1);
+
+	// and: capturing cout
+	testing::internal::CaptureStdout();
+
+	// when: trying to PushBack to the empty list
+	PushBack(cell_one, list);
+
+	std::string output = testing::internal::GetCapturedStdout();
+
+	// then: a warning should be seen
+	EXPECT_EQ("Cannot PushBack onto an empty List. \n", output);
+	
+	// and: the list should be NULL
+	EXPECT_EQ(NULL, list);
+
+	// Free the memory.
+	CellDestructor(cell_one);
+}

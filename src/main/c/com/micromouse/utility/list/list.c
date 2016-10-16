@@ -34,19 +34,19 @@ void ListDestructor(List * list) {
 	free(list);
 }
 
-Cell * front(List * list) {
+Cell * front(List ** list) {
 	// TODO: Implement
 	return NULL;
 }
 
-Cell * back(List * list) {
+Cell * back(List ** list) {
 	// TODO: Implement
 	return NULL;
 }
 
 void PushBack(Cell * data, List * list) {
 	if (list == NULL) {
-		list = InitializeList(data);
+		printf("Cannot PushBack onto an empty List. \n");
 		return;
 	}
 	if (list->next_ == NULL) {
@@ -60,7 +60,7 @@ void PushBack(Cell * data, List * list) {
 	head->next_ = InitializeList(data);
 }
 
-void Append(Cell * data, List * list) {
+void Append(Cell * data, List ** list) {
 	// TODO: Implement
 }
 
@@ -92,15 +92,15 @@ bool empty(List * list) {
 	return false;
 }
 
-void clear(List * list) {
+void clear(List ** list) {
 	// TODO: Implement
 }
 
-void erase(Cell * data, List * list) {
+void erase(Cell * data, List ** list) {
 	// TODO: Implement
 }
 
-List * reverse(List * list) {
+List * reverse(List ** list) {
 	// TODO: Implement
 	return NULL;
 }
