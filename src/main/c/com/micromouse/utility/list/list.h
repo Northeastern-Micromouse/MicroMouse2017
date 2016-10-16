@@ -54,4 +54,7 @@ void erase(Cell * data, List ** list);
 // Reverses the list.
 List * reverse(List ** list);
 
+// Resets the list to the head.
+void resetList(List ** head);
+
 #endif  // MICROMOUSE_UTILITY_LIST_LIST_H_

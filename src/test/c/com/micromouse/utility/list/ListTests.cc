@@ -108,3 +108,134 @@ TEST(ListTests, ChangingACellChangesItsValueInTheList) {
 	// Free the memory.
 	ListDestructor(list);
 }
+
+TEST(ListTests, AppendingToAnEmptyListShouldHaveAListOfSizeOne) {
+	// Given: an empty list and some data
+	List * list = NULL;
+	Cell * data = InitializeCell(10, 10);
+
+	// when: appending to the list
+	List ** list_head = (List **)malloc(sizeof(List *));
+	list_head = &list;
+	Append(data, list_head);
+
+	// then: the size should be one and the data should be correct.
+	ASSERT_EQ(1, length(list));
+	EXPECT_EQ(10, list->data_->location->x);
+	EXPECT_EQ(10, list->data_->location->y);
+
+	// and: It should be at the head.
+	EXPECT_EQ(NULL, list->prev_);
+
+	// Free the memory
+	ListDestructor(list);
+}
+
+TEST(ListTests, AppendingToAListShouldPlaceItAtItsHead) {
+	// Given: A list and some data
+	Cell * cell_one = InitializeCell(1, 1);
+	Cell * cell_two = InitializeCell(3, 3);
+	Cell * cell_three = InitializeCell(5, 5);
+	List * list = InitializeList(cell_one);
+	PushBack(cell_two, list);
+
+	// when: appending to the list
+	List ** list_head = (List **)malloc(sizeof(List *));
+	list_head = &list;
+	Append(cell_three, list_head);
+
+	// then: the size should be one and the data should be correct.
+	ASSERT_EQ(3, length(list));
+
+	// and: It should be at the head
+	EXPECT_EQ(NULL, list->prev_);
+
+	// and: the data should be correct.
+	EXPECT_EQ(5, list->data_->location->x);
+	EXPECT_EQ(5, list->data_->location->y);
+
+	// Free the memory
+	ListDestructor(list);
+}
+
+TEST(ListTests, AppendingToAListOfSizeOneShouldWork) {
+	// Given: A list and some data
+	Cell * cell_one = InitializeCell(1, 1);
+	Cell * cell_two = InitializeCell(3, 3);
+	List * list = InitializeList(cell_one);
+
+	// when: appending to the list
+	List ** list_head = (List **)malloc(sizeof(List *));
+	list_head = &list;
+	Append(cell_two, list_head);
+
+	// then: the size should be one and the data should be correct.
+	ASSERT_EQ(2, length(list));
+
+	// and: It should be at the head
+	EXPECT_EQ(NULL, list->prev_);
+
+	// and: the data should be correct.
+	EXPECT_EQ(3, list->data_->location->x);
+	EXPECT_EQ(3, list->data_->location->y);
+
+	// Free the memory
+	ListDestructor(list);	
+}
+
+TEST(ListTests, PushingBackToAListOfSizeOneShouldWorkCorrectly) {
+	// Given: a list of size one and some data.
+	Cell * cell_one = InitializeCell(1, 1);
+	Cell * cell_two = InitializeCell(3, 3);
+	List * list = InitializeList(cell_one);
+
+	// when: pushing back to the list
+	PushBack(cell_two, list);
+
+	// then: the size should be correct
+	ASSERT_EQ(2, length(list));
+
+	// and: the data should be correct
+	EXPECT_EQ(1, list->data_->location->x);
+	EXPECT_EQ(1, list->data_->location->y);
+	EXPECT_EQ(3, list->next_->data_->location->x);
+	EXPECT_EQ(3, list->next_->data_->location->y);
+
+	// and: the links should be correct.
+	EXPECT_EQ(1, list->next_->prev_->data_->location->x);
+	EXPECT_EQ(1, list->next_->prev_->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
+
+TEST(ListTests, PushingBackToAListOfSizeTwoShouldWorkCorrectly) {
+	// Given: a list of size one and some data.
+	Cell * cell_one = InitializeCell(1, 1);
+	Cell * cell_two = InitializeCell(3, 3);
+	Cell * cell_three = InitializeCell(5, 5);
+	List * list = InitializeList(cell_one);
+	PushBack(cell_two, list);
+
+	// when: pushing back to the list
+	PushBack(cell_three, list);
+
+	// then: the size should be correct
+	ASSERT_EQ(3, length(list));
+
+	// and: the data should be correct
+	EXPECT_EQ(1, list->data_->location->x);
+	EXPECT_EQ(1, list->data_->location->y);
+	list = list->next_;
+	EXPECT_EQ(3, list->data_->location->x);
+	EXPECT_EQ(3, list->data_->location->y);
+	EXPECT_EQ(5, list->next_->data_->location->x);
+	EXPECT_EQ(5, list->next_->data_->location->y);
+
+	// and: the links should be correct.
+	EXPECT_EQ(3, list->next_->prev_->data_->location->x);
+	EXPECT_EQ(3, list->next_->prev_->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
