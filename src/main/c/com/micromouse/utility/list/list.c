@@ -51,6 +51,7 @@ void PushBack(Cell * data, List * list) {
 	}
 	if (list->next_ == NULL) {
 		list->next_ = InitializeList(data);
+		list->next_->prev_ = list;
 		return;
 	}
 	List * head = list->next_;
@@ -58,6 +59,7 @@ void PushBack(Cell * data, List * list) {
 		head = head->next_;
 	}
 	head->next_ = InitializeList(data);
+	head->next_->prev_ = head;
 }
 
 void Append(Cell * data, List ** list) {
