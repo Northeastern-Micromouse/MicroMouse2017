@@ -1,9 +1,9 @@
 cc_test(
-    name = "robot",
-    srcs = ["RobotTests.cc"],
+    name = "maze",
+    srcs = ["CellTests.cc"],
     copts = ["-Iexternal/gtest/include"],
     deps = [
         "@gtest//:main",
-        "//src/main/c/com/micromouse/robot",
+        "//src/main/c/com/micromouse/maze",
     ],
 )
