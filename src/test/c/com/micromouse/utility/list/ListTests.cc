@@ -82,3 +82,29 @@ TEST(ListTests, ShouldRecieveWarningWhenPushingBackToAnEmptyList) {
 	// Free the memory.
 	CellDestructor(cell_one);
 }
+
+TEST(ListTests, ChangingACellChangesItsValueInTheList) {
+	// Given: a list of size two.
+	Cell * cell_one = InitializeCell(1, 1);
+	Cell * cell_two = InitializeCell(3, 3);
+	List * list = InitializeList(cell_one);
+	PushBack(cell_two, list);
+
+	// then: the size should be two.
+	ASSERT_EQ(2, length(list));
+
+	// and: the data in the second element should be correct
+	EXPECT_EQ(3, list->next_->data_->location->x);
+	EXPECT_EQ(3, list->next_->data_->location->y);
+
+	// when: changing the data for a cell
+	cell_two->location->x = 10;
+	cell_two->location->y = 10;
+
+	// then: the values in the list should be updated.
+	EXPECT_EQ(10, list->next_->data_->location->x);
+	EXPECT_EQ(10, list->next_->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
