@@ -39,7 +39,7 @@ Cell * front(List ** list) {
 	return NULL;
 }
 
-Cell * back(List ** list) {
+Cell * back(List * list) {
 	// TODO: Implement
 	return NULL;
 }

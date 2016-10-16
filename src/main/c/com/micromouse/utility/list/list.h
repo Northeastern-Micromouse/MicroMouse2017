@@ -25,7 +25,7 @@ void ListDestructor(List * list);
 Cell * front(List ** list);
 
 // Returns the last element of the list.
-Cell * back(List ** list);
+Cell * back(List * list);
 
 // Pushes the element onto the end of the list. Does not work on an empty list.
 void PushBack(Cell * data, List * list);
