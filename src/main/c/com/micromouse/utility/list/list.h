@@ -25,10 +25,10 @@ void ListDestructor(List * list);
 Cell * front(List ** list);
 
 // Returns the last element of the list.
-Cell * back(List ** list);
+Cell * back(List * list);
 
 // Pushes the element onto the end of the list.
-void PushBack(Cell * data, List ** list);
+void PushBack(Cell * data, List * list);
 
 // Appends the element to the front of the list.
 void Append(Cell * data, List ** list);
