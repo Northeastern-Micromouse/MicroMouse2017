@@ -10,5 +10,6 @@ cc_library(
     deps = [
     	"//src/main/c/com/micromouse/location",
         "//src/main/c/com/micromouse/maze",
+        "//src/main/c/com/micromouse/utility/moves",
     ],
 )

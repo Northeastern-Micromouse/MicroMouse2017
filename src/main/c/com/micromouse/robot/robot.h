@@ -3,6 +3,7 @@
 
 #include "src/main/c/com/micromouse/maze/cell.h"
 #include "src/main/c/com/micromouse/location/location.h"
+#include "src/main/c/com/micromouse/utility/moves/move.h"
 
 typedef struct Robot {
 	Location * location_;
