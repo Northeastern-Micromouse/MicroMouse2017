@@ -5,12 +5,12 @@
 #include "src/main/c/com/micromouse/location/location.h"
 
 typedef struct Robot {
-	Location location_;
-	Cell maze_[16][16];
+	Location * location_;
+	Cell * maze_[16][16];
 } Robot;
 
 // Returns a robot location at the given location.
-Robot * InlitializeRobot(Location location);
+Robot * InitializeRobot(Location * location);
 
 // Frees all of the memory associated with the given robot.
 void RobotDestructor(Robot * winslow);
