@@ -109,7 +109,6 @@ TEST(ListTests, ChangingACellChangesItsValueInTheList) {
 	ListDestructor(list);
 }
 
-<<<<<<< HEAD
 TEST(ListTests, AppendingToAnEmptyListShouldHaveAListOfSizeOne) {
 	// Given: an empty list and some data
 	List * list = NULL;
@@ -184,8 +183,6 @@ TEST(ListTests, AppendingToAListOfSizeOneShouldWork) {
 	ListDestructor(list);	
 }
 
-=======
->>>>>>> c1e53c34bd08aa04e2ce4df23e50fe2f631dc297
 TEST(ListTests, PushingBackToAListOfSizeOneShouldWorkCorrectly) {
 	// Given: a list of size one and some data.
 	Cell * cell_one = InitializeCell(1, 1);
@@ -238,6 +235,61 @@ TEST(ListTests, PushingBackToAListOfSizeTwoShouldWorkCorrectly) {
 	// and: the links should be correct.
 	EXPECT_EQ(3, list->next_->prev_->data_->location->x);
 	EXPECT_EQ(3, list->next_->prev_->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
+
+TEST(ListTests, ResetingAEmptyListShouldDoNothing) {
+	// Given: an emtpy list
+	List * list = NULL;
+
+	// when: calling reset
+	List ** list_head = &list;
+	resetList(list_head);
+
+	// then: nothing should happen.
+	EXPECT_EQ(NULL, list);
+}
+
+TEST(ListTests, ResettingAListOfOneElementShouldDoNothing) {
+	// Given: a list with one element
+	Cell * cell = InitializeCell(4, 4);
+	List * list = InitializeList(cell);
+
+	// when: calling reset
+	List ** list_head = &list;
+	resetList(list_head);
+
+	// then: the list should be the same
+	ASSERT_EQ(1, length(list));
+	EXPECT_EQ(4, list->data_->location->x);
+	EXPECT_EQ(4, list->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
+
+TEST(ListTests, ResettingAListOfTwoElementsShouldPlaceHeadAtFront) {
+	// Given: a list with one element
+	Cell * cell = InitializeCell(4, 4);
+	Cell * cell_one = InitializeCell(1, 1);
+	List * list = InitializeList(cell);
+	PushBack(cell_one, list);
+
+	// and: the head not at the begining
+	list = list->next_;
+	EXPECT_EQ(1, list->data_->location->x);
+	EXPECT_EQ(1, list->data_->location->y);
+
+	// when: calling reset
+	List ** list_head = &list;
+	resetList(list_head);
+
+	// then: the list should be reset
+	ASSERT_EQ(2, length(list));
+	EXPECT_EQ(4, list->data_->location->x);
+	EXPECT_EQ(4, list->data_->location->y);
 
 	// Free the memory.
 	ListDestructor(list);
