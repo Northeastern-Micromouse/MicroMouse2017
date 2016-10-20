@@ -28,3 +28,7 @@ Location * InitializeLocation(int x, int y) {
 void LocationDestructor(Location * location) {
 	free(location);
 }
+
+bool SameLocation(Location * loc1, Location * loc2) {
+	return ((loc1->x == loc2->x) && (loc1->y == loc2->y));
+}

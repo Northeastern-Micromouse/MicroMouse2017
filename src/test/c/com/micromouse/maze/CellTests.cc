@@ -121,3 +121,40 @@ TEST(CellTests, ShouldSeeWarningIfInitializedWithNegativeY) {
 	// Free up the memory.
 	CellDestructor(cell);
 }
+
+TEST(CellTests, SameCellsShouldBeEqual) {
+	// Given: A cell
+	Cell * cell = InitializeCell(5, 5);
+
+	// Then: it should be equal to itself
+	EXPECT_TRUE(SameCell(cell, cell));
+
+	// Free up memory
+	CellDestructor(cell);
+}
+
+TEST(CellTests, DifferentCellsShouldntBeEqual) {
+	// Given: two different cells
+	Cell * cell = InitializeCell(5, 5);
+	Cell * cell1 = InitializeCell(5, 6);
+
+	// Then: they should not be equal
+	EXPECT_FALSE(SameCell(cell, cell1));
+
+	// Free up memory
+	CellDestructor(cell);
+	CellDestructor(cell1);
+}
+
+TEST(CellTests, CellsWithTheSameValueShouldBeEqual) {
+		// Given: two different cells with the same values
+	Cell * cell = InitializeCell(5, 5);
+	Cell * cell1 = InitializeCell(5, 5);
+
+	// Then: they should be equal
+	EXPECT_TRUE(SameCell(cell, cell1));
+
+	// Free up memory
+	CellDestructor(cell);
+	CellDestructor(cell1);
+}

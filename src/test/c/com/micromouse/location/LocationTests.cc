@@ -64,3 +64,50 @@ TEST(LocationTests, ShouldSeeWarningWhenInitializingLocationWithOneNegativeValue
 	// Free up the memory.
 	LocationDestructor(location);
 }
+
+TEST(LocationTests, TheSameLocationShouldBeEqualToEachOther) {
+	// Given: a location
+	Location * location = InitializeLocation(5, 5);
+
+	// then: it should be equal to itself
+	EXPECT_EQ(true, SameLocation(location, location));
+
+	// Free memory.
+	LocationDestructor(location);
+}
+
+TEST(LocationTests, DifferentLocationsShouldNotBeEqual) {
+	// Given: 4 different locaations
+	Location * location = InitializeLocation(5, 4);
+	Location * location1 = InitializeLocation(4, 5);
+	Location * location2 = InitializeLocation(4, 4);
+	Location * location3 = InitializeLocation(5, 5);
+
+	// then: none of them should be equal.
+	EXPECT_FALSE(SameLocation(location, location1));
+	EXPECT_FALSE(SameLocation(location, location2));
+	EXPECT_FALSE(SameLocation(location, location3));
+	EXPECT_FALSE(SameLocation(location1, location2));
+	EXPECT_FALSE(SameLocation(location1, location3));
+	EXPECT_FALSE(SameLocation(location2, location3));
+
+	// Free memory.
+	LocationDestructor(location);
+	LocationDestructor(location1);
+	LocationDestructor(location2);
+	LocationDestructor(location3);
+}
+
+TEST(LocationTests, DifferentLocationsWithTheSameValuesShouldBeEqual) {
+	// Given: Two locations with the same values
+	Location * location = InitializeLocation(5, 4);
+	Location * location1 = InitializeLocation(5, 4);
+
+	// Then: they should be the same
+	EXPECT_NE(&location, &location1);
+	EXPECT_TRUE(SameLocation(location, location1));
+
+	// Free memory.
+	LocationDestructor(location);
+	LocationDestructor(location1);
+}

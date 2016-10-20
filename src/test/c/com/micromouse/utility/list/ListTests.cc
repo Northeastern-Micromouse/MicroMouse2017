@@ -12,8 +12,8 @@ TEST(ListTests, ShouldInitializeANodeCorreectly) {
 	List * list = InitializeList(cell);
 
 	// Then: the data should be initialized correctly.
-	EXPECT_EQ(10, list->data_->location->x);
-	EXPECT_EQ(10, list->data_->location->y);
+	Location * loc = InitializeLocation(10, 10);
+	EXPECT_TRUE(SameLocation(loc, list->data_->location));
 	EXPECT_EQ(true, list->data_->top);
 	EXPECT_EQ(true, list->data_->bottom);
 	EXPECT_EQ(true, list->data_->left);
@@ -24,6 +24,7 @@ TEST(ListTests, ShouldInitializeANodeCorreectly) {
 
 	// Free the memory.
 	ListDestructor(list);
+	LocationDestructor(loc);
 }
 
 TEST(ListTests, AnEmptyListSholudHaveASizeOfZero) {
@@ -94,22 +95,23 @@ TEST(ListTests, ChangingACellChangesItsValueInTheList) {
 	ASSERT_EQ(2, length(list));
 
 	// and: the data in the second element should be correct
-	EXPECT_EQ(3, list->next_->data_->location->x);
-	EXPECT_EQ(3, list->next_->data_->location->y);
+	Location * loc = InitializeLocation(3, 3);
+	EXPECT_TRUE(SameLocation(loc, list->next_->data_->location));
 
 	// when: changing the data for a cell
 	cell_two->location->x = 10;
 	cell_two->location->y = 10;
 
 	// then: the values in the list should be updated.
-	EXPECT_EQ(10, list->next_->data_->location->x);
-	EXPECT_EQ(10, list->next_->data_->location->y);
+	Location * loc1 = InitializeLocation(10, 10);
+	EXPECT_TRUE(SameLocation(loc1, list->next_->data_->location));
 
 	// Free the memory.
 	ListDestructor(list);
+	LocationDestructor(loc);
+	LocationDestructor(loc1);
 }
 
-<<<<<<< HEAD
 TEST(ListTests, AppendingToAnEmptyListShouldHaveAListOfSizeOne) {
 	// Given: an empty list and some data
 	List * list = NULL;
@@ -121,15 +123,16 @@ TEST(ListTests, AppendingToAnEmptyListShouldHaveAListOfSizeOne) {
 	Append(data, list_head);
 
 	// then: the size should be one and the data should be correct.
+	Location * loc = InitializeLocation(10, 10);
 	ASSERT_EQ(1, length(list));
-	EXPECT_EQ(10, list->data_->location->x);
-	EXPECT_EQ(10, list->data_->location->y);
+	EXPECT_TRUE(SameLocation(loc, list->data_->location));
 
 	// and: It should be at the head.
 	EXPECT_EQ(NULL, list->prev_);
 
 	// Free the memory
 	ListDestructor(list);
+	LocationDestructor(loc);
 }
 
 TEST(ListTests, AppendingToAListShouldPlaceItAtItsHead) {
@@ -152,11 +155,12 @@ TEST(ListTests, AppendingToAListShouldPlaceItAtItsHead) {
 	EXPECT_EQ(NULL, list->prev_);
 
 	// and: the data should be correct.
-	EXPECT_EQ(5, list->data_->location->x);
-	EXPECT_EQ(5, list->data_->location->y);
+	Location * loc = InitializeLocation(5, 5);
+	EXPECT_TRUE(SameLocation(loc, list->data_->location));
 
 	// Free the memory
 	ListDestructor(list);
+	LocationDestructor(loc);
 }
 
 TEST(ListTests, AppendingToAListOfSizeOneShouldWork) {
@@ -177,15 +181,14 @@ TEST(ListTests, AppendingToAListOfSizeOneShouldWork) {
 	EXPECT_EQ(NULL, list->prev_);
 
 	// and: the data should be correct.
-	EXPECT_EQ(3, list->data_->location->x);
-	EXPECT_EQ(3, list->data_->location->y);
+	Location * loc = InitializeLocation(3, 3);
+	EXPECT_TRUE(SameLocation(loc, list->data_->location));
 
 	// Free the memory
-	ListDestructor(list);	
+	ListDestructor(list);
+	LocationDestructor(loc);
 }
 
-=======
->>>>>>> c1e53c34bd08aa04e2ce4df23e50fe2f631dc297
 TEST(ListTests, PushingBackToAListOfSizeOneShouldWorkCorrectly) {
 	// Given: a list of size one and some data.
 	Cell * cell_one = InitializeCell(1, 1);
@@ -238,6 +241,61 @@ TEST(ListTests, PushingBackToAListOfSizeTwoShouldWorkCorrectly) {
 	// and: the links should be correct.
 	EXPECT_EQ(3, list->next_->prev_->data_->location->x);
 	EXPECT_EQ(3, list->next_->prev_->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
+
+TEST(ListTests, ResetingAEmptyListShouldDoNothing) {
+	// Given: an emtpy list
+	List * list = NULL;
+
+	// when: calling reset
+	List ** list_head = &list;
+	resetList(list_head);
+
+	// then: nothing should happen.
+	EXPECT_EQ(NULL, list);
+}
+
+TEST(ListTests, ResettingAListOfOneElementShouldDoNothing) {
+	// Given: a list with one element
+	Cell * cell = InitializeCell(4, 4);
+	List * list = InitializeList(cell);
+
+	// when: calling reset
+	List ** list_head = &list;
+	resetList(list_head);
+
+	// then: the list should be the same
+	ASSERT_EQ(1, length(list));
+	EXPECT_EQ(4, list->data_->location->x);
+	EXPECT_EQ(4, list->data_->location->y);
+
+	// Free the memory.
+	ListDestructor(list);
+}
+
+TEST(ListTests, ResettingAListOfTwoElementsShouldPlaceHeadAtFront) {
+	// Given: a list with one element
+	Cell * cell = InitializeCell(4, 4);
+	Cell * cell_one = InitializeCell(1, 1);
+	List * list = InitializeList(cell);
+	PushBack(cell_one, list);
+
+	// and: the head not at the begining
+	list = list->next_;
+	EXPECT_EQ(1, list->data_->location->x);
+	EXPECT_EQ(1, list->data_->location->y);
+
+	// when: calling reset
+	List ** list_head = &list;
+	resetList(list_head);
+
+	// then: the list should be reset
+	ASSERT_EQ(2, length(list));
+	EXPECT_EQ(4, list->data_->location->x);
+	EXPECT_EQ(4, list->data_->location->y);
 
 	// Free the memory.
 	ListDestructor(list);

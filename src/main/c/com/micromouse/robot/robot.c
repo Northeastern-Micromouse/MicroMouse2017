@@ -1,5 +1,30 @@
 #include "robot.h"
 
+void ExploreMaze(Robot * winslow) {
+	printf("Starting to explore the maze. Location is: x: %d, y: %d \n", winslow->location_->x, winslow->location_->y);
+
+	// Start by checking the sensors.
+	SR * values = PollSensors();
+
+	// Update the maze with the values.
+	UpdateMaze(winslow, values);
+
+	// Use a Stratgey to determine where to go next
+	// TODO: Implement
+
+	// While the maze is not mapped repeat
+	while (false) {
+		// TODO: Implement
+
+		// If you ever have nowhere to go or decide to go back go back.
+	}
+	printf("Done mapping the maze.\n");
+}
+
+void UpdateMaze(Robot * winslow, SR * values) {
+	// TODO: Implement
+}
+
 Robot * InitializeRobot(Location * location) {
 	// Create the struct for winslow.
 	Robot * winslow;

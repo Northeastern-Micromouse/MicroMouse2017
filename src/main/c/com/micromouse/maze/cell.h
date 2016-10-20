@@ -32,6 +32,9 @@ typedef struct Cell {
 	bool mapped;
 } Cell;
 
+// Returns true if the given cells are equal, false otherwise
+bool SameCell(Cell *, Cell *);
+
 // Determines if the cell is open. Returns true if it is open, false otherwise.
 bool DetermineIfOpen(Cell * cell);
 

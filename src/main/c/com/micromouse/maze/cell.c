@@ -13,6 +13,19 @@ Location * GetLocation(Cell * cell) {
 	return cell->location;
 }
 
+bool SameCell(Cell * this, Cell * that) {
+	if (!SameLocation(this->location, that->location)) {
+		return false;
+	}
+	return ((this->open == that->open) &&
+			(this->top == that->top) &&
+			(this->bottom == that->bottom) &&
+			(this->left == that->left) && 
+			(this->right == that->right) &&
+			(this->visited == that->visited) && 
+			(this->mapped == that->mapped));
+}
+
 Cell * InitializeCell(int x, int y) {
 	// Create the cell struct.
 	Cell * new_cell;
