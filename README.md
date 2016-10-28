@@ -34,4 +34,9 @@ You will also need:
 4. Several msys2 packages. Use the pacman command to install them: pacman -Syuu gcc git curl zip unzip zlib-devel
 
 
+To get Git Autocomplete:
+	
+1. http://code-worrier.com/blog/autocomplete-git/
+
+
 
