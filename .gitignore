@@ -37,3 +37,7 @@
 /bazel.iml
 /output/
 /bazel-MicroMouse2017
+
+#Clion
+.idea/
+

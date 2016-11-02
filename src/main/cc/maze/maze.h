@@ -2,7 +2,7 @@
 #define CC_MAZE_MAZE_H_
 
 // Abstract class to represent a maze.
-public class Maze {
+class Maze {
 	 	
 };
 

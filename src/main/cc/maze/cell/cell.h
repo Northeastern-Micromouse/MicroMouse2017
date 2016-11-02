@@ -3,23 +3,26 @@
 
 // Cell class
 class Cell {
-	// Creates a Cell object at (x,y)
+public:
+	Cell();
+
+	// Constructs a cell at the given location (x,y).
 	Cell(int x, int y);
 
-	// Gets the x offsest of a Cell
+	// Gets the x offsest of a Cell.
 	int GetLocationX();
 
-	// Gets the y offset of a Cell
+	// Gets the y offset of a Cell.
 	int GetLocationY();
 
-	// Gets the status of whether a Cell has been visited
+	// Gets the status of whether a Cell has been visited.
 	bool IsVisited();
 
-	// Marks a Cell as visited
+	// Visits the cell.
 	void VisitCell();
 
-	// Marks a Cell as not visited 
-	void unVisitCell();
+	// UnVisits the cell.
+	void UnVisitCell();
 
 private:
 	int x_loc_;

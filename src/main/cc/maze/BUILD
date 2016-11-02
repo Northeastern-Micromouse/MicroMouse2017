@@ -7,4 +7,6 @@ cc_library(
     deps = [
         "//src/main/cc/maze/cell",
     ],
+    linkopts = ["-std=c++11"],
+    copts = ["-isystemsrc/main/cc"],
 )
