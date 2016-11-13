@@ -31,3 +31,8 @@ void Cell::VisitCell() {
 void Cell::UnVisitCell() {
 	visited = false;
 }
+
+std::vector<Cell::Direction> Cell::GetNeighbors() {
+	// TODO(matt): Implement
+	return NULL;
+}

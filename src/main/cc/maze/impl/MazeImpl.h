@@ -11,15 +11,17 @@ class MazeImpl : public Maze {
  public:
  	MazeImpl();
 
- 	Cell &operator()(int row, int col) {
+ 	Cell *operator()(int row, int col) {
  		if (row < 0 || col < 0) {
  			throw new std::range_error("Index out of bounds");
  		}
  		return maze_[col + (col * row)];
  	}
 
+	std::vector<Cell *> GetNeighbors(int row, int col, std::vector<Cell::Direction> neighbors);
+
  private:
- 	std::vector<Cell> maze_;
+ 	std::vector<Cell *> maze_;
 };
 
 #endif  // CC_MAZE_IMPL_MAZEIMPL_H_
