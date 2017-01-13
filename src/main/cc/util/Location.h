@@ -6,8 +6,8 @@ class Location {
  public:
   Location(int x, int y);
 
-  int GetXLocation();
-  int GetYLocation();
+  int x();
+  int y();
 
   bool isEqual(Location that);
 

@@ -5,14 +5,14 @@ Location::Location(int x, int y) {
   y_ = y;
 }
 
-int Location::GetXLocation() {
+int Location::x() {
   return x_;
 }
 
-int Location::GetYLocation() {
+int Location::y() {
   return y_;
 }
 
 bool Location::isEqual(Location that) {
-  return (x_ == that.GetXLocation() && y_ == that.GetYLocation());
+  return (x_ == that.x() && y_ == that.y());
 }

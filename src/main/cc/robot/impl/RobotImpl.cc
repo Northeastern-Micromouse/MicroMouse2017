@@ -1,8 +1,5 @@
 #include <queue>
-<<<<<<< HEAD
 #include <iostream>
-=======
->>>>>>> ffd3a118004e720ac7d4bbd285de574b4f107bd7
 #include "maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
 
@@ -13,7 +10,7 @@ RobotImpl::RobotImpl() {
 
 void RobotImpl::StartExploration() {
   std::cout<< "RobotImpl - Start Exploration" << std::endl;
-  if (curr_loc_.GetXLocation() != 0 && curr_loc_.GetYLocation() != 0) {
+  if (curr_loc_.x() != 0 && curr_loc_.y() != 0) {
     ReturnToStart();
   }
   Cell * curr_cell;
@@ -86,14 +83,14 @@ void RobotImpl::GoBack(Cell::Direction dir) {
 }
 
 std::vector<Cell *> RobotImpl::GetNeighbors() {
-  return maze_.GetNeighbors(curr_loc_.GetXLocation(),
-                            curr_loc_.GetYLocation(),
-                            maze_(curr_loc_.GetXLocation(), curr_loc_.GetYLocation())->GetNeighbors());
+  return maze_.GetNeighbors(curr_loc_.x(),
+                            curr_loc_.y(),
+                            maze_(curr_loc_.x(), curr_loc_.y())->GetNeighbors());
 }
 
 void RobotImpl::VisitCurrentCell() {
   std::cout << "Visit Current Cell" << std::endl;
-  Cell * curr_cell = maze_(curr_loc_.GetXLocation(), curr_loc_.GetYLocation());
+  Cell * curr_cell = maze_(curr_loc_.x(), curr_loc_.y());
   std::cout << "Visit Current Cell: X: " << curr_cell->GetLocationX() <<  " Y: "<< curr_cell->GetLocationY() << std::endl;
   if (!curr_cell->IsVisited()) {
     std::cout << "The Cell is not visited" << std::endl;
@@ -130,16 +127,16 @@ void RobotImpl::Move(Cell::Direction dir) {
 Cell::Direction RobotImpl::GetDirection(Cell* cell) {
   int x = cell->GetLocationX();
   int y = cell->GetLocationY();
-  if (x == curr_loc_.GetXLocation() && y == curr_loc_.GetYLocation() + 1) {
+  if (x == curr_loc_.x() && y == curr_loc_.y() + 1) {
     return Cell::Direction::FORWARD;
   }
-  if (x == curr_loc_.GetXLocation() && y == curr_loc_.GetYLocation() - 1) {
+  if (x == curr_loc_.x() && y == curr_loc_.y() - 1) {
     return Cell::Direction::BACKWARD;
   }
-  if (x == curr_loc_.GetXLocation() + 1 && y == curr_loc_.GetYLocation()) {
+  if (x == curr_loc_.x() + 1 && y == curr_loc_.y()) {
     return Cell::Direction::RIGHT;
   }
-  if (x == curr_loc_.GetXLocation() - 1 && y == curr_loc_.GetYLocation()) {
+  if (x == curr_loc_.x() - 1 && y == curr_loc_.y()) {
     return Cell::Direction::LEFT;
   }
   // TODO(matt): Implement error checking
