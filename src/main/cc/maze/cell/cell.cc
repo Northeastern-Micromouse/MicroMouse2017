@@ -34,5 +34,6 @@ void Cell::UnVisitCell() {
 
 std::vector<Cell::Direction> Cell::GetNeighbors() {
 	// TODO(matt): Implement
-	return NULL;
+	std::vector<Cell::Direction> value;
+  return value;
 }

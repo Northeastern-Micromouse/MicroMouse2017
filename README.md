@@ -39,4 +39,8 @@ To get Git Autocomplete:
 1. http://code-worrier.com/blog/autocomplete-git/
 
 
+Visual GDB Licenses:
+    NEU Micromouse - [name].
+
+
 

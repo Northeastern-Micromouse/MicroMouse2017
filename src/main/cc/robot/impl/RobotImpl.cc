@@ -1,13 +1,18 @@
 #include <queue>
+<<<<<<< HEAD
+#include <iostream>
+=======
+>>>>>>> ffd3a118004e720ac7d4bbd285de574b4f107bd7
 #include "maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
 
 
 RobotImpl::RobotImpl() {
-  maze_ = MazeImpl();
+  // No op.
 }
 
 void RobotImpl::StartExploration() {
+  std::cout<< "RobotImpl - Start Exploration" << std::endl;
   if (curr_loc_.GetXLocation() != 0 && curr_loc_.GetYLocation() != 0) {
     ReturnToStart();
   }
@@ -18,35 +23,35 @@ void RobotImpl::StartExploration() {
   // Visit the first cell.
   VisitCurrentCell();
 
-  // While there are still possible moves to go.
-  while (!stack_.empty()) {
-    curr_cell = stack_.top();
-    stack_.pop();
-    // If it is not visited we need to visit it.
-    if (!curr_cell->IsVisited()) {
-      prev_move = GetDirection(curr_cell);
-      // Move the robot to the cell.
-      Move(prev_move);
-      // Visit the cell.
-      curr_cell->VisitCell();
-      neighbors = GetNeighbors();
-      // If it is empty we cannot go forward any more, so move back.
-      if (!neighbors.empty()) {
-        // Loop through all of its possible neighbors.
-        for (Cell *neighbor : neighbors) {
-          // If they are not visited then push them onto the stack to visit later
-          if (!neighbor->IsVisited()) {
-            stack_.push(neighbor);
-          }
-        }
-      } else {
-        GoBack(prev_move);
-      }
-    } else {
-      // Otherwise we have to move back
-      GoBack(prev_move);
-    }
-  }
+//  // While there are still possible moves to go.
+//  while (!stack_.empty()) {
+//    curr_cell = stack_.top();
+//    stack_.pop();
+//    // If it is not visited we need to visit it.
+//    if (!curr_cell->IsVisited()) {
+//      prev_move = GetDirection(curr_cell);
+//      // Move the robot to the cell.
+//      Move(prev_move);
+//      // Visit the cell.
+//      curr_cell->VisitCell();
+//      neighbors = GetNeighbors();
+//      // If it is empty we cannot go forward any more, so move back.
+//      if (!neighbors.empty()) {
+//        // Loop through all of its possible neighbors.
+//        for (Cell *neighbor : neighbors) {
+//          // If they are not visited then push them onto the stack to visit later
+//          if (!neighbor->IsVisited()) {
+//            stack_.push(neighbor);
+//          }
+//        }
+//      } else {
+//        GoBack(prev_move);
+//      }
+//    } else {
+//      // Otherwise we have to move back
+//      GoBack(prev_move);
+//    }
+//  }
 }
 
 void RobotImpl::GoToGoal() {
@@ -87,11 +92,16 @@ std::vector<Cell *> RobotImpl::GetNeighbors() {
 }
 
 void RobotImpl::VisitCurrentCell() {
+  std::cout << "Visit Current Cell" << std::endl;
   Cell * curr_cell = maze_(curr_loc_.GetXLocation(), curr_loc_.GetYLocation());
+  std::cout << "Visit Current Cell: X: " << curr_cell->GetLocationX() <<  " Y: "<< curr_cell->GetLocationY() << std::endl;
   if (!curr_cell->IsVisited()) {
+    std::cout << "The Cell is not visited" << std::endl;
     curr_cell->VisitCell();
     for (Cell *neighbor : GetNeighbors()) {
+      std::cout << "Have a neighbor of a cell" << std::endl;
       if (!neighbor->IsVisited()) {
+        std::cout << "It is not visited" << std::endl;
         stack_.push(neighbor);
       }
     }

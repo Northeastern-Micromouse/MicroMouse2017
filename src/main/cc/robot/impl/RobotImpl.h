@@ -3,7 +3,7 @@
 
 #include <stack>
 #include "robot/robot.h"
-#include "maze/maze.h"
+#include "maze/impl/MazeImpl.h"
 #include "util/Location.h"
 
 class RobotImpl : public Robot {
