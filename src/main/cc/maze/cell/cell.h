@@ -19,7 +19,7 @@ public:
 	// Constructs a cell at the given location (x,y).
 	Cell(int x, int y);
 
-	// Gets the x offsest of a Cell.
+	// Gets the x offset of a Cell.
 	int GetLocationX();
 
 	// Gets the y offset of a Cell.

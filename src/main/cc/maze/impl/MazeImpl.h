@@ -20,7 +20,7 @@ class MazeImpl : public Maze {
  		return maze_[col + (col * row)];
  	}
 
-	std::vector<Cell *> GetNeighbors(int row, int col, std::vector<Cell::Direction> neighbors);
+	std::vector<Cell *> GetNeighbors(int row, int col);
 
  private:
  	std::vector<Cell *> maze_;

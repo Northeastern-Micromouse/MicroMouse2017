@@ -11,6 +11,6 @@ include_directories(src/test/c)
 
 FILE(GLOB_RECURSE SRCFILES src/main/cc/*.cc src/main/cc/*.h)
 
-set(SOURCE_FILES ${SRCFILES} main.cc)
+set(SOURCE_FILES ${SRCFILES} main.cc src/test/cc/util/UtilTests.cc)
 
 add_executable(MicroMouse ${SOURCE_FILES})

@@ -3,7 +3,6 @@
 #include "maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
 
-
 RobotImpl::RobotImpl() {
   // No op.
 }
@@ -83,9 +82,7 @@ void RobotImpl::GoBack(Cell::Direction dir) {
 }
 
 std::vector<Cell *> RobotImpl::GetNeighbors() {
-  return maze_.GetNeighbors(curr_loc_.x(),
-                            curr_loc_.y(),
-                            maze_(curr_loc_.x(), curr_loc_.y())->GetNeighbors());
+  return maze_.GetNeighbors(curr_loc_.x(), curr_loc_.y());
 }
 
 void RobotImpl::VisitCurrentCell() {

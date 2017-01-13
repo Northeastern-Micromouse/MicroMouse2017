@@ -1,3 +1,4 @@
+#include <iostream>
 #include "cell.h"
 
 Cell::Cell(int x, int y) {
@@ -25,6 +26,7 @@ bool Cell::IsVisited() {
 }
 
 void Cell::VisitCell() {
+  std::cout << "Visit cell -_- X: " << x_loc_ << " Y: " << y_loc_ << std::endl;
 	visited = true; 
 }
 
@@ -33,7 +35,6 @@ void Cell::UnVisitCell() {
 }
 
 std::vector<Cell::Direction> Cell::GetNeighbors() {
-	// TODO(matt): Implement
-	std::vector<Cell::Direction> value;
-  return value;
+	std::vector<Cell::Direction> neighbors;
+  return neighbors;
 }
