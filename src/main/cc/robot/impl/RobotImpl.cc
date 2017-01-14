@@ -139,3 +139,8 @@ Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
   // TODO(matt): Implement error checking
   return Cell::RelativeDirection::NONE;
 }
+
+std::string RobotImpl::print() {
+  // TODO(matt): Implement
+  return "";
+}

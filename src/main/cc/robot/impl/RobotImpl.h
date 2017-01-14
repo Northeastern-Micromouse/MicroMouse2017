@@ -16,6 +16,8 @@ class RobotImpl : public Robot {
 
   void GoToGoal() override;
 
+  std::string print();
+
  private:
   MazeImpl maze_;
   Location curr_loc_ = Location(0, 0);

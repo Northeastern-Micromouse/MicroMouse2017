@@ -16,3 +16,8 @@ int Location::y() {
 bool Location::isEqual(Location that) {
   return (x_ == that.x() && y_ == that.y());
 }
+
+std::string Location::print() {
+  // TODO(matt): Implement
+  return "";
+}

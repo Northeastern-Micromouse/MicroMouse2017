@@ -44,3 +44,8 @@ Cell * MazeImpl::getCell(int row, int col, Cell::RelativeDirection direction) {
     std::cout << ex.what() << std::endl;
   }
 }
+
+std::string MazeImpl::print() {
+  // TODO(matt): Implement
+  return "";
+}

@@ -22,6 +22,8 @@ class MazeImpl : public Maze {
 
 	std::vector<Cell *> GetNeighbors(int row, int col);
 
+  std::string print();
+
  private:
  	std::vector<Cell *> maze_;
 

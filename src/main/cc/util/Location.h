@@ -2,6 +2,8 @@
 #define CC_UTIL_LOCATION_H_
 
 
+#include <string>
+
 class Location {
  public:
   Location(int x, int y);
@@ -10,6 +12,8 @@ class Location {
   int y();
 
   bool isEqual(Location that);
+
+  std::string print();
 
  private:
   int x_;
