@@ -43,7 +43,31 @@ std::vector<Cell::RelativeDirection> Cell::GetNeighbors() {
   return neighbors_;
 }
 
-std::string Cell::print() {
-  // TODO(matt): Implement
-  return "";
+void Cell::print() {
+  std::cout << "--------------------" << std::endl;
+  std::cout << "| Cell: " << x_loc_ << ", " << y_loc_ << "       |" << std::endl;
+  std::cout << "| Visited: " << (visited_ ? "True " : "False") << "   |" << std::endl;
+  for (RelativeDirection neighbor : neighbors_) {
+    switch (neighbor) {
+      case NORTH:
+        std::cout << "| Neighbor: North  |" << std::endl;
+        break;
+      case EAST:
+        std::cout << "| Neighbor: South  |" << std::endl;
+        break;
+      case WEST:
+        std::cout << "| Neighbor: East   |" << std::endl;
+        break;
+      case SOUTH:
+        std::cout << "| Neighbor: West   |" << std::endl;
+        break;
+      case NONE:
+        std::cout << "| Neighbor: None    |" << std::endl;
+        break;
+      default:
+        std::cout << "| Neighbor: Unknown    |" << std::endl;
+        break;
+    }
+  }
+  std::cout << "--------------------" << std::endl;
 }

@@ -46,7 +46,7 @@ public:
   // vector is empty.
 	std::vector<Cell::RelativeDirection> GetNeighbors();
 
-  std::string print();
+  void print();
 
 private:
 	int x_loc_;

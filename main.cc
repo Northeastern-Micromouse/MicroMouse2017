@@ -4,7 +4,11 @@
 int main() {
   std::cout << "Hello Winslow!" << std::endl;
   RobotImpl winslow = RobotImpl();
-  winslow.StartExploration();
+//  winslow.StartExploration();
+  Cell cell = Cell(0, 0);
+  cell.print();
+  cell.VisitCell();
+  cell.print();
   return 0;
 }
 
