@@ -15,10 +15,10 @@ class Cell {
 public:
 	// Represents a relative direction
 	enum RelativeDirection {
-		FORWARD,
-		BACKWARD,
-		LEFT,
-		RIGHT,
+		NORTH,
+		SOUTH,
+		EAST,
+		WEST,
 		NONE
 	};
 

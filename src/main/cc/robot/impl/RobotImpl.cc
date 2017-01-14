@@ -64,17 +64,17 @@ void RobotImpl::ReturnToStart() {
 
 void RobotImpl::GoBack(Cell::RelativeDirection dir) {
   switch (dir) {
-    case Cell::RelativeDirection::FORWARD:
-      Move(Cell::RelativeDirection::BACKWARD);
+    case Cell::RelativeDirection::NORTH:
+      Move(Cell::RelativeDirection::SOUTH);
       break;
-    case Cell::RelativeDirection::BACKWARD:
-      Move(Cell::RelativeDirection::FORWARD);
+    case Cell::RelativeDirection::SOUTH:
+      Move(Cell::RelativeDirection::NORTH);
       break;
-    case Cell::RelativeDirection::LEFT:
-      Move(Cell::RelativeDirection::RIGHT);
+    case Cell::RelativeDirection::EAST:
+      Move(Cell::RelativeDirection::WEST);
       break;
-    case Cell::RelativeDirection::RIGHT:
-      Move(Cell::RelativeDirection::LEFT);
+    case Cell::RelativeDirection::WEST:
+      Move(Cell::RelativeDirection::EAST);
       break;
     default:
       break;
@@ -104,16 +104,16 @@ void RobotImpl::VisitCurrentCell() {
 
 void RobotImpl::Move(Cell::RelativeDirection dir) {
   switch (dir) {
-    case Cell::RelativeDirection::FORWARD:
+    case Cell::RelativeDirection::NORTH:
       //TODO(matt): Actually move forward
       break;
-    case Cell::RelativeDirection::BACKWARD:
+    case Cell::RelativeDirection::SOUTH:
       //TODO(matt): Actually move backward
       break;
-    case Cell::RelativeDirection::LEFT:
+    case Cell::RelativeDirection::EAST:
       //TODO(matt): Actually move left
       break;
-    case Cell::RelativeDirection::RIGHT:
+    case Cell::RelativeDirection::WEST:
       //TODO(matt): Actually move right
       break;
     default:
@@ -125,16 +125,16 @@ Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
   int x = cell->x();
   int y = cell->y();
   if (x == curr_loc_.x() && y == curr_loc_.y() + 1) {
-    return Cell::RelativeDirection::FORWARD;
+    return Cell::RelativeDirection::NORTH;
   }
   if (x == curr_loc_.x() && y == curr_loc_.y() - 1) {
-    return Cell::RelativeDirection::BACKWARD;
+    return Cell::RelativeDirection::SOUTH;
   }
   if (x == curr_loc_.x() + 1 && y == curr_loc_.y()) {
-    return Cell::RelativeDirection::RIGHT;
+    return Cell::RelativeDirection::WEST;
   }
   if (x == curr_loc_.x() - 1 && y == curr_loc_.y()) {
-    return Cell::RelativeDirection::LEFT;
+    return Cell::RelativeDirection::EAST;
   }
   // TODO(matt): Implement error checking
   return Cell::RelativeDirection::NONE;

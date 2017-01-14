@@ -28,10 +28,10 @@ void Cell::VisitCell() {
 	visited_ = true;
   // For now just return all the directions.
   // TODO(matt): Query the seneors here.
-  neighbors_.push_back(RelativeDirection::FORWARD);
-  neighbors_.push_back(RelativeDirection::BACKWARD);
-  neighbors_.push_back(RelativeDirection::LEFT);
-  neighbors_.push_back(RelativeDirection::RIGHT);
+  neighbors_.push_back(RelativeDirection::NORTH);
+  neighbors_.push_back(RelativeDirection::SOUTH);
+  neighbors_.push_back(RelativeDirection::EAST);
+  neighbors_.push_back(RelativeDirection::WEST);
 }
 
 void Cell::UnVisitCell() {
