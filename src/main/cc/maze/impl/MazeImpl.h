@@ -26,8 +26,10 @@ class MazeImpl : public Maze {
 
  private:
  	std::vector<Cell *> maze_;
+  static constexpr int maze_size = 16;
 
   Cell * getCell(int row, int col, Cell::RelativeDirection direction);
+	bool validMove(int row, int col, Cell::RelativeDirection direction);
 };
 
 #endif  // CC_MAZE_IMPL_MAZEIMPL_H_

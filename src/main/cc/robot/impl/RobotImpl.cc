@@ -93,7 +93,7 @@ void RobotImpl::VisitCurrentCell() {
     std::cout << "The Cell is not visited" << std::endl;
     curr_cell->VisitCell();
     for (Cell* neighbor : GetNeighbors()) {
-      std::cout << "Have a neighbor of a cell at: " << neighbor->x() << "," << neighbor->y() << std::endl;
+      std::cout << "Have a neighbor of a cell at: " << neighbor->x() << ", " << neighbor->y() << std::endl;
       if (!neighbor->isVisited()) {
         std::cout << "It is not visited" << std::endl;
         stack_.push(neighbor);
