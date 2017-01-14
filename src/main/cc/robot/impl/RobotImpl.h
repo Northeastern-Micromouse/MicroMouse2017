@@ -23,11 +23,11 @@ class RobotImpl : public Robot {
   std::stack<Cell *> stack_;
 
   void ReturnToStart();
-  void GoBack(Cell::Direction dir);
+  void GoBack(Cell::RelativeDirection dir);
   std::vector<Cell *> GetNeighbors();
   void VisitCurrentCell();
-  void Move(Cell::Direction dir);
-  Cell::Direction GetDirection(Cell* cell);
+  void Move(Cell::RelativeDirection dir);
+  Cell::RelativeDirection GetDirection(Cell* cell);
 };
 
 

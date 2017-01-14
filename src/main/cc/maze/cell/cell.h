@@ -3,10 +3,18 @@
 
 #include <vector>
 
-// Cell class
+// Represents a single cell in the micromouse maze.
+// A cell has an
+//    - x coordinate
+//    - y coordinate
+//    - a visited flag
+//    - A list of relative directions representing its neighbors. Two cells are neighbors of one another if
+//    they are reachable by only one movement in the respective relative direction.
+
 class Cell {
 public:
-	enum Direction {
+	// Represents a relative direction
+	enum RelativeDirection {
 		FORWARD,
 		BACKWARD,
 		LEFT,
@@ -20,13 +28,13 @@ public:
 	Cell(int x, int y);
 
 	// Gets the x offset of a Cell.
-	int GetLocationX();
+	int x();
 
 	// Gets the y offset of a Cell.
-	int GetLocationY();
+	int y();
 
 	// Gets the status of whether a Cell has been visited.
-	bool IsVisited();
+	bool isVisited();
 
 	// Visits the cell.
 	void VisitCell();
@@ -34,12 +42,17 @@ public:
 	// UnVisits the cell.
 	void UnVisitCell();
 
-	std::vector<Cell::Direction> GetNeighbors();
+  // Returns the neighbors of the given cell. If the cell has no neighbors the resulting
+  // vector is empty.
+	std::vector<Cell::RelativeDirection> GetNeighbors();
+
+  std::string print();
 
 private:
 	int x_loc_;
 	int y_loc_; 
-	bool visited; 
+	bool visited_;
+  std::vector<Cell::RelativeDirection> neighbors_;
 };
 
 #endif 

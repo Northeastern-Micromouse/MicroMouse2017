@@ -4,37 +4,46 @@
 Cell::Cell(int x, int y) {
 	x_loc_ = x;
 	y_loc_ = y;
-	visited = false; 
+	visited_ = false;
 }
 
 Cell::Cell() {
-	x_loc_ = 0;
-	y_loc_ = 0;
-	visited = false;
+	Cell(0,0);
 }
 
-int Cell::GetLocationX() {
+int Cell::x() {
 	return x_loc_;
 }
 
-int Cell::GetLocationY() {
+int Cell::y() {
 	return y_loc_; 
 }
 
-bool Cell::IsVisited() {
-	return visited; 
+bool Cell::isVisited() {
+	return visited_;
 }
 
 void Cell::VisitCell() {
   std::cout << "Visit cell -_- X: " << x_loc_ << " Y: " << y_loc_ << std::endl;
-	visited = true; 
+	visited_ = true;
+  // For now just return all the directions.
+  // TODO(matt): Query the seneors here.
+  neighbors_.push_back(RelativeDirection::FORWARD);
+  neighbors_.push_back(RelativeDirection::BACKWARD);
+  neighbors_.push_back(RelativeDirection::LEFT);
+  neighbors_.push_back(RelativeDirection::RIGHT);
 }
 
 void Cell::UnVisitCell() {
-	visited = false;
+	visited_ = false;
+  neighbors_.clear();
 }
 
-std::vector<Cell::Direction> Cell::GetNeighbors() {
-	std::vector<Cell::Direction> neighbors;
-  return neighbors;
+std::vector<Cell::RelativeDirection> Cell::GetNeighbors() {
+  return neighbors_;
+}
+
+std::string Cell::print() {
+  // TODO(matt): Implement
+  return "";
 }

@@ -14,7 +14,7 @@ void RobotImpl::StartExploration() {
   }
   Cell * curr_cell;
   std::vector<Cell *> neighbors;
-  Cell::Direction prev_move = Cell::Direction::NONE;
+  Cell::RelativeDirection prev_move = Cell::RelativeDirection::NONE;
 
   // Visit the first cell.
   VisitCurrentCell();
@@ -24,7 +24,7 @@ void RobotImpl::StartExploration() {
 //    curr_cell = stack_.top();
 //    stack_.pop();
 //    // If it is not visited we need to visit it.
-//    if (!curr_cell->IsVisited()) {
+//    if (!curr_cell->isVisited()) {
 //      prev_move = GetDirection(curr_cell);
 //      // Move the robot to the cell.
 //      Move(prev_move);
@@ -36,7 +36,7 @@ void RobotImpl::StartExploration() {
 //        // Loop through all of its possible neighbors.
 //        for (Cell *neighbor : neighbors) {
 //          // If they are not visited then push them onto the stack to visit later
-//          if (!neighbor->IsVisited()) {
+//          if (!neighbor->isVisited()) {
 //            stack_.push(neighbor);
 //          }
 //        }
@@ -62,19 +62,19 @@ void RobotImpl::ReturnToStart() {
   // TODO(matt): Implement
 }
 
-void RobotImpl::GoBack(Cell::Direction dir) {
+void RobotImpl::GoBack(Cell::RelativeDirection dir) {
   switch (dir) {
-    case Cell::Direction::FORWARD:
-      Move(Cell::Direction::BACKWARD);
+    case Cell::RelativeDirection::FORWARD:
+      Move(Cell::RelativeDirection::BACKWARD);
       break;
-    case Cell::Direction::BACKWARD:
-      Move(Cell::Direction::FORWARD);
+    case Cell::RelativeDirection::BACKWARD:
+      Move(Cell::RelativeDirection::FORWARD);
       break;
-    case Cell::Direction::LEFT:
-      Move(Cell::Direction::RIGHT);
+    case Cell::RelativeDirection::LEFT:
+      Move(Cell::RelativeDirection::RIGHT);
       break;
-    case Cell::Direction::RIGHT:
-      Move(Cell::Direction::LEFT);
+    case Cell::RelativeDirection::RIGHT:
+      Move(Cell::RelativeDirection::LEFT);
       break;
     default:
       break;
@@ -88,13 +88,13 @@ std::vector<Cell *> RobotImpl::GetNeighbors() {
 void RobotImpl::VisitCurrentCell() {
   std::cout << "Visit Current Cell" << std::endl;
   Cell * curr_cell = maze_(curr_loc_.x(), curr_loc_.y());
-  std::cout << "Visit Current Cell: X: " << curr_cell->GetLocationX() <<  " Y: "<< curr_cell->GetLocationY() << std::endl;
-  if (!curr_cell->IsVisited()) {
+  std::cout << "Visit Current Cell: X: " << curr_cell->x() <<  " Y: "<< curr_cell->y() << std::endl;
+  if (!curr_cell->isVisited()) {
     std::cout << "The Cell is not visited" << std::endl;
     curr_cell->VisitCell();
     for (Cell *neighbor : GetNeighbors()) {
       std::cout << "Have a neighbor of a cell" << std::endl;
-      if (!neighbor->IsVisited()) {
+      if (!neighbor->isVisited()) {
         std::cout << "It is not visited" << std::endl;
         stack_.push(neighbor);
       }
@@ -102,18 +102,18 @@ void RobotImpl::VisitCurrentCell() {
   }
 }
 
-void RobotImpl::Move(Cell::Direction dir) {
+void RobotImpl::Move(Cell::RelativeDirection dir) {
   switch (dir) {
-    case Cell::Direction::FORWARD:
+    case Cell::RelativeDirection::FORWARD:
       //TODO(matt): Actually move forward
       break;
-    case Cell::Direction::BACKWARD:
+    case Cell::RelativeDirection::BACKWARD:
       //TODO(matt): Actually move backward
       break;
-    case Cell::Direction::LEFT:
+    case Cell::RelativeDirection::LEFT:
       //TODO(matt): Actually move left
       break;
-    case Cell::Direction::RIGHT:
+    case Cell::RelativeDirection::RIGHT:
       //TODO(matt): Actually move right
       break;
     default:
@@ -121,21 +121,21 @@ void RobotImpl::Move(Cell::Direction dir) {
   }
 }
 
-Cell::Direction RobotImpl::GetDirection(Cell* cell) {
-  int x = cell->GetLocationX();
-  int y = cell->GetLocationY();
+Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
+  int x = cell->x();
+  int y = cell->y();
   if (x == curr_loc_.x() && y == curr_loc_.y() + 1) {
-    return Cell::Direction::FORWARD;
+    return Cell::RelativeDirection::FORWARD;
   }
   if (x == curr_loc_.x() && y == curr_loc_.y() - 1) {
-    return Cell::Direction::BACKWARD;
+    return Cell::RelativeDirection::BACKWARD;
   }
   if (x == curr_loc_.x() + 1 && y == curr_loc_.y()) {
-    return Cell::Direction::RIGHT;
+    return Cell::RelativeDirection::RIGHT;
   }
   if (x == curr_loc_.x() - 1 && y == curr_loc_.y()) {
-    return Cell::Direction::LEFT;
+    return Cell::RelativeDirection::LEFT;
   }
   // TODO(matt): Implement error checking
-  return Cell::Direction::NONE;
+  return Cell::RelativeDirection::NONE;
 }
