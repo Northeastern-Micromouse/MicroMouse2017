@@ -42,3 +42,5 @@
 .idea/
 /cmake-build-debug/
 
+#Cmake 
+/CMakeFiles
