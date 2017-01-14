@@ -81,19 +81,19 @@ void RobotImpl::GoBack(Cell::RelativeDirection dir) {
   }
 }
 
-std::vector<Cell *> RobotImpl::GetNeighbors() {
+std::vector<Cell*> RobotImpl::GetNeighbors() {
   return maze_.GetNeighbors(curr_loc_.x(), curr_loc_.y());
 }
 
 void RobotImpl::VisitCurrentCell() {
   std::cout << "Visit Current Cell" << std::endl;
-  Cell * curr_cell = maze_(curr_loc_.x(), curr_loc_.y());
+  Cell* curr_cell = maze_(curr_loc_.x(), curr_loc_.y());
   std::cout << "Visit Current Cell: X: " << curr_cell->x() <<  " Y: "<< curr_cell->y() << std::endl;
   if (!curr_cell->isVisited()) {
     std::cout << "The Cell is not visited" << std::endl;
     curr_cell->VisitCell();
-    for (Cell *neighbor : GetNeighbors()) {
-      std::cout << "Have a neighbor of a cell" << std::endl;
+    for (Cell* neighbor : GetNeighbors()) {
+      std::cout << "Have a neighbor of a cell at: " << neighbor->x() << "," << neighbor->y() << std::endl;
       if (!neighbor->isVisited()) {
         std::cout << "It is not visited" << std::endl;
         stack_.push(neighbor);

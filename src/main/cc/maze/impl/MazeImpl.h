@@ -15,7 +15,7 @@ class MazeImpl : public Maze {
  	Cell *operator()(int row, int col) {
     std::cout << "Get the cell in the maze. Row: " << row << " Column: " << col << std::endl;
  		if (row < 0 || col < 0) {
- 			throw new std::range_error("Index out of bounds");
+ 			throw std::range_error("Index out of bounds");
  		}
  		return maze_[col + (col * row)];
  	}
@@ -24,6 +24,8 @@ class MazeImpl : public Maze {
 
  private:
  	std::vector<Cell *> maze_;
+
+  Cell * getCell(int row, int col, Cell::RelativeDirection direction);
 };
 
 #endif  // CC_MAZE_IMPL_MAZEIMPL_H_
