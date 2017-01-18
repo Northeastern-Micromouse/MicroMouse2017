@@ -1,6 +1,6 @@
 #include "cell.h"
 
-bool DetermineIfOpen(Cell * cell) {
+bool DetermineIfOpen(Cell* cell) {
 	if (cell->top && cell->right && cell->left && cell->bottom) {
 		cell->open = true;
 		return true;
@@ -9,11 +9,11 @@ bool DetermineIfOpen(Cell * cell) {
 	return false;
 }
 
-Location * GetLocation(Cell * cell) {
+Location* GetLocation(Cell* cell) {
 	return cell->location;
 }
 
-bool SameCell(Cell * this, Cell * that) {
+bool SameCell(Cell* this, Cell* that) {
 	if (!SameLocation(this->location, that->location)) {
 		return false;
 	}
@@ -26,12 +26,12 @@ bool SameCell(Cell * this, Cell * that) {
 			(this->mapped == that->mapped));
 }
 
-Cell * InitializeCell(int x, int y) {
+Cell* InitializeCell(int x, int y) {
 	// Create the cell struct.
-	Cell * new_cell;
+	Cell* new_cell;
 
 	// Request memory from the heap.
-	new_cell = (Cell *)malloc(sizeof(Cell));
+	new_cell = (Cell*)malloc(sizeof(Cell));
 
 	// Alert the user if there is no memory avaliable. 
 	if (new_cell == 0) {
@@ -47,7 +47,7 @@ Cell * InitializeCell(int x, int y) {
 	}
 
 	// Create all of the inner structs.
-	Location * new_location = InitializeLocation(x, y);
+	Location* new_location = InitializeLocation(x, y);
 
 	// Set the values.
 	new_cell->location = new_location;
@@ -62,7 +62,7 @@ Cell * InitializeCell(int x, int y) {
 	return new_cell;
 }
 
-void CellDestructor(Cell * cell) {
+void CellDestructor(Cell* cell) {
 	// Call the destructor on all of its contents.
 	LocationDestructor(cell->location);
 	// Free up its own memory.

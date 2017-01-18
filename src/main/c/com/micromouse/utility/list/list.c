@@ -1,11 +1,11 @@
 #include "list.h"
 
-List * InitializeList(Cell * data) {
+List* InitializeList(Cell* data) {
 	// Create the List struct.
-	List * new_list;
+	List* new_list;
 
 	// Request the memory from the heap.
-	new_list = (List *)malloc(sizeof(List));
+	new_list = (List*)malloc(sizeof(List));
 
 	// Check if the request was successful
 	if (new_list == 0) {
@@ -21,30 +21,37 @@ List * InitializeList(Cell * data) {
 	return new_list;
 }
 
-void ListDestructor(List * list) {
+void ListDestructor(List** list) {
 	// Check if you are at the end of the list.
 	if (list == NULL) {
 		return;
 	}
-	// Frees the memory for the cell.
-	CellDestructor(list->data_);
-	ListDestructor(list->next_);
 
-	// Free the memory for this node.
-	free(list);
+	struct List* current = *list;
+  struct List* next;
+  while (current != NULL) {
+    next = current->next_;
+    // Frees the memory for the cell.
+    CellDestructor(current->data_);
+    // Free the memory for this node.
+    free(current);
+    // Go to next node.
+    current = next;
+  }
+  current = NULL;
 }
 
-Cell * front(List ** list) {
+Cell* front(List ** list) {
 	// TODO: Implement
 	return NULL;
 }
 
-Cell * back(List * list) {
+Cell* back(List * list) {
 	// TODO: Implement
 	return NULL;
 }
 
-void PushBack(Cell * data, List * list) {
+void PushBack(Cell* data, List* list) {
 	if (list == NULL) {
 		printf("Cannot PushBack onto an empty List. \n");
 		return;
@@ -54,7 +61,7 @@ void PushBack(Cell * data, List * list) {
 		list->next_->prev_ = list;
 		return;
 	}
-	List * head = list->next_;
+	List* head = list->next_;
 	while (head->next_ != NULL) {
 		head = head->next_;
 	}
@@ -62,7 +69,7 @@ void PushBack(Cell * data, List * list) {
 	head->next_->prev_ = head;
 }
 
-void Append(Cell * data, List ** list) {
+void Append(Cell* data, List** list) {
 	if ((*list) == NULL) {
 		(*list) = InitializeList(data);
 		return;
@@ -73,7 +80,8 @@ void Append(Cell * data, List ** list) {
 		(*list) = (*list)->prev_;
 		return;
 	}
-	List * head = (*list)->prev_;
+
+	List* head = (*list)->prev_;
 	while (head->prev_ != NULL) {
 		head = head->prev_;
 	}
@@ -82,22 +90,22 @@ void Append(Cell * data, List ** list) {
 	head = head->prev_;
 }
 
-Cell * get(int index, List * list) {
+Cell* get(int index, List* list) {
 	// TODO: Implement
 	return NULL;
 }
 
-bool in(Cell * data, List * list) {
+bool in(Cell* data, List* list) {
 	// TODO: Implement
 	return false;
 }
 
-int length(List * list) {
+int length(List* list) {
 	if (list == NULL) {
 		return 0;
 	}
 	int count = 1;
-	List * head = list;
+	List* head = list;
 	while (head->next_ != NULL) {
 		count++;
 		head = head->next_;
@@ -105,32 +113,32 @@ int length(List * list) {
 	return count;
 }
 
-bool empty(List * list) {
+bool empty(List* list) {
 	// TODO: Implement
 	return false;
 }
 
-void clear(List ** list) {
+void clear(List** list) {
 	// TODO: Implement
 }
 
-void erase(Cell * data, List ** list) {
+void erase(Cell* data, List** list) {
 	// TODO: Implement
 }
 
-List * reverse(List ** list) {
+List* reverse(List** list) {
 	// TODO: Implement
 	return NULL;
 }
 
-void resetList(List ** list) {
+void resetList(List** list) {
 	if ((*list) == NULL) {
 		return;
 	}
 	if ((*list)->prev_ == NULL) {
 		return;
 	}
-	List * head = (*list);
+	List* head = (*list);
 	while (head->prev_ != NULL) {
 		head = head->prev_;
 	}

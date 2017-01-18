@@ -7,20 +7,20 @@
 #include "src/main/c/com/micromouse/maze/cell.h"
 
 typedef struct Robot {
-	Location * location_;
-	Cell * maze_[16][16];
+	Location* location_;
+	Cell* maze_[16][16];
 } Robot;
 
 // Returns a robot location at the given location.
-Robot * InitializeRobot(Location * location);
+Robot* InitializeRobot(Location* location);
 
 // Frees all of the memory associated with the given robot.
-void RobotDestructor(Robot * winslow);
+void RobotDestructor(Robot* winslow);
 
 // Explores the maze.
-void ExploreMaze(Robot * winslow);
+void ExploreMaze(Robot* winslow);
 
 // Updates the maze in the robot with the sensor information/
-void UpdateMaze(Robot * winslow, SR * values);
+void UpdateMaze(Robot* winslow, SR* values);
 
 #endif  // MICROMOUSE_ROBOT_ROBOT_H_

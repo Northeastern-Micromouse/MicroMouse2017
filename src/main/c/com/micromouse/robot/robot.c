@@ -4,7 +4,7 @@ void ExploreMaze(Robot * winslow) {
 	printf("Starting to explore the maze. Location is: x: %d, y: %d \n", winslow->location_->x, winslow->location_->y);
 
 	// Start by checking the sensors.
-	SR * values = PollSensors();
+	SR* values = PollSensors();
 
 	// Update the maze with the values.
 	UpdateMaze(winslow, values);
@@ -21,22 +21,21 @@ void ExploreMaze(Robot * winslow) {
 	printf("Done mapping the maze.\n");
 }
 
-void UpdateMaze(Robot * winslow, SR * values) {
+void UpdateMaze(Robot* winslow, SR* values) {
 	// TODO: Implement
 }
 
-Robot * InitializeRobot(Location * location) {
+Robot* InitializeRobot(Location * location) {
 	// Create the struct for winslow.
-	Robot * winslow;
+	Robot* winslow;
 
 	// Request memory from the heap.
-	winslow = (Robot *)malloc(sizeof(Robot));
+	winslow = (Robot*)malloc(sizeof(Robot));
 
 	// Check if the memory is avaliable.
 	if (winslow == 0) {
 		printf("Error out of memory. Unable to create winslow"
 		" at location x: %d, y: %d.\n", location->x, location->y);
-		return NULL;
 		return NULL;
 	}
 
@@ -56,7 +55,7 @@ Robot * InitializeRobot(Location * location) {
 	return winslow;
 }
 
-void RobotDestructor(Robot * winslow) {
+void RobotDestructor(Robot* winslow) {
 	// Call the destructor on all of its contents.
 	LocationDestructor(winslow->location_);
 	for (int row = 0; row < 16; row++) {

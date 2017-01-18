@@ -11,9 +11,9 @@
 // The top position in the cell (0,0) is the cell (0,1).
 typedef struct Cell {
 	// The coordinates of the cell relative to the world.
-	Location * location;
+	Location* location;
 	// Whether or not it is possible to reach the cell. 
-	// I.e if a cell is surronded by 4 walls.
+	// I.e if a cell is surrounded by 4 walls.
 	bool open; 
 
 	// True if there is no wall in the square above this cell. 
@@ -33,18 +33,18 @@ typedef struct Cell {
 } Cell;
 
 // Returns true if the given cells are equal, false otherwise
-bool SameCell(Cell *, Cell *);
+bool SameCell(Cell*, Cell*);
 
 // Determines if the cell is open. Returns true if it is open, false otherwise.
-bool DetermineIfOpen(Cell * cell);
+bool DetermineIfOpen(Cell* cell);
 
 // Returns the cells location.
-Location * GetLocation(Cell * cell);
+Location* GetLocation(Cell* cell);
 
 // Initializes a cell to all of the default values.
-Cell * InitializeCell(int x, int y);
+Cell* InitializeCell(int x, int y);
 
 // Frees all of the memory for the given cell.
-void CellDestructor(Cell * cell);
+void CellDestructor(Cell* cell);
 
 #endif  // MICROMOUSE_MAZE_MAZE_H_
