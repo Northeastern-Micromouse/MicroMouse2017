@@ -41,6 +41,4 @@
 #Clion
 .idea/
 /cmake-build-debug/
-
-#Cmake 
 /CMakeFiles
