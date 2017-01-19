@@ -41,12 +41,24 @@ void ListDestructor(List** list) {
   current = NULL;
 }
 
-Cell* front(List ** list) {
+Cell *Front(List **list) {
 	// TODO: Implement
-	return NULL;
+	if (list == NULL) {
+		printf("Invalid argument in Front");
+		return NULL;
+	}
+	if (*list == NULL) {
+		printf("List is null in Front");
+		return NULL;
+	}
+	List *result = *list;
+	*list = result->next_;
+	result->prev_ = NULL;
+
+	return result->data_;
 }
 
-Cell* back(List * list) {
+Cell *back(List * list) {
 	// TODO: Implement
 	return NULL;
 }
@@ -90,7 +102,7 @@ void Append(Cell* data, List** list) {
 	head = head->prev_;
 }
 
-Cell* get(int index, List* list) {
+Cell *get(int index, List* list) {
 	// TODO: Implement
 	return NULL;
 }
@@ -113,8 +125,10 @@ int length(List* list) {
 	return count;
 }
 
-bool empty(List* list) {
-	// TODO: Implement
+bool empty(List *list) {
+	if (list == NULL) {
+    return true;
+  }
 	return false;
 }
 

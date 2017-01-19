@@ -22,7 +22,7 @@ List * InitializeList(Cell * data);
 void ListDestructor(List** list);
 
 // Returns the first element of the list.
-Cell* front(List** list);
+Cell* Front(List **list);
 
 // Returns the last element of the list.
 Cell* back(List* list);
@@ -30,7 +30,7 @@ Cell* back(List* list);
 // Pushes the element onto the end of the list. Does not work on an empty list.
 void PushBack(Cell* data, List* list);
 
-// Appends the element to the front of the list.
+// Appends the element to the Front of the list.
 void Append(Cell* data, List** list);
 
 // Gets the element at index in the list. Return NULL if not found.
