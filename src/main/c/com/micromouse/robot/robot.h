@@ -19,6 +19,8 @@ void CanMove(Robot *winslow, Move move);
 
 void NaiveStrategy(Robot *winslow, Move *possibleMoves, int size, List **queue);
 
+void AddMove(Robot *winslow, Move move, List **queue);
+
 // Frees all of the memory associated with the given robot.
 void RobotDestructor(Robot *winslow);
 
