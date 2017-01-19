@@ -1,7 +1,7 @@
 cc_library(
-    name = "moves",
+    name = "direction",
     hdrs = [
-    	"move.h",
+    	"direction.h",
     ],
     visibility = ["//visibility:public"],
 )

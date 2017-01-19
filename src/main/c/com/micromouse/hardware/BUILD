@@ -7,5 +7,7 @@ cc_library(
     	"hardware.c",
     ],
     visibility = ["//visibility:public"],
-    deps = [],
+    deps = [
+        "//src/main/c/com/micromouse/utility/direction",
+    ],
 )

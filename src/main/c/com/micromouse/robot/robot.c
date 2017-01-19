@@ -1,15 +1,16 @@
 #include "robot.h"
 
-void ExploreMaze(Robot * winslow) {
+void ExploreMaze(Robot *winslow) {
 	printf("Starting to explore the maze. Location is: x: %d, y: %d \n", winslow->location_->x, winslow->location_->y);
 
 	// Start by checking the sensors.
-	SR* values = PollSensors();
+  Move *possibleMoves = malloc(sizeof(Move) * max_possible_moves);
+	PollSensors(possibleMoves);
 
 	// Update the maze with the values.
-	UpdateMaze(winslow, values);
+	UpdateMaze(winslow, possibleMoves, max_possible_moves);
 
-	// Use a Stratgey to determine where to go next
+	// Use a Strategy to determine where to go next
 	// TODO: Implement
 
 	// While the maze is not mapped repeat
@@ -19,10 +20,37 @@ void ExploreMaze(Robot * winslow) {
 		// If you ever have nowhere to go or decide to go back go back.
 	}
 	printf("Done mapping the maze.\n");
+
+  // Clean up memory
+  free(possibleMoves);
 }
 
-void UpdateMaze(Robot* winslow, SR* values) {
-	// TODO: Implement
+void UpdateMaze(Robot *winslow, Move *values, int size) {
+	printf("Updating the maze\n");
+  for (int i = 0; i < size; i++) {
+    if (values[i].is_valid_) {
+      CanMove(winslow, values[i]);
+    }
+  }
+}
+
+void CanMove(Robot *winslow, Move move) {
+  switch (move.dir_) {
+    case NORTH:
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->top = true;
+      break;
+    case SOUTH:
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->bottom = true;
+      break;
+    case EAST:
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->right = true;
+      break;
+    case WEST:
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->left = true;
+      break;
+    default:
+      printf("Error in CanMove. Invalid Move\n");
+  }
 }
 
 Robot* InitializeRobot(Location * location) {

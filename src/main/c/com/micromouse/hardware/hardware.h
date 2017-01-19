@@ -1,11 +1,16 @@
 #ifndef MICROMOUSE_HARDWARE_HARDWARE_H_
 #define MICROMOUSE_HARDWARE_HARDWARE_H_
 
-typedef enum SensorResult {
-	VALID,
-	INVALID
-} SR;
+#include <stdbool.h>
+#include "src/main/c/com/micromouse/utility/direction/direction.h"
 
-SR * PollSensors();
+typedef struct Move {
+  bool is_valid_;
+  direction_t dir_;
+} Move;
+
+// Returns an array of size 4 representing the four possible moves from
+// this location in the maze.
+void PollSensors(Move *possibleMoves);
 
 #endif  // MICROMOUSE_HARDWARE_HARDWARE_H_
