@@ -1,7 +1,7 @@
 #include "cell.h"
 
 bool DetermineIfOpen(Cell* cell) {
-	if (cell->top && cell->right && cell->left && cell->bottom) {
+	if (cell->north && cell->east && cell->west && cell->south) {
 		cell->open = true;
 		return true;
 	}
@@ -18,10 +18,10 @@ bool SameCell(Cell* this, Cell* that) {
 		return false;
 	}
 	return ((this->open == that->open) &&
-			(this->top == that->top) &&
-			(this->bottom == that->bottom) &&
-			(this->left == that->left) && 
-			(this->right == that->right) &&
+			(this->north == that->north) &&
+			(this->south == that->south) &&
+			(this->west == that->west) &&
+			(this->east == that->east) &&
 			(this->visited == that->visited) && 
 			(this->mapped == that->mapped));
 }
@@ -52,10 +52,10 @@ Cell* InitializeCell(int x, int y) {
 	// Set the values.
 	new_cell->location = new_location;
 	new_cell->open = true;
-	new_cell->top = true;
-	new_cell->bottom = true;
-	new_cell->left = true;
-	new_cell->right = true;
+	new_cell->north = true;
+	new_cell->south = true;
+	new_cell->west = true;
+	new_cell->east = true;
 	new_cell->visited = false;
 	new_cell->mapped = false;
 

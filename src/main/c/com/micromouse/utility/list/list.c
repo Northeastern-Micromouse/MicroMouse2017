@@ -1,11 +1,11 @@
 #include "list.h"
 
-List* InitializeList(Cell* data) {
+List *InitializeList(Cell *data) {
 	// Create the List struct.
-	List* new_list;
+	List *new_list;
 
 	// Request the memory from the heap.
-	new_list = (List*)malloc(sizeof(List));
+	new_list = (List *)malloc(sizeof(List));
 
 	// Check if the request was successful
 	if (new_list == 0) {

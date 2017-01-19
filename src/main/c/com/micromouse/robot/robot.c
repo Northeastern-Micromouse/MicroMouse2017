@@ -1,5 +1,8 @@
 #include "robot.h"
 
+// The maximum number of possible moves from any given cell.
+int max_possible_moves = 4;
+
 void ExploreMaze(Robot *winslow) {
 	printf("Starting to explore the maze. Location is: x: %d, y: %d \n", winslow->location_->x, winslow->location_->y);
 
@@ -11,10 +14,15 @@ void ExploreMaze(Robot *winslow) {
 	UpdateMaze(winslow, possibleMoves, max_possible_moves);
 
 	// Use a Strategy to determine where to go next
-	// TODO: Implement
+	// TODO: Implement not a basic one.
+  List *queue = (List *)malloc(sizeof(List));
+  List **head = &queue;
+  NaiveStrategy(winslow, possibleMoves, max_possible_moves, head);
+  winslow->maze_[0][0]->mapped = true;
+
 
 	// While the maze is not mapped repeat
-	while (false) {
+	while (!empty(queue)) {
 		// TODO: Implement
 
 		// If you ever have nowhere to go or decide to go back go back.
@@ -34,19 +42,28 @@ void UpdateMaze(Robot *winslow, Move *values, int size) {
   }
 }
 
+void NaiveStrategy(Robot *winslow, Move *possibleMoves, int size, List **queue) {
+  printf("Naive Strategy\n");
+  for (int i = 0; i < size; i++) {
+    if (possibleMoves[i].is_valid_) {
+      // AddMove(winslow, possibleMoves[i], queue);
+    }
+  }
+}
+
 void CanMove(Robot *winslow, Move move) {
   switch (move.dir_) {
     case NORTH:
-      winslow->maze_[winslow->location_->x][winslow->location_->y]->top = true;
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->north = true;
       break;
     case SOUTH:
-      winslow->maze_[winslow->location_->x][winslow->location_->y]->bottom = true;
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->south = true;
       break;
     case EAST:
-      winslow->maze_[winslow->location_->x][winslow->location_->y]->right = true;
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->east = true;
       break;
     case WEST:
-      winslow->maze_[winslow->location_->x][winslow->location_->y]->left = true;
+      winslow->maze_[winslow->location_->x][winslow->location_->y]->west = true;
       break;
     default:
       printf("Error in CanMove. Invalid Move\n");

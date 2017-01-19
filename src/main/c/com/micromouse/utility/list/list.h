@@ -42,8 +42,8 @@ bool in(Cell* data, List* list);
 // Returns the length of the list.
 int length(List* list);
 
-// Returns if the list is empty.
-bool empty(List* list);
+// Returns true if the list is empty, false otherwise.
+bool empty(List *list);
 
 // Clears the list, does not free the memory associated with the list.
 void clear(List** list);
