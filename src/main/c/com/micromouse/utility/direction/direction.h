@@ -1,6 +1,6 @@
 #ifndef MICROMOUSE_UTILITY_DIRECTION_MOVE_H_
 #define MICROMOUSE_UTILITY_DIRECTION_MOVE_H_
 
-typedef enum direction_t {NORTH, SOUTH, EAST, WEST} direction_t;
+typedef enum direction_t {NORTH, SOUTH, EAST, WEST, NONE} direction_t;
 
 #endif  // MICROMOUSE_UTILITY_DIRECTION_MOVE_H_

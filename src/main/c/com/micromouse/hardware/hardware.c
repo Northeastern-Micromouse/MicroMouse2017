@@ -14,3 +14,27 @@ void PollSensors(Move *arr) {
   arr[3].dir_ = WEST;
   arr[3].is_valid_ = true;
 }
+
+void HardwareMove(direction_t direction) {
+  switch (direction) {
+    case NORTH:
+      printf("Moving north\n");
+      // TODO(matt): Implement
+      break;
+    case SOUTH:
+      printf("Moving south\n");
+      // TODO(matt): Implement
+      break;
+    case EAST:
+      printf("Moving east\n");
+      // TODO(matt): Implement
+      break;
+    case WEST:
+      printf("Moving west\n");
+      // TODO(matt): Implement
+      break;
+    default:
+      printf("Unknown move");
+      break;
+  }
+}

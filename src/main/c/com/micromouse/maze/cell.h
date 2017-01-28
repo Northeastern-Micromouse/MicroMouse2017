@@ -11,7 +11,7 @@
 // The north position in the cell (0,0) is the cell (0,1).
 typedef struct Cell {
 	// The coordinates of the cell relative to the world.
-	Location *location;
+	Location* location;
 	// Whether or not it is possible to reach the cell. 
 	// I.e if a cell is surrounded by 4 walls.
 	bool open; 

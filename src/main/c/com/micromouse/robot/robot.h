@@ -24,6 +24,10 @@ void AddMove(Robot* winslow, Move move, List** queue);
 // Frees all of the memory associated with the given robot.
 void RobotDestructor(Robot* winslow);
 
+void MoveRobot(Robot*, direction_t);
+
+direction_t DetermineDirection(Robot*, Cell*);
+
 // Explores the maze.
 void ExploreMaze(Robot* winslow);
 

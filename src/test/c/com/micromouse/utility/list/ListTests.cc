@@ -14,10 +14,10 @@ TEST(ListTests, ShouldInitializeANodeCorrectly) {
 	// Then: the data should be initialized correctly.
 	Location* loc = InitializeLocation(10, 10);
 	EXPECT_TRUE(SameLocation(loc, list->data_->location));
-	EXPECT_EQ(true, list->data_->top);
-	EXPECT_EQ(true, list->data_->bottom);
-	EXPECT_EQ(true, list->data_->left);
-	EXPECT_EQ(true, list->data_->right);
+	EXPECT_EQ(true, list->data_->north);
+	EXPECT_EQ(true, list->data_->south);
+	EXPECT_EQ(true, list->data_->west);
+	EXPECT_EQ(true, list->data_->east);
   EXPECT_EQ(true, list->data_->open);
 	EXPECT_EQ(false, list->data_->mapped);
 	EXPECT_EQ(false, list->data_->visited);
