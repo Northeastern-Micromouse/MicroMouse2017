@@ -11,7 +11,7 @@ typedef struct Move {
 
 // Returns an array of size 4 representing the four possible moves from
 // this location in the maze.
-void PollSensors(Move* possibleMoves);
+void PollSensors(Move* possibleMoves, int size);
 
 void HardwareMove(direction_t direction);
 

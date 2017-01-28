@@ -8,7 +8,7 @@ void ExploreMaze(Robot *winslow) {
 
 	// Start by checking the sensors.
   Move* possibleMoves = malloc(sizeof(Move) * max_possible_moves);
-	PollSensors(possibleMoves);
+	PollSensors(possibleMoves, max_possible_moves);
 
 	// Update the maze with the values.
 	UpdateMaze(winslow, possibleMoves, max_possible_moves);
@@ -29,7 +29,7 @@ void ExploreMaze(Robot *winslow) {
 		curr = Front(head);
     PrintCell(curr);
     MoveRobot(winslow, DetermineDirection(winslow, curr));
-    PollSensors(possibleMoves);
+    PollSensors(possibleMoves, max_possible_moves);
     // UpdateMaze(winslow, possibleMoves, max_possible_moves);
     // NaiveStrategy(winslow, possibleMoves, max_possible_moves, head);
 		// If you ever have nowhere to go or decide to go back go back.
