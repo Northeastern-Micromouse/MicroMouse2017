@@ -39,6 +39,7 @@ void ExploreMaze(Robot *winslow) {
 
   // Clean up memory
   free(possibleMoves);
+  ListDestructor(head);
 }
 
 void MoveRobot(Robot* winslow, direction_t dir) {
