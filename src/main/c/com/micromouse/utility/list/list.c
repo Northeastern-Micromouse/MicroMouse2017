@@ -1,6 +1,6 @@
 #include "list.h"
 
-List *InitializeList(Cell *data) {
+List* InitializeList(Cell *data) {
 	// Create the List struct.
 	List *new_list;
 
@@ -41,7 +41,7 @@ void ListDestructor(List** list) {
   current = NULL;
 }
 
-Cell *Front(List **list) {
+Cell* Front(List **list) {
 	// TODO: Implement
 	if (list == NULL) {
 		printf("Invalid argument in Front");
@@ -58,7 +58,7 @@ Cell *Front(List **list) {
 	return result->data_;
 }
 
-Cell *back(List * list) {
+Cell* back(List * list) {
 	// TODO: Implement
 	return NULL;
 }
@@ -102,7 +102,7 @@ void Append(Cell* data, List** list) {
 	head = head->prev_;
 }
 
-Cell *get(int index, List* list) {
+Cell* get(int index, List* list) {
 	// TODO: Implement
 	return NULL;
 }
@@ -125,7 +125,7 @@ int length(List* list) {
 	return count;
 }
 
-bool empty(List *list) {
+bool empty(List* list) {
 	if (list == NULL) {
     return true;
   }

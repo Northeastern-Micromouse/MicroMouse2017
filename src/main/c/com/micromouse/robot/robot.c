@@ -7,7 +7,7 @@ void ExploreMaze(Robot *winslow) {
 	printf("Starting to explore the maze. Location is: x: %d, y: %d \n", winslow->location_->x, winslow->location_->y);
 
 	// Start by checking the sensors.
-  Move *possibleMoves = malloc(sizeof(Move) * max_possible_moves);
+  Move* possibleMoves = malloc(sizeof(Move) * max_possible_moves);
 	PollSensors(possibleMoves);
 
 	// Update the maze with the values.
@@ -15,8 +15,8 @@ void ExploreMaze(Robot *winslow) {
 
 	// Use a Strategy to determine where to go next
 	// TODO: Implement not a basic one.
-  List *queue = (List *)malloc(sizeof(List));
-  List **head = &queue;
+  List* queue = (List*)malloc(sizeof(List));
+  List** head = &queue;
   NaiveStrategy(winslow, possibleMoves, max_possible_moves, head);
   winslow->maze_[0][0]->mapped = true;
 
@@ -25,6 +25,7 @@ void ExploreMaze(Robot *winslow) {
 	while (!empty(queue)) {
 		curr = Front(head);
 		// If you ever have nowhere to go or decide to go back go back.
+    printf("Hello\n");
 	}
 	printf("Done mapping the maze.\n");
 

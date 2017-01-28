@@ -15,14 +15,14 @@ typedef struct List {
 } List;
 
 // Create a node with the given data.
-List * InitializeList(Cell * data);
+List* InitializeList(Cell* data);
 
 // Free all of the memory associated with the list. Goes through all of the 
 // nodes after this node in the list and frees their memory.
 void ListDestructor(List** list);
 
 // Returns the first element of the list.
-Cell* Front(List **list);
+Cell* Front(List** list);
 
 // Returns the last element of the list.
 Cell* back(List* list);
@@ -43,7 +43,7 @@ bool in(Cell* data, List* list);
 int length(List* list);
 
 // Returns true if the list is empty, false otherwise.
-bool empty(List *list);
+bool empty(List* list);
 
 // Clears the list, does not free the memory associated with the list.
 void clear(List** list);
