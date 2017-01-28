@@ -41,6 +41,17 @@ void ListDestructor(List** list) {
   current = NULL;
 }
 
+void PrintList(List* list) {
+  if (list == NULL) {
+    printf("List is empty\n");
+  }
+  List* head = list;
+  while (head != NULL) {
+    PrintCell(head->data_);
+    head = head->next_;
+  }
+}
+
 Cell* Front(List **list) {
 	// TODO: Implement
 	if (list == NULL) {
@@ -58,9 +69,20 @@ Cell* Front(List **list) {
 	return result->data_;
 }
 
-Cell* back(List * list) {
-	// TODO: Implement
-	return NULL;
+Cell* back(List** list) {
+	if (list == NULL) {
+    printf("Invalid argument in back\n");
+    return NULL;
+  }
+  if (*list == NULL) {
+    return NULL;
+  }
+  List* iter = *list;
+  while (iter->next_ != NULL) {
+    iter = iter->next_;
+  }
+  iter->prev_->next_ = NULL;
+	return iter->data_;
 }
 
 void PushBack(Cell* data, List* list) {

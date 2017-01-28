@@ -18,9 +18,11 @@ void ExploreMaze(Robot *winslow) {
   List* queue = (List*)malloc(sizeof(List));
   List** head = &queue;
   NaiveStrategy(winslow, possibleMoves, max_possible_moves, head);
+  // TODO(matt): Remove this hack
+  Front(head);
   winslow->maze_[0][0]->mapped = true;
 
-  Cell *curr = malloc(sizeof(Cell));
+  Cell* curr = malloc(sizeof(Cell));
 
 	while (!empty(queue)) {
 		curr = Front(head);
@@ -33,7 +35,7 @@ void ExploreMaze(Robot *winslow) {
   free(possibleMoves);
 }
 
-void UpdateMaze(Robot *winslow, Move *values, int size) {
+void UpdateMaze(Robot* winslow, Move* values, int size) {
 	printf("Updating the maze\n");
   for (int i = 0; i < size; i++) {
     if (values[i].is_valid_) {
@@ -42,19 +44,17 @@ void UpdateMaze(Robot *winslow, Move *values, int size) {
   }
 }
 
-void NaiveStrategy(Robot *winslow, Move *possibleMoves, int size, List **queue) {
+void NaiveStrategy(Robot* winslow, Move* possibleMoves, int size, List** queue) {
   printf("Naive Strategy\n");
-  printf("Length is: %d\n", length(*queue));
   for (int i = 0; i < size; i++) {
     if (possibleMoves[i].is_valid_) {
-       AddMove(winslow, possibleMoves[i], queue);
-      printf("Length is: %d\n", length(*queue));
+      AddMove(winslow, possibleMoves[i], queue);
     }
   }
 }
 
 void AddMove(Robot *winslow, Move move, List **queue) {
-  Cell *temp = InitializeCell(winslow->location_->x, winslow->location_->y);
+  Cell* temp = InitializeCell(winslow->location_->x, winslow->location_->y);
   switch (move.dir_) {
     case NORTH:
       temp->location->y = temp->location->y + 1;

@@ -9,6 +9,15 @@ bool DetermineIfOpen(Cell* cell) {
 	return false;
 }
 
+void PrintCell(Cell* cell) {
+	if (cell == NULL) {
+		printf("Cell can not be null in print cell\n");
+    return;
+	}
+	printf("X: %d, Y: %d\n", cell->location->x, cell->location->y);
+	// TODO(matt): Print more shit
+}
+
 Location* GetLocation(Cell* cell) {
 	return cell->location;
 }

@@ -36,15 +36,17 @@ typedef struct Cell {
 bool SameCell(Cell *, Cell *);
 
 // Determines if the cell is open. Returns true if it is open, false otherwise.
-bool DetermineIfOpen(Cell *cell);
+bool DetermineIfOpen(Cell* cell);
+
+void PrintCell(Cell* cell);
 
 // Returns the cells location.
-Location *GetLocation(Cell *cell);
+Location *GetLocation(Cell* cell);
 
 // Initializes a cell to all of the default values.
 Cell *InitializeCell(int x, int y);
 
 // Frees all of the memory for the given cell.
-void CellDestructor(Cell *cell);
+void CellDestructor(Cell* cell);
 
 #endif  // MICROMOUSE_MAZE_MAZE_H_
