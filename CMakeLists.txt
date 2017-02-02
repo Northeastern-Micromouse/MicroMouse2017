@@ -15,6 +15,6 @@ include_directories(src/test/c)
 
 FILE(GLOB_RECURSE SRCFILES src/main/c/*.c src/main/c/*.h)
 
-set(SOURCE_FILES ${SRCFILES} main.c src/main/c/com/micromouse/utility/vector/cell_vector.h src/main/c/com/micromouse/utility/vector/cell_vector.c src/test/c/com/micromouse/utility/vector/VectorTests.cc)
+set(SOURCE_FILES ${SRCFILES} main.c)
 
 add_executable(MicroMouse ${SOURCE_FILES})
