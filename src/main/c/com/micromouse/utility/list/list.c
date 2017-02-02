@@ -1,3 +1,4 @@
+// TODO: Need add push and pop functionality for queue operations.
 #include "list.h"
 
 List* InitializeList(Cell *data) {
