@@ -26,6 +26,14 @@ Vector_c* make_vector_c_with_size(int nn) {
   return vector;
 }
 
+bool vector_c_empty(Vector_c* vec) {
+  return vec->size == 0;
+}
+
+int vector_c_length(Vector_c* vec) {
+  return vec->size;
+}
+
 void free_vector_c(Vector_c* vec) {
   for (int ii = 0; ii < vec->size; ii++) {
     CellDestructor(vec->data[ii]);

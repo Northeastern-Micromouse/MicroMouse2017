@@ -1,7 +1,7 @@
 #ifndef MICROMOUSE_CELL_VECTOR_H
 #define MICROMOUSE_CELL_VECTOR_H
 
-#include <src/main/c/com/micromouse/maze/cell.h>
+#include "src/main/c/com/micromouse/maze/cell.h"
 
 typedef struct Vector_c {
   int size;
