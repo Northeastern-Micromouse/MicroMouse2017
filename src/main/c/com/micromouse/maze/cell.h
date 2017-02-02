@@ -30,9 +30,6 @@ typedef struct Cell {
 	bool visited;
 	// True if winslow has mapped this cell. Used only in mapping the maze.
 	bool mapped;
-
-	// parent for the BFS algorithm
-	Cell* parent;
 } Cell;
 
 // Returns true if the given cells are equal, false otherwise
