@@ -42,5 +42,8 @@ To get Git Autocomplete:
 Visual GDB Licenses:
     NEU Micromouse - [name].
 
+Qt:
+    https://www.qt.io
+
 
 
