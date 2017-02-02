@@ -11,8 +11,10 @@ typedef struct Vector_c {
   bool tight;
 } Vector_c;
 
+// Constructs a vector with an initial size of 10.
 Vector_c* make_vector_c();
-Vector_c* make_vector_c_with_size(int n);
+// Constructs a vector with an initial size.
+Vector_c* make_vector_c_with_size(int);
 
 void print_vector_c(Vector_c*);
 
@@ -24,10 +26,17 @@ Cell* vector_c_back(Vector_c*);
 
 bool vector_c_empty(Vector_c*);
 
+// Takes ownership of the cell that is passed in.
+// Will be responsible for cleaning up the memory.
+// If a cell is passed in then nothing should free its memory
+// other than this vector unless it is poped off the front
+// or the back.
 void append_vector_c(Vector_c*, Cell* data);
 
 void double_size_vector_c(Vector_c*);
 
+// Will free all of the memory associated with this vector
+// including the cells it holds.
 void free_vector_c(Vector_c *);
 
 #endif  // MICROMOUSE_CELL_VECTOR_H
