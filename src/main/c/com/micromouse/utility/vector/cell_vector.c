@@ -27,14 +27,17 @@ Vector_c* make_vector_c_with_size(int nn) {
 }
 
 bool vector_c_empty(Vector_c* vec) {
+  assert(vec != NULL);
   return vec->size == 0;
 }
 
 int vector_c_length(Vector_c* vec) {
+  assert(vec != NULL);
   return vec->size;
 }
 
 void free_vector_c(Vector_c* vec) {
+  assert(vec != NULL);
   for (int ii = 0; ii < vec->size; ii++) {
     CellDestructor(vec->data[ii]);
   }
