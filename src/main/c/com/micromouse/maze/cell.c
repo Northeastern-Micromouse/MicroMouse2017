@@ -1,4 +1,5 @@
 #include "cell.h"
+#include <stdbool.h>
 
 bool DetermineIfOpen(Cell* cell) {
 	if (cell->north && cell->east && cell->west && cell->south) {

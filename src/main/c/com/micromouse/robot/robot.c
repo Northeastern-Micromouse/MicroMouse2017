@@ -148,7 +148,7 @@ Robot* InitializeRobot(Location* location) {
 	// Request memory from the heap.
 	winslow = (Robot*)malloc(sizeof(Robot));
 
-	// Check if the memory is avaliable.
+	// Check if the memory is available.
 	if (winslow == 0) {
 		printf("Error out of memory. Unable to create winslow"
 		" at location x: %d, y: %d.\n", location->x, location->y);
@@ -183,3 +183,54 @@ void RobotDestructor(Robot* winslow) {
 	// Free up the memory for the Robot
 	free(winslow);
 }
+
+// Robot Location -> [Linked-list of [Moves]]
+// Returns a linked list of moves for the robot to execute, starts by 
+// searching the maze for the path to the goal, and returns the path as a 
+// Linked-list of Moves.
+Cell* SolveMaze(Robot* winslow, Location* goal) {
+  // Create path to return and load starting location into path
+  Location* curr_loc = winslow->location_;
+  // Mark curr_loc as visited
+  int curr_x = curr_loc->x;
+  int curr_y = curr_loc->y;
+  List* queue = InitializeList(winslow->maze_[curr_x][curr_y]);
+  List** head = &queue;
+  Cell* curr_cell = winslow->maze_[curr_x][curr_y];
+  curr_cell->visited = true;
+
+  while(empty(queue)) {
+    curr_cell = back(head);
+    curr_loc = curr_cell->location;
+    int x_ = curr_loc->x;
+    int y_ = curr_loc->y;
+    if(x_ == goal->x && y_ == goal->y) {
+      return winslow->maze_[goal->x][goal->y];
+    }
+    if(curr_cell->east) {
+      VisitNeighbor(curr_cell, x_ + 1, y_, winslow, head);
+    }
+    if(curr_cell->west) {
+      VisitNeighbor(curr_cell, x_ - 1, y_, winslow, head);
+    }
+    if(curr_cell->north) {
+      VisitNeighbor(curr_cell, x_, y_ + 1, winslow, head);
+    }
+    if(curr_cell->south) {
+      VisitNeighbor(curr_cell, x_, y_ - 1, winslow, head);
+    }
+  }
+  return winslow->maze_[0][0]; // Did not find goal cell, return fail.
+}
+
+// Visit neighbor and update the queue
+void VisitNeighbor(Cell* current_cell, int x, int y, Robot* winslow, List** head) {
+  Cell* neighbor_cell = winslow->maze_[x][y];
+  if(!neighbor_cell->visited) {
+    neighbor_cell->visited = true;
+    neighbor_cell->parent = current_cell;
+    Location* neighbor_loc = neighbor_cell->location;
+    Append(winslow->maze_[neighbor_loc->x][neighbor_loc->y], head);
+  }
+}
+

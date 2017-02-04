@@ -48,10 +48,10 @@ int length(List* list);
 bool empty(List* list);
 
 // Clears the list, does not free the memory associated with the list.
-void clear(List** list);
+void clear_list(List** list);
 
 // Erases the first element to match the data in the list.
-void erase(Cell* data, List** list);
+void erase_list(Cell* data, List** list);
 
 // Reverses the list.
 List* reverse(List** list);
