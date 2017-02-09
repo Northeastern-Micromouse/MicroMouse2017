@@ -4,6 +4,6 @@
 int main() {
   std::cout << "Starting the program" << std::endl;
   RobotImpl winslow = RobotImpl();
-
+  winslow.StartExploration();
   return 0;
 }

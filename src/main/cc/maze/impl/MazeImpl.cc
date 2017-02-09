@@ -10,35 +10,35 @@ MazeImpl::MazeImpl() {
   }
 }
 
-std::vector<Cell *> MazeImpl::GetNeighbors(int row, int col) {
+std::vector<Cell *> MazeImpl::GetNeighbors(int x, int y) {
 	std::vector<Cell *> neighbors;
-  std::vector<Cell::RelativeDirection> directions = this->operator()(row, col)->GetNeighbors();
+  std::vector<Cell::RelativeDirection> directions = this->operator()(x, y)->GetNeighbors();
   for (auto dir : directions) {
     if (dir == Cell::RelativeDirection::NONE) {
       continue;
     }
-    if (getCell(row, col, dir) != nullptr) {
-      neighbors.push_back(getCell(row, col, dir));
+    if (getCell(x, y, dir) != nullptr) {
+      neighbors.push_back(getCell(x, y, dir));
     }
   }
   std::cout << "The size of the neighbors is: " << neighbors.size() << std::endl;
   return neighbors;
 }
 
-Cell * MazeImpl::getCell(int row, int col, Cell::RelativeDirection direction) {
-  if (!validMove(row, col, direction)) {
+Cell * MazeImpl::getCell(int x, int y, Cell::RelativeDirection direction) {
+  if (!validMove(x, y, direction)) {
     return nullptr;
   }
   try {
     switch (direction) {
       case Cell::RelativeDirection::NORTH:
-        return this->operator()(row, col + 1);
+        return this->operator()(x, y + 1);
       case Cell::RelativeDirection::SOUTH:
-        return this->operator()(row, col - 1);
+        return this->operator()(x, y - 1);
       case Cell::RelativeDirection::WEST:
-        return this->operator()(row - 1, col);
+        return this->operator()(x - 1, y);
       case Cell::RelativeDirection::EAST:
-        return this->operator()(row + 1, col + 1);
+        return this->operator()(x + 1, y);
       case Cell::RelativeDirection::NONE:
         throw std::range_error("Invalid direction None in getCell");
       default:
@@ -55,17 +55,17 @@ std::string MazeImpl::print() {
   return "";
 }
 
-bool MazeImpl::validMove(int row, int col, Cell::RelativeDirection direction) {
-  if (row == 0 && direction == Cell::RelativeDirection::SOUTH) {
+bool MazeImpl::validMove(int x, int y, Cell::RelativeDirection direction) {
+  if (x == 0 && direction == Cell::RelativeDirection::SOUTH) {
     return false;
   }
-  if (row == maze_size - 1 && direction == Cell::RelativeDirection::NORTH) {
+  if (x == maze_size - 1 && direction == Cell::RelativeDirection::NORTH) {
     return false;
   }
-  if (col == maze_size - 1  && direction == Cell::RelativeDirection::EAST) {
+  if (y == maze_size - 1  && direction == Cell::RelativeDirection::EAST) {
     return false;
   }
-  if (col == 0 && direction == Cell::RelativeDirection::WEST) {
+  if (y == 0 && direction == Cell::RelativeDirection::WEST) {
     return false;
   }
   return true;

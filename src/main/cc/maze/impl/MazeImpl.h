@@ -12,12 +12,12 @@ class MazeImpl : public Maze {
  public:
  	MazeImpl();
 
- 	Cell *operator()(int row, int col) {
-    std::cout << "Get the cell in the maze. Row: " << row << " Column: " << col << std::endl;
- 		if (row < 0 || col < 0) {
+ 	Cell *operator()(int x, int y) {
+    std::cout << "Get the cell in the maze. Row: " << x << " Column: " << y << std::endl;
+ 		if (x < 0 || y < 0) {
  			throw std::range_error("Index out of bounds");
  		}
- 		return maze_[col + (col * row)];
+ 		return maze_[x + (maze_size * y)];
  	}
 
 	std::vector<Cell *> GetNeighbors(int row, int col);
@@ -28,8 +28,8 @@ class MazeImpl : public Maze {
  	std::vector<Cell *> maze_;
   static constexpr int maze_size = 16;
 
-  Cell * getCell(int row, int col, Cell::RelativeDirection direction);
-	bool validMove(int row, int col, Cell::RelativeDirection direction);
+  Cell * getCell(int x, int y, Cell::RelativeDirection direction);
+	bool validMove(int x, int y, Cell::RelativeDirection direction);
 };
 
 #endif  // CC_MAZE_IMPL_MAZEIMPL_H_
