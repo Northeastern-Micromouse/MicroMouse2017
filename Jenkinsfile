@@ -7,7 +7,7 @@ node {
 		stage 'Report'
 		sh 'rm -rf builds'
 		sh 'mkdir builds'
-		sh 'bazel test src/test/c/com/micromouse/... > builds/output.bazel'
+		sh 'bazel test src/test/cc/... > builds/output.bazel'
 		echo '-----------------------Build results----------------------------'
 		sh 'cat builds/output.bazel'
 }
