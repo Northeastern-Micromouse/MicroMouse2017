@@ -10,4 +10,11 @@ node {
 		sh 'bazel test src/test/cc/... > builds/output.bazel'
 		echo '-----------------------Build results----------------------------'
 		sh 'cat builds/output.bazel'
+		notifySuccessful()
+}
+
+
+def notifySuccessful() {
+  slackSend (color: '#00FF00', message: "SUCCESSFUL: Job '${env.JOB_NAME}
+  [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
 }
