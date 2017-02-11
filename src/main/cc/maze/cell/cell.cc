@@ -7,8 +7,8 @@ Cell::Cell(int x, int y) {
 	visited_ = false;
 }
 
-Cell::Cell() {
-	Cell(0,0);
+Cell::Cell() : Cell(0,0) {
+  // No op.
 }
 
 int Cell::x() {

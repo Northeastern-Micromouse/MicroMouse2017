@@ -24,6 +24,6 @@ include_directories(src/test/cc)
 #FILE(GLOB_RECURSE SRCFILES src/main/c/*.c src/main/c/*.h)
 FILE(GLOB_RECURSE SRCFILES src/main/cc/*.cc src/main/cc/*.h)
 
-set(SOURCE_FILES ${SRCFILES} main.cc)
+set(SOURCE_FILES ${SRCFILES} main.cc src/test/cc/cell/CellTests.cc)
 
 add_executable(MicroMouse ${SOURCE_FILES})
