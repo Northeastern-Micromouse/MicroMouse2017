@@ -14,6 +14,22 @@ TEST(UtilTests, ALocationShouldHaveTheCorrectXAndYValues) {
   EXPECT_EQ(5, location.y());
 }
 
+TEST(UtilTests, ALocationShouldHaveTheCorrectValuesWhenUpdated) {
+  // Given: and x and a y coordinate.
+  int x = 10;
+  int y = 5;
+
+  // When: creating a location.
+  Location location = Location(x, y);
+
+  // and: updating the values of the location
+  location.update(20, 30);
+
+  // Then: the values of the locations should be updated
+  EXPECT_EQ(20, location.x());
+  EXPECT_EQ(30, location.y());
+}
+
 TEST(UtilTests, TheSameLocationShouldBeEqualToItself) {
   // Given: a location
   Location location = Location(2, -1);

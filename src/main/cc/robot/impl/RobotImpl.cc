@@ -22,6 +22,8 @@ void RobotImpl::StartExploration() {
   // While there are still possible moves to go.
   while (!stack_.empty()) {
     curr_cell = stack_.top();
+    std::cout << "popping cell: " << std::endl;
+    curr_cell->print();
     stack_.pop();
     // If it is not visited we need to visit it.
     if (!curr_cell->isVisited()) {
@@ -35,8 +37,12 @@ void RobotImpl::StartExploration() {
       if (!neighbors.empty()) {
         // Loop through all of its possible neighbors.
         for (Cell* neighbor : neighbors) {
+          std::cout << "Neighbor cell: " << std::endl;
+          neighbor->print();
           // If they are not visited then push them onto the stack to visit later
           if (!neighbor->isVisited()) {
+            std::cout << "Adding cell: " << std::endl;
+            neighbor->print();
             stack_.push(neighbor);
           }
         }
@@ -95,7 +101,8 @@ void RobotImpl::VisitCurrentCell() {
     for (Cell* neighbor : GetNeighbors()) {
       std::cout << "Have a neighbor of a cell at: " << neighbor->x() << ", " << neighbor->y() << std::endl;
       if (!neighbor->isVisited()) {
-        std::cout << "It is not visited" << std::endl;
+        std::cout << "Adding cell" << std::endl;
+        neighbor->print();
         stack_.push(neighbor);
       }
     }
@@ -106,15 +113,19 @@ void RobotImpl::Move(Cell::RelativeDirection dir) {
   switch (dir) {
     case Cell::RelativeDirection::NORTH:
       //TODO(matt): Actually move forward
+      curr_loc_.update(curr_loc_.x(), curr_loc_.y() + 1);
       break;
     case Cell::RelativeDirection::SOUTH:
       //TODO(matt): Actually move backward
+      curr_loc_.update(curr_loc_.x(), curr_loc_.y() - 1);
       break;
     case Cell::RelativeDirection::EAST:
       //TODO(matt): Actually move left
+      curr_loc_.update(curr_loc_.x() + 1, curr_loc_.y());
       break;
     case Cell::RelativeDirection::WEST:
       //TODO(matt): Actually move right
+      curr_loc_.update(curr_loc_.x() - 1, curr_loc_.y());
       break;
     default:
       break;
@@ -131,10 +142,10 @@ Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
     return Cell::RelativeDirection::SOUTH;
   }
   if (x == curr_loc_.x() + 1 && y == curr_loc_.y()) {
-    return Cell::RelativeDirection::WEST;
+    return Cell::RelativeDirection::EAST;
   }
   if (x == curr_loc_.x() - 1 && y == curr_loc_.y()) {
-    return Cell::RelativeDirection::EAST;
+    return Cell::RelativeDirection::WEST;
   }
   // TODO(matt): Implement error checking
   return Cell::RelativeDirection::NONE;

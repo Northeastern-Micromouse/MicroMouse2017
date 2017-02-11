@@ -4,6 +4,8 @@
 
 #include <string>
 
+// Represents a coordinate point in a maze.
+// A coordinate point has an x and a y location.
 class Location {
  public:
   Location(int x, int y);
@@ -11,6 +13,11 @@ class Location {
   int x();
   int y();
 
+  // Updates the value of the location to the x and y values.
+  void update(int x, int y);
+
+  // Returns if this location is equal to that. Locations are equal if
+  // both their x and y values are equal.
   bool isEqual(Location that);
 
   std::string print();
