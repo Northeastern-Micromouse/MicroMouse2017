@@ -60,14 +60,32 @@ std::string MazeImpl::print() {
 }
 
 bool MazeImpl::validMove(int x, int y, Cell::RelativeDirection direction) {
-  if (x == 0 && direction == Cell::RelativeDirection::WEST) {
+  int dest_x = x;
+  int dest_y = y;
+  if (direction == Cell::RelativeDirection::WEST) {
+     dest_x = x - 1;
+  }
+  else if(direction == Cell::RelativeDirection::EAST) {
+     dest_x = x + 1;
+  }
+  else if(direction == Cell::RelativeDirection::SOUTH) {
+    dest_y = y - 1;
+  }
+  else if(direction == Cell::RelativeDirection::NORTH) {
+    dest_y = y + 1;
+  }
+  else {
+    dest_x = x;
+    dest_y = y;
+  }
+  if (dest_x <= 0 && direction == Cell::RelativeDirection::WEST) {
     return false;
   }
-  if (x == maze_size - 1 && direction == Cell::RelativeDirection::EAST) {
+  if (dest_x >= maze_size - 1 && direction == Cell::RelativeDirection::EAST) {
     return false;
   }
-  if (y == maze_size - 1  && direction == Cell::RelativeDirection::NORTH) {
+  if (dest_y >= maze_size - 1  && direction == Cell::RelativeDirection::NORTH) {
     return false;
   }
-  return (y == 0 && direction == Cell::RelativeDirection::SOUTH);
+  return (dest_y <= 0 && direction == Cell::RelativeDirection::SOUTH);
 }
