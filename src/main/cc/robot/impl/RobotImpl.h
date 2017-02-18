@@ -2,9 +2,12 @@
 #define CC_ROBOT_IMPL_ROBOTIMPL_H_
 
 #include <stack>
-#include "robot/robot.h"
-#include "maze/impl/MazeImpl.h"
-#include "util/Location.h"
+#include "src/main/cc/robot/robot.h"
+#include "src/main/cc/maze/impl/MazeImpl.h"
+#include "src/main/cc/util/Location.h"
+
+namespace robot {
+namespace impl {
 
 class RobotImpl : public Robot {
  public:
@@ -19,18 +22,21 @@ class RobotImpl : public Robot {
   std::string print();
 
  private:
-  MazeImpl maze_;
-  Location curr_loc_ = Location(0, 0);
-  Location goal_ = Location(8, 8);
-  std::stack<Cell *> stack_;
+  maze::impl::MazeImpl maze_;
+  util::location::Location curr_loc_ = util::location::Location(0, 0);
+  util::location::Location goal_ = util::location::Location(8, 8);
+  std::stack<maze::cell::Cell *> stack_;
 
   void ReturnToStart();
-  void GoBack(Cell::RelativeDirection dir);
-  std::vector<Cell *> GetNeighbors();
+  void GoBack(maze::cell::Cell::RelativeDirection dir);
+  std::vector<maze::cell::Cell *> GetNeighbors();
   void VisitCurrentCell();
-  void Move(Cell::RelativeDirection dir);
-  Cell::RelativeDirection GetDirection(Cell* cell);
+  void Move(maze::cell::Cell::RelativeDirection dir);
+  maze::cell::Cell::RelativeDirection GetDirection(maze::cell::Cell* cell);
 };
 
+
+}  // impl
+}  // robot
 
 #endif  // CC_ROBOT_IMPL_ROBOTIMPL_H_

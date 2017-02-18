@@ -1,5 +1,5 @@
 cc_test(
-    name = "cell",
+    name = "impl",
     srcs = ["MazeTests.cc"],
     copts = ["-Iexternal/gtest/include"],
     deps = [

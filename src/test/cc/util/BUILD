@@ -5,5 +5,6 @@ cc_test(
     deps = [
         "@gtest//:main",
         "//src/main/cc/util",
+        "//src/main/cc/maze/impl",
     ],
 )

@@ -3,6 +3,9 @@
 
 #include <vector>
 
+namespace maze {
+namespace cell {
+
 // Represents a single cell in the micromouse maze.
 // A cell has an
 //    - x coordinate
@@ -12,47 +15,50 @@
 //    they are reachable by only one movement in the respective relative direction.
 
 class Cell {
-public:
-	// Represents a relative direction
-	enum RelativeDirection {
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST,
-		NONE
-	};
+ public:
+  // Represents a relative direction
+  enum RelativeDirection {
+    NORTH,
+    SOUTH,
+    EAST,
+    WEST,
+    NONE
+  };
 
-	Cell();
+  Cell();
 
-	// Constructs a cell at the given location (x,y).
-	Cell(int x, int y);
+  // Constructs a cell at the given location (x,y).
+  Cell(int x, int y);
 
-	// Gets the x offset of a Cell.
-	int x();
+  // Gets the x offset of a Cell.
+  int x();
 
-	// Gets the y offset of a Cell.
-	int y();
+  // Gets the y offset of a Cell.
+  int y();
 
-	// Gets the status of whether a Cell has been visited.
-	bool isVisited();
+  // Gets the status of whether a Cell has been visited.
+  bool isVisited();
 
-	// Visits the cell.
-	void VisitCell();
+  // Visits the cell.
+  void VisitCell();
 
-	// UnVisits the cell.
-	void UnVisitCell();
+  // UnVisits the cell.
+  void UnVisitCell();
 
   // Returns the neighbors of the given cell. If the cell has no neighbors the resulting
   // vector is empty.
-	std::vector<Cell::RelativeDirection> GetNeighbors();
+  std::vector<Cell::RelativeDirection> GetNeighbors();
 
   void print();
 
-private:
-	int x_loc_;
-	int y_loc_; 
-	bool visited_;
+ private:
+  int x_loc_;
+  int y_loc_;
+  bool visited_;
   std::vector<Cell::RelativeDirection> neighbors_;
 };
+
+}  // cell
+}  // maze
 
 #endif 

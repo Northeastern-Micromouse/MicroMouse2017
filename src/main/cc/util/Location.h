@@ -1,8 +1,10 @@
 #ifndef CC_UTIL_LOCATION_H_
 #define CC_UTIL_LOCATION_H_
 
-
 #include <string>
+
+namespace util {
+namespace location {
 
 // Represents a coordinate point in a maze.
 // A coordinate point has an x and a y location.
@@ -26,5 +28,9 @@ class Location {
   int x_;
   int y_;
 };
+
+
+}  // location
+}  // util
 
 #endif  // CC_UTIL_LOCATION_H_

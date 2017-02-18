@@ -1,5 +1,17 @@
 #include "gtest/gtest.h"
-#include "src/main/cc/maze/impl/MmazeImpl.h"
+#include "src/main/cc/maze/impl/MazeImpl.h"
+
+namespace test {
+namespace maze {
+namespace impl {
+
+using ::maze::cell::Cell;
+using ::maze::cell::Cell::RelativeDirection::NORTH;
+using ::maze::cell::Cell::RelativeDirection::SOUTH;
+using ::maze::cell::Cell::RelativeDirection::EAST;
+using ::maze::cell::Cell::RelativeDirection::WEST;
+using ::maze::cell::Cell::RelativeDirection::NONE;
+using ::maze::impl::MazeImpl;
 
 TEST(UtilTests, ALegalLocationShouldReturnACell) {
   // Given: a MazeImpl, an int x, and an int y
@@ -8,11 +20,11 @@ TEST(UtilTests, ALegalLocationShouldReturnACell) {
   MazeImpl _maze = MazeImpl();
 
   // When: requesting a particular cell
-  Cell requested = _maze.getCell(x, y, None);
+  Cell* requested = _maze(x, y);
 
   // Then: Cell should be from (x, y)
-  EXPECT_EQ(x, requested.x());
-  EXPECT_EQ(y, requested.y());
+  EXPECT_EQ(x, requested->x());
+  EXPECT_EQ(y, requested->y());
 }
 
 TEST(UtilTests, NORTHGetCellShouldReturnYIncremented) {
@@ -22,36 +34,14 @@ TEST(UtilTests, NORTHGetCellShouldReturnYIncremented) {
   MazeImpl _maze = MazeImpl();
 
   // When: requesting the cell North of (x, y)
-  Cell requested = _maze.getCell(x, y, NORTH);
+  Cell* requested = _maze(x, y + 1);
 
   // Then: x should be the same in Cell, y should be y + 1
   int expected_y = y + 1;
-  EXPECT_EQ(x, requested.x());
-  EXPECT_EQ(expect_y, requested.y());
+  EXPECT_EQ(x, requested->x());
+  EXPECT_EQ(expected_y, requested->y());
 }
 
-TEST(UtilTests, RequestingAnInvalidCellLocation) {
-  // Given: A MazeImpl, an int x and an int y
-  int x = -2;
-  int y = 7;
-  MazeImpl _maze = MazeImpl();
-
-  // When: requesting a cell from an invalid location
-  Bool allowed_cell = _maze.validMove(x, y, NORTH);
-
-  // Then: allowed_cell should be false
-  EXPECT_FALSE(allowed_cell);
-}
-
-TEST(UtilTests, RequestingAValidCellLocation) {
-  // Given a MazeImpl, an int x and an int y
-  int x = 5
-  int y = 5;
-  MazeImpl _maze = MazeImpl();
-
-  // When: requesting a cell from a valid location
-  Boolean allowed_cell = _maze.validMove(x, y, NORTH);
-
-  // Then: allowed_cell should be true
-  EXPECT_TRUE(allowed_cell);
-}
+}  // impl
+}  // maze
+}  // test

@@ -3,8 +3,8 @@
 
 TEST(CellTests, ACellShouldBeInitializedCorrectly) {
   // Given: two cells
-  Cell cell =  Cell();
-  Cell cell1 = Cell(10, 10);
+  maze::cell::Cell cell =  maze::cell::Cell();
+  maze::cell::Cell cell1 = maze::cell::Cell(10, 10);
 
   // Then: they should have been initialized correctly.
   EXPECT_EQ(0, cell.x());

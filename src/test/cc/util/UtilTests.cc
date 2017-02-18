@@ -7,7 +7,7 @@ TEST(UtilTests, ALocationShouldHaveTheCorrectXAndYValues) {
   int y = 5;
 
   // When: creating a location.
-  Location location = Location(x, y);
+  util::location::Location location = util::location::Location(x, y);
 
   // Then: the x and y values should be set correctly.
   EXPECT_EQ(10, location.x());
@@ -20,7 +20,7 @@ TEST(UtilTests, ALocationShouldHaveTheCorrectValuesWhenUpdated) {
   int y = 5;
 
   // When: creating a location.
-  Location location = Location(x, y);
+  util::location::Location location = util::location::Location(x, y);
 
   // and: updating the values of the location
   location.update(20, 30);
@@ -32,7 +32,7 @@ TEST(UtilTests, ALocationShouldHaveTheCorrectValuesWhenUpdated) {
 
 TEST(UtilTests, TheSameLocationShouldBeEqualToItself) {
   // Given: a location
-  Location location = Location(2, -1);
+  util::location::Location location = util::location::Location(2, -1);
 
 
   // Then: it should be equal to itself.
@@ -41,8 +41,8 @@ TEST(UtilTests, TheSameLocationShouldBeEqualToItself) {
 
 TEST(UtilTests, TwoLocationsWithTheSameValueShouldBeEqual) {
   // Given: a two locations with the same value
-  Location location = Location(2, -1);
-  Location location1 = Location(2, -1);
+  util::location::Location location = util::location::Location(2, -1);
+  util::location::Location location1 = util::location::Location(2, -1);
 
 
   // Then: they should be equal to each other.
@@ -51,8 +51,8 @@ TEST(UtilTests, TwoLocationsWithTheSameValueShouldBeEqual) {
 
 TEST(UtilTests, TwoLocationsWithDifferentValuesShouldNotBeEqual) {
   // Given: a two locations with the same value
-  Location location = Location(2, -1);
-  Location location1 = Location(2, 0);
+  util::location::Location location = util::location::Location(2, -1);
+  util::location::Location location1 = util::location::Location(2, 0);
 
 
   // Then: they should not be equal to each other.

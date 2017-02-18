@@ -1,10 +1,13 @@
 #include <iostream>
 #include "cell.h"
 
+namespace maze {
+namespace cell {
+
 Cell::Cell(int x, int y) {
-	x_loc_ = x;
-	y_loc_ = y;
-	visited_ = false;
+  x_loc_ = x;
+  y_loc_ = y;
+  visited_ = false;
 }
 
 Cell::Cell() : Cell(0,0) {
@@ -12,20 +15,20 @@ Cell::Cell() : Cell(0,0) {
 }
 
 int Cell::x() {
-	return x_loc_;
+  return x_loc_;
 }
 
 int Cell::y() {
-	return y_loc_; 
+  return y_loc_;
 }
 
 bool Cell::isVisited() {
-	return visited_;
+  return visited_;
 }
 
 void Cell::VisitCell() {
   std::cout << "Visit cell -_- X: " << x_loc_ << " Y: " << y_loc_ << std::endl;
-	visited_ = true;
+  visited_ = true;
   // For now just return all the directions.
   // TODO(matt): Query the seneors here.
   neighbors_.push_back(RelativeDirection::NORTH);
@@ -35,7 +38,7 @@ void Cell::VisitCell() {
 }
 
 void Cell::UnVisitCell() {
-	visited_ = false;
+  visited_ = false;
   neighbors_.clear();
 }
 
@@ -71,3 +74,6 @@ void Cell::print() {
   }
   std::cout << "--------------------" << std::endl;
 }
+
+}  // cell
+}  // maze
