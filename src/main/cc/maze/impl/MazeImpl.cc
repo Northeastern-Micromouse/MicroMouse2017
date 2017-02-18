@@ -27,7 +27,6 @@ std::vector<Cell *> MazeImpl::GetNeighbors(int x, int y) {
       neighbors.push_back(c);
     }
   }
-  std::cout << "The size of the neighbors is: " << neighbors.size() << std::endl;
   return neighbors;
 }
 

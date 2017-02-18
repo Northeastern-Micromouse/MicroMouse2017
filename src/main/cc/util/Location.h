@@ -29,7 +29,6 @@ class Location {
   int y_;
 };
 
-
 }  // location
 }  // util
 

@@ -28,8 +28,6 @@ void RobotImpl::StartExploration() {
   // While there are still possible moves to go.
   while (!stack_.empty()) {
     curr_cell = stack_.top();
-    std::cout << "popping cell: " << std::endl;
-    curr_cell->print();
     stack_.pop();
     // If it is not visited we need to visit it.
     if (!curr_cell->isVisited()) {
@@ -43,12 +41,8 @@ void RobotImpl::StartExploration() {
       if (!neighbors.empty()) {
         // Loop through all of its possible neighbors.
         for (Cell* neighbor : neighbors) {
-          std::cout << "Neighbor cell: " << std::endl;
-          neighbor->print();
           // If they are not visited then push them onto the stack to visit later
           if (!neighbor->isVisited()) {
-            std::cout << "Adding cell: " << std::endl;
-            neighbor->print();
             stack_.push(neighbor);
           }
         }
@@ -98,17 +92,11 @@ std::vector<Cell*> RobotImpl::GetNeighbors() {
 }
 
 void RobotImpl::VisitCurrentCell() {
-  std::cout << "Visit Current Cell" << std::endl;
   Cell* curr_cell = maze_(curr_loc_.x(), curr_loc_.y());
-  std::cout << "Visit Current Cell: X: " << curr_cell->x() <<  " Y: "<< curr_cell->y() << std::endl;
   if (!curr_cell->isVisited()) {
-    std::cout << "The Cell is not visited" << std::endl;
     curr_cell->VisitCell();
     for (Cell* neighbor : GetNeighbors()) {
-      std::cout << "Have a neighbor of a cell at: " << neighbor->x() << ", " << neighbor->y() << std::endl;
       if (!neighbor->isVisited()) {
-        std::cout << "Adding cell" << std::endl;
-        neighbor->print();
         stack_.push(neighbor);
       }
     }

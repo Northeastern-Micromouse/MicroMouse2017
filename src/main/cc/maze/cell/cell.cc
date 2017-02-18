@@ -27,7 +27,6 @@ bool Cell::isVisited() {
 }
 
 void Cell::VisitCell() {
-  std::cout << "Visit cell -_- X: " << x_loc_ << " Y: " << y_loc_ << std::endl;
   visited_ = true;
   // For now just return all the directions.
   // TODO(matt): Query the seneors here.
