@@ -8,8 +8,10 @@ cc_library(
     ],
     visibility = ["//visibility:public"],
     deps = [
-        "//src/main/cc/maze/cell",
+        "//src/main/cc/util",
         "//src/main/cc/maze",
+        "//src/main/cc/maze/cell",
+        "//src/main/cc/maze/impl",
         "//src/main/cc/robot",
     ],
     copts = ["-isystemsrc/main/cc"],

@@ -1,49 +1,53 @@
-# Master
-Northeastern University Micromouse 2017
+# Northeastern University Micromouse 2017
 
-Installing Homebrew:
+# What is Micromouse?
+A Micromouse is a small autonomous vehicle that is able to navigate its way through an unknown maze. 
+The robot is self contained and battery operated and incorporates many aspects of electrical and computer engineering.
 
-1. If you are a mac user type 
+# Our Team
+Our Micromouse team is made up of 7 Northeastern undergraduate electrical and computer engineers.
 
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+| Name | Major | Graduation Year |
+| ---------- | ---------- |----- |
+| Matthew Murphy | Bachelors of Computer Science and Computer Engineering | Class of 2018 |
+| Charles Ziegler |Bachelors of Electrical Engineering | Class of 2017 |
+| Sourabh Marathe | Bachelors of Computer Engineering | Class of 2018 |
+| Billy Kalfus |Bachelors of Computer Engineering and Physics | Class of 2020 |
+| Justin Xia | Bachelors of Computer Engineering | Class of 2020 |
+| Kenneth Afriyie |Bachelors of Computer Engineering | Class of 2020 |
+| Noah Lichtenstein | Bachelors of Computer Engineering | Class of 2020 |
 
 
-into your terminal.
-
-
-We are using Bazel to build all of our code. The docs can be found at https://bazel.io/
-It is an open source tool created by Google used to build code. 
+# Getting Started
+We are using [Bazel](https://bazel.io/) to build all of our code. It is an open source tool created
+by Google.
 
 Installation instructions for Mac:
 
-1. If you have homebrew installed just type brew install bazel into your terminal.
+1. Bazel can be installed directly from Homebrew with the command brew install bazel.
+
 2. If you encounter problems, make sure homebrew is updated. Do this by running brew update twice.
+
 3. If you still have problems run brew doctor. 
 
-Installation instructions for PC: https://bazel.io/versions/master/docs/windows.html
 
-1. Get a mac
+Installation instructions for PC can be found [here.](https://bazel.io/versions/master/docs/windows.html)
 
-Currently it is only supported for 64 bit Windows 7 or higher and we compile Bazel as a msys2 binary.
-
-You will also need: 
-
-1. Java JDK 8 or later
-2. Visual Studio (Community Edition is okay)
-3. msys2 (need to be installed at C:\tools\msys64\).
-4. Several msys2 packages. Use the pacman command to install them: pacman -Syuu gcc git curl zip unzip zlib-devel
+# Installing Homebrew
+1. Run /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+in your terminal.
 
 
-To get Git Autocomplete:
+# Git Autocomplete:
 	
-1. http://code-worrier.com/blog/autocomplete-git/
+1. Instructions can be found [here.](http://code-worrier.com/blog/autocomplete-git/)
 
 
-Visual GDB Licenses:
-    NEU Micromouse - [name].
+# Visual GDB Licenses:
+NEU Micromouse - name.
 
-Qt:
-    https://www.qt.io
+# Qt:
+[Qt](https://www.qt.io)
 
 
 

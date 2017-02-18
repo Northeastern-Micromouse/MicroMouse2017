@@ -6,11 +6,6 @@ namespace maze {
 namespace impl {
 
 using ::maze::cell::Cell;
-using ::maze::cell::Cell::RelativeDirection::NORTH;
-using ::maze::cell::Cell::RelativeDirection::SOUTH;
-using ::maze::cell::Cell::RelativeDirection::EAST;
-using ::maze::cell::Cell::RelativeDirection::WEST;
-using ::maze::cell::Cell::RelativeDirection::NONE;
 using ::maze::impl::MazeImpl;
 
 TEST(UtilTests, ALegalLocationShouldReturnACell) {
