@@ -16,7 +16,6 @@ class MazeImpl : public Maze {
   MazeImpl();
 
   maze::cell::Cell *operator()(int x, int y) {
-    std::cout << "Get the cell in the maze. Row: " << x << " Column: " << y << std::endl;
     if (x < 0 || y < 0) {
       throw std::range_error("Index out of bounds");
     }
