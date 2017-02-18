@@ -7,11 +7,6 @@ namespace robot {
 namespace impl {
 
 using maze::cell::Cell;
-using maze::cell::Cell::RelativeDirection::NORTH;
-using maze::cell::Cell::RelativeDirection::SOUTH;
-using maze::cell::Cell::RelativeDirection::EAST;
-using maze::cell::Cell::RelativeDirection::WEST;
-using maze::cell::Cell::RelativeDirection::NONE;
 using util::location::Location;
 
 RobotImpl::RobotImpl() {
@@ -25,7 +20,7 @@ void RobotImpl::StartExploration() {
   }
   Cell* curr_cell;
   std::vector<Cell*> neighbors;
-  Cell::RelativeDirection prev_move = NONE;
+  Cell::RelativeDirection prev_move = Cell::RelativeDirection::NONE;
 
   // Visit the first cell.
   VisitCurrentCell();
@@ -81,17 +76,17 @@ void RobotImpl::ReturnToStart() {
 
 void RobotImpl::GoBack(Cell::RelativeDirection dir) {
   switch (dir) {
-    case NORTH:
-      Move(SOUTH);
+    case Cell::RelativeDirection::NORTH:
+      Move(Cell::RelativeDirection::SOUTH);
       break;
-    case SOUTH:
-      Move(NORTH);
+    case Cell::RelativeDirection::SOUTH:
+      Move(Cell::RelativeDirection::NORTH);
       break;
-    case EAST:
-      Move(WEST);
+    case Cell::RelativeDirection::EAST:
+      Move(Cell::RelativeDirection::WEST);
       break;
-    case WEST:
-      Move(EAST);
+    case Cell::RelativeDirection::WEST:
+      Move(Cell::RelativeDirection::EAST);
       break;
     default:
       break;
@@ -122,19 +117,19 @@ void RobotImpl::VisitCurrentCell() {
 
 void RobotImpl::Move(Cell::RelativeDirection dir) {
   switch (dir) {
-    case NORTH:
+    case Cell::RelativeDirection::NORTH:
       //TODO(matt): Actually move forward
       curr_loc_.update(curr_loc_.x(), curr_loc_.y() + 1);
       break;
-    case SOUTH:
+    case Cell::RelativeDirection::SOUTH:
       //TODO(matt): Actually move backward
       curr_loc_.update(curr_loc_.x(), curr_loc_.y() - 1);
       break;
-    case EAST:
+    case Cell::RelativeDirection::EAST:
       //TODO(matt): Actually move left
       curr_loc_.update(curr_loc_.x() + 1, curr_loc_.y());
       break;
-    case WEST:
+    case Cell::RelativeDirection::WEST:
       //TODO(matt): Actually move right
       curr_loc_.update(curr_loc_.x() - 1, curr_loc_.y());
       break;
@@ -147,19 +142,19 @@ Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
   int x = cell->x();
   int y = cell->y();
   if (x == curr_loc_.x() && y == curr_loc_.y() + 1) {
-    return NORTH;
+    return Cell::RelativeDirection::NORTH;
   }
   if (x == curr_loc_.x() && y == curr_loc_.y() - 1) {
-    return SOUTH;
+    return Cell::RelativeDirection::SOUTH;
   }
   if (x == curr_loc_.x() + 1 && y == curr_loc_.y()) {
-    return EAST;
+    return Cell::RelativeDirection::EAST;
   }
   if (x == curr_loc_.x() - 1 && y == curr_loc_.y()) {
-    return WEST;
+    return Cell::RelativeDirection::WEST;
   }
   // TODO(matt): Implement error checking
-  return NONE;
+  return Cell::RelativeDirection::NONE;
 }
 
 std::string RobotImpl::print() {
