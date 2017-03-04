@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|VisualGDB">
+      <Configuration>Debug</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|VisualGDB">
+      <Configuration>Release</Configuration>
+      <Platform>VisualGDB</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{25CC4009-8AF6-45EF-8A00-1467690FB8D5}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <MCUPropertyListFile>$(ProjectDir)stm32.props</MCUPropertyListFile>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <GNUConfigurationType>Debug</GNUConfigurationType>
+    <Toolchain>C:\SysGCC\arm-eabi</Toolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <Toolchain>C:\SysGCC\arm-eabi</Toolchain>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|VisualGDB'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Inc;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/CMSIS_HAL/Device/ST/STM32L4xx/Include;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/STM32L4xx_HAL_Driver/Inc;C:/Users/billy_000/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/STM32Cube_FW_L4_V1.6.0/Drivers/BSP/STM32L4xx_Nucleo;C:/Users/billy_000/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/STM32Cube_FW_L4_V1.6.0/Drivers/BSP/Components/Common;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/CMSIS_HAL/Include;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/CMSIS_HAL/Include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(ClCompile.PreprocessorDefinitions);DEBUG=1;USE_HAL_DRIVER;USE_STM32L4XX_NUCLEO;STM32L476xx</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|VisualGDB'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>Inc;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/CMSIS_HAL/Device/ST/STM32L4xx/Include;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/STM32L4xx_HAL_Driver/Inc;C:/Users/billy_000/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/STM32Cube_FW_L4_V1.6.0/Drivers/BSP/STM32L4xx_Nucleo;C:/Users/billy_000/AppData/Local/VisualGDB/EmbeddedBSPs/arm-eabi/com.sysprogs.arm.stm32/VendorSamples/STM32Cube_FW_L4_V1.6.0/Drivers/BSP/Components/Common;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/CMSIS_HAL/Include;C:\Users\billy_000\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32/STM32L4xxxx/CMSIS_HAL/Include;%(ClCompile.AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>%(ClCompile.PreprocessorDefinitions);NDEBUG=1;RELEASE=1;USE_HAL_DRIVER;USE_STM32L4XX_NUCLEO;STM32L476xx</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <Text Include="readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Inc\main.h" />
+    <ClInclude Include="Inc\stm32l4xx_hal_conf.h" />
+    <ClInclude Include="Inc\stm32l4xx_it.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\StartupFiles\startup_stm32l476xx.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_cortex.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_dma.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_gpio.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_i2c.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_i2c_ex.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_pwr.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_pwr_ex.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_rcc.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_rcc_ex.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_uart.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\STM32L4xxxx\STM32L4xx_HAL_Driver\Src\stm32l4xx_hal_uart_ex.c" />
+    <ClCompile Include="..\..\..\..\..\..\AppData\Local\VisualGDB\EmbeddedBSPs\arm-eabi\com.sysprogs.arm.stm32\VendorSamples\STM32Cube_FW_L4_V1.6.0\Drivers\BSP\STM32L4xx_Nucleo\stm32l4xx_nucleo.c" />
+    <ClCompile Include="Src\main.c" />
+    <ClCompile Include="Src\stm32l4xx_hal_msp.c" />
+    <ClCompile Include="Src\stm32l4xx_it.c" />
+    <ClCompile Include="Src\system_stm32l4xx.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="MicromouseFirmware-Debug.vgdbsettings" />
+    <None Include="MicromouseFirmware-Release.vgdbsettings" />
+    <None Include="stm32.props" />
+  </ItemGroup>
+  <ItemGroup>
+    <Xml Include="stm32.xml" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
