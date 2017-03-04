@@ -1,14 +1,10 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards_ComPolling/Inc/stm32l4xx_it.h 
-  * @author  MCD Application Team
-  * @version V1.6.0
-  * @date    28-October-2016
+  * @file    stm32l4xx_it.h
   * @brief   This file contains the headers of the interrupt handlers.
   ******************************************************************************
-  * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * COPYRIGHT(c) 2017 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -58,6 +54,10 @@ void SVC_Handler(void);
 void DebugMon_Handler(void);
 void PendSV_Handler(void);
 void SysTick_Handler(void);
+void DMA1_Channel1_IRQHandler(void);
+void DMA1_Channel2_IRQHandler(void);
+void DMA2_Channel4_IRQHandler(void);
+void DMA2_Channel5_IRQHandler(void);
 
 #ifdef __cplusplus
 }

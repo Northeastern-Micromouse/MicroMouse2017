@@ -1,14 +1,11 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards_ComPolling/Src/stm32l4xx_hal_msp.c
-  * @author  MCD Application Team
-  * @version V1.6.0
-  * @date    28-October-2016
-  * @brief   HAL MSP module.
+  * File Name          : stm32l4xx_hal_msp.c
+  * Description        : This file provides code for the MSP Initialization 
+  *                      and de-Initialization codes.
   ******************************************************************************
-  * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * COPYRIGHT(c) 2017 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -32,99 +29,53 @@
   * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
   * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   *
-  ******************************************************************************  
-  */ 
-
+  ******************************************************************************
+  */
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "stm32l4xx_hal.h"
 
-/** @addtogroup STM32L4xx_HAL_Examples
-  * @{
-  */
+extern void Error_Handler(void);
+/* USER CODE BEGIN 0 */
 
-/** @defgroup HAL_MSP
-  * @brief HAL MSP module.
-  * @{
-  */
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
-
-/** @defgroup HAL_MSP_Private_Functions
-  * @{
-  */
-
+/* USER CODE END 0 */
 /**
-  * @brief I2C MSP Initialization 
-  *        This function configures the hardware resources used in this example: 
-  *           - Peripheral's clock enable
-  *           - Peripheral's GPIO Configuration  
-  *           - DMA configuration for transmission request by peripheral 
-  *           - NVIC configuration for DMA interrupt request enable
-  * @param hi2c: I2C handle pointer
-  * @retval None
+  * Initializes the Global MSP.
   */
-void HAL_I2C_MspInit(I2C_HandleTypeDef *hi2c)
+void HAL_MspInit(void)
 {
-  GPIO_InitTypeDef  GPIO_InitStruct;
-  RCC_PeriphCLKInitTypeDef  RCC_PeriphCLKInitStruct;
-  
-  /*##-1- Configure the I2C clock source. The clock is derived from the SYSCLK #*/
-  RCC_PeriphCLKInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2Cx;
-  RCC_PeriphCLKInitStruct.I2c3ClockSelection = RCC_I2CxCLKSOURCE_SYSCLK;
-  HAL_RCCEx_PeriphCLKConfig(&RCC_PeriphCLKInitStruct);
+  /* USER CODE BEGIN MspInit 0 */
 
-  /*##-2- Enable peripherals and GPIO Clocks #################################*/
-  /* Enable GPIO TX/RX clock */
-  I2Cx_SCL_GPIO_CLK_ENABLE();
-  I2Cx_SDA_GPIO_CLK_ENABLE();
-  /* Enable I2Cx clock */
-  I2Cx_CLK_ENABLE(); 
+  /* USER CODE END MspInit 0 */
 
-  /*##-3- Configure peripheral GPIO ##########################################*/  
-  /* I2C TX GPIO pin configuration  */
-  GPIO_InitStruct.Pin       = I2Cx_SCL_PIN;
-  GPIO_InitStruct.Mode      = GPIO_MODE_AF_OD;
-  GPIO_InitStruct.Pull      = GPIO_PULLUP;
-  GPIO_InitStruct.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
-  GPIO_InitStruct.Alternate = I2Cx_SCL_SDA_AF;
-  HAL_GPIO_Init(I2Cx_SCL_GPIO_PORT, &GPIO_InitStruct);
-    
-  /* I2C RX GPIO pin configuration  */
-  GPIO_InitStruct.Pin       = I2Cx_SDA_PIN;
-  GPIO_InitStruct.Alternate = I2Cx_SCL_SDA_AF;
-  HAL_GPIO_Init(I2Cx_SDA_GPIO_PORT, &GPIO_InitStruct);
+  __HAL_RCC_SYSCFG_CLK_ENABLE();
+  __HAL_RCC_PWR_CLK_ENABLE();
+
+  HAL_NVIC_SetPriorityGrouping(NVIC_PRIORITYGROUP_4);
+
+  /* System interrupt init*/
+  /* MemoryManagement_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(MemoryManagement_IRQn, 0, 0);
+  /* BusFault_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(BusFault_IRQn, 0, 0);
+  /* UsageFault_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(UsageFault_IRQn, 0, 0);
+  /* SVCall_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(SVCall_IRQn, 0, 0);
+  /* DebugMonitor_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DebugMonitor_IRQn, 0, 0);
+  /* PendSV_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(PendSV_IRQn, 0, 0);
+  /* SysTick_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+
+  /* USER CODE BEGIN MspInit 1 */
+
+  /* USER CODE END MspInit 1 */
 }
 
-/**
-  * @brief I2C MSP De-Initialization 
-  *        This function frees the hardware resources used in this example:
-  *          - Disable the Peripheral's clock
-  *          - Revert GPIO, DMA and NVIC configuration to their default state
-  * @param hi2c: I2C handle pointer
-  * @retval None
-  */
-void HAL_I2C_MspDeInit(I2C_HandleTypeDef *hi2c)
-{
-  
-  /*##-1- Reset peripherals ##################################################*/
-  I2Cx_FORCE_RESET();
-  I2Cx_RELEASE_RESET();
+/* USER CODE BEGIN 1 */
 
-  /*##-2- Disable peripherals and GPIO Clocks #################################*/
-  /* Configure I2C Tx as alternate function  */
-  HAL_GPIO_DeInit(I2Cx_SCL_GPIO_PORT, I2Cx_SCL_PIN);
-  /* Configure I2C Rx as alternate function  */
-  HAL_GPIO_DeInit(I2Cx_SDA_GPIO_PORT, I2Cx_SDA_PIN);
-}
-
-/**
-  * @}
-  */
+/* USER CODE END 1 */
 
 /**
   * @}

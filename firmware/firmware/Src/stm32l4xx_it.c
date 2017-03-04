@@ -1,16 +1,10 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards_ComPolling/Src/stm32l4xx_it.c 
-  * @author  MCD Application Team
-  * @version V1.6.0
-  * @date    28-October-2016
-  * @brief   Main Interrupt Service Routines.
-  *          This file provides template for all exceptions handler and 
-  *          peripherals interrupt service routine.
+  * @file    stm32l4xx_it.c
+  * @brief   Interrupt Service Routines.
   ******************************************************************************
-  * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * COPYRIGHT(c) 2017 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -36,150 +30,220 @@
   *
   ******************************************************************************
   */
-
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "stm32l4xx_hal.h"
+#include "stm32l4xx.h"
 #include "stm32l4xx_it.h"
 
-/** @addtogroup STM32L4xx_HAL_Examples
-  * @{
-  */
+/* USER CODE BEGIN 0 */
 
-/** @addtogroup I2C_TwoBoards_ComPolling
-  * @{
-  */
+/* USER CODE END 0 */
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+/* External variables --------------------------------------------------------*/
+extern DMA_HandleTypeDef hdma_adc1;
+extern DMA_HandleTypeDef hdma_adc2;
+extern DMA_HandleTypeDef hdma_adc3;
+extern DMA_HandleTypeDef hdma_sdmmc1;
 
 /******************************************************************************/
-/*            Cortex-M4 Processor Exceptions Handlers                         */
+/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
 /******************************************************************************/
 
 /**
-  * @brief  This function handles NMI exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Non maskable interrupt.
+*/
 void NMI_Handler(void)
 {
+  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+
+  /* USER CODE END NonMaskableInt_IRQn 0 */
+  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+
+  /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles Hard Fault exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Hard fault interrupt.
+*/
 void HardFault_Handler(void)
 {
-  /* Go to infinite loop when Hard Fault exception occurs */
+  /* USER CODE BEGIN HardFault_IRQn 0 */
+
+  /* USER CODE END HardFault_IRQn 0 */
   while (1)
   {
   }
+  /* USER CODE BEGIN HardFault_IRQn 1 */
+
+  /* USER CODE END HardFault_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles Memory Manage exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Memory management fault.
+*/
 void MemManage_Handler(void)
 {
-  /* Go to infinite loop when Memory Manage exception occurs */
+  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+
+  /* USER CODE END MemoryManagement_IRQn 0 */
   while (1)
   {
   }
+  /* USER CODE BEGIN MemoryManagement_IRQn 1 */
+
+  /* USER CODE END MemoryManagement_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles Bus Fault exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Prefetch fault, memory access fault.
+*/
 void BusFault_Handler(void)
 {
-  /* Go to infinite loop when Bus Fault exception occurs */
+  /* USER CODE BEGIN BusFault_IRQn 0 */
+
+  /* USER CODE END BusFault_IRQn 0 */
   while (1)
   {
   }
+  /* USER CODE BEGIN BusFault_IRQn 1 */
+
+  /* USER CODE END BusFault_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles Usage Fault exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Undefined instruction or illegal state.
+*/
 void UsageFault_Handler(void)
 {
-  /* Go to infinite loop when Usage Fault exception occurs */
+  /* USER CODE BEGIN UsageFault_IRQn 0 */
+
+  /* USER CODE END UsageFault_IRQn 0 */
   while (1)
   {
   }
+  /* USER CODE BEGIN UsageFault_IRQn 1 */
+
+  /* USER CODE END UsageFault_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles SVCall exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles System service call via SWI instruction.
+*/
 void SVC_Handler(void)
 {
+  /* USER CODE BEGIN SVCall_IRQn 0 */
+
+  /* USER CODE END SVCall_IRQn 0 */
+  /* USER CODE BEGIN SVCall_IRQn 1 */
+
+  /* USER CODE END SVCall_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles Debug Monitor exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Debug monitor.
+*/
 void DebugMon_Handler(void)
 {
+  /* USER CODE BEGIN DebugMonitor_IRQn 0 */
+
+  /* USER CODE END DebugMonitor_IRQn 0 */
+  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+
+  /* USER CODE END DebugMonitor_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles PendSVC exception.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles Pendable request for system service.
+*/
 void PendSV_Handler(void)
 {
+  /* USER CODE BEGIN PendSV_IRQn 0 */
+
+  /* USER CODE END PendSV_IRQn 0 */
+  /* USER CODE BEGIN PendSV_IRQn 1 */
+
+  /* USER CODE END PendSV_IRQn 1 */
 }
 
 /**
-  * @brief  This function handles SysTick Handler.
-  * @param  None
-  * @retval None
-  */
+* @brief This function handles System tick timer.
+*/
 void SysTick_Handler(void)
 {
+  /* USER CODE BEGIN SysTick_IRQn 0 */
+
+  /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
+  HAL_SYSTICK_IRQHandler();
+  /* USER CODE BEGIN SysTick_IRQn 1 */
+
+  /* USER CODE END SysTick_IRQn 1 */
 }
 
 /******************************************************************************/
-/*                 STM32L4xx Peripherals Interrupt Handlers                  */
-/*  Add here the Interrupt Handler for the used peripheral(s) (PPP), for the  */
-/*  available peripheral interrupt handler's name please refer to the startup */
-/*  file (startup_stm32l4xx.s).                                               */
+/* STM32L4xx Peripheral Interrupt Handlers                                    */
+/* Add here the Interrupt Handlers for the used peripherals.                  */
+/* For the available peripheral interrupt handler names,                      */
+/* please refer to the startup file (startup_stm32l4xx.s).                    */
 /******************************************************************************/
 
 /**
-  * @brief  This function handles PPP interrupt request.
-  * @param  None
-  * @retval None
-  */
-/*void PPP_IRQHandler(void)
+* @brief This function handles DMA1 channel1 global interrupt.
+*/
+void DMA1_Channel1_IRQHandler(void)
 {
-}*/
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc1);
+  /* USER CODE BEGIN DMA1_Channel1_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel1_IRQn 1 */
+}
 
 /**
-  * @}
-  */
+* @brief This function handles DMA1 channel2 global interrupt.
+*/
+void DMA1_Channel2_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 0 */
+
+  /* USER CODE END DMA1_Channel2_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc2);
+  /* USER CODE BEGIN DMA1_Channel2_IRQn 1 */
+
+  /* USER CODE END DMA1_Channel2_IRQn 1 */
+}
 
 /**
-  * @}
-  */
+* @brief This function handles DMA2 channel4 global interrupt.
+*/
+void DMA2_Channel4_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Channel4_IRQn 0 */
 
+  /* USER CODE END DMA2_Channel4_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_sdmmc1);
+  /* USER CODE BEGIN DMA2_Channel4_IRQn 1 */
+
+  /* USER CODE END DMA2_Channel4_IRQn 1 */
+}
+
+/**
+* @brief This function handles DMA2 channel5 global interrupt.
+*/
+void DMA2_Channel5_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Channel5_IRQn 0 */
+
+  /* USER CODE END DMA2_Channel5_IRQn 0 */
+  HAL_DMA_IRQHandler(&hdma_adc3);
+  /* USER CODE BEGIN DMA2_Channel5_IRQn 1 */
+
+  /* USER CODE END DMA2_Channel5_IRQn 1 */
+}
+
+/* USER CODE BEGIN 1 */
+
+/* USER CODE END 1 */
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

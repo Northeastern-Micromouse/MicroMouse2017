@@ -1,14 +1,10 @@
 /**
   ******************************************************************************
-  * @file    I2C/I2C_TwoBoards_ComPolling/Inc/main.h 
-  * @author  MCD Application Team
-  * @version V1.6.0
-  * @date    28-October-2016
-  * @brief   Header for main.c module
+  * File Name          : main.h
+  * Description        : This file contains the common defines of the application
   ******************************************************************************
-  * @attention
   *
-  * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
+  * COPYRIGHT(c) 2017 STMicroelectronics
   *
   * Redistribution and use in source and binary forms, with or without modification,
   * are permitted provided that the following conditions are met:
@@ -34,47 +30,94 @@
   *
   ******************************************************************************
   */
-  
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __MAIN_H
 #define __MAIN_H
+  /* Includes ------------------------------------------------------------------*/
 
-/* Includes ------------------------------------------------------------------*/
-#include "stm32l4xx_hal.h"
-#include "stm32l4xx_nucleo.h"
+/* USER CODE BEGIN Includes */
 
+/* USER CODE END Includes */
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* User can use this section to tailor I2Cx/I2Cx instance used and associated
-   resources */
-/* Definition for I2Cx clock resources */
-#define I2Cx                            I2C3
-#define RCC_PERIPHCLK_I2Cx              RCC_PERIPHCLK_I2C3
-#define RCC_I2CxCLKSOURCE_SYSCLK        RCC_I2C3CLKSOURCE_SYSCLK
-#define I2Cx_CLK_ENABLE()               __HAL_RCC_I2C3_CLK_ENABLE()
-#define I2Cx_SDA_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE()
-#define I2Cx_SCL_GPIO_CLK_ENABLE()      __HAL_RCC_GPIOC_CLK_ENABLE() 
+/* Private define ------------------------------------------------------------*/
 
-#define I2Cx_FORCE_RESET()              __HAL_RCC_I2C3_FORCE_RESET()
-#define I2Cx_RELEASE_RESET()            __HAL_RCC_I2C3_RELEASE_RESET()
+#define OSC32_IN_Pin GPIO_PIN_14
+#define OSC32_IN_GPIO_Port GPIOC
+#define OSC32_OUT_Pin GPIO_PIN_15
+#define OSC32_OUT_GPIO_Port GPIOC
+#define S_MOTOR_A_DIR_Pin GPIO_PIN_0
+#define S_MOTOR_A_DIR_GPIO_Port GPIOC
+#define S_MOTOR_A_STEP_Pin GPIO_PIN_1
+#define S_MOTOR_A_STEP_GPIO_Port GPIOC
+#define DRIVER_RSTn_Pin GPIO_PIN_2
+#define DRIVER_RSTn_GPIO_Port GPIOC
+#define REFL_DIST_C_OUT_Pin GPIO_PIN_3
+#define REFL_DIST_C_OUT_GPIO_Port GPIOC
+#define GP2Y_DIST_A_OUT_Pin GPIO_PIN_0
+#define GP2Y_DIST_A_OUT_GPIO_Port GPIOA
+#define GP2Y_DIST_B_OUT_Pin GPIO_PIN_1
+#define GP2Y_DIST_B_OUT_GPIO_Port GPIOA
+#define REFL_DIST_A_OUT_Pin GPIO_PIN_2
+#define REFL_DIST_A_OUT_GPIO_Port GPIOA
+#define REFL_DIST_B_OUT_Pin GPIO_PIN_3
+#define REFL_DIST_B_OUT_GPIO_Port GPIOA
+#define REFL_DIST_D_OUT_Pin GPIO_PIN_4
+#define REFL_DIST_D_OUT_GPIO_Port GPIOC
+#define DC_M2_IN1_Pin GPIO_PIN_5
+#define DC_M2_IN1_GPIO_Port GPIOC
+#define S_MOTOR_B_DIR_Pin GPIO_PIN_0
+#define S_MOTOR_B_DIR_GPIO_Port GPIOB
+#define S_MOTOR_B_STEP_Pin GPIO_PIN_1
+#define S_MOTOR_B_STEP_GPIO_Port GPIOB
+#define DIST_INT2_Pin GPIO_PIN_2
+#define DIST_INT2_GPIO_Port GPIOB
+#define BNO_RSTn_Pin GPIO_PIN_13
+#define BNO_RSTn_GPIO_Port GPIOB
+#define DIST_INT1_Pin GPIO_PIN_14
+#define DIST_INT1_GPIO_Port GPIOB
+#define DC_M2_IN2_Pin GPIO_PIN_6
+#define DC_M2_IN2_GPIO_Port GPIOC
+#define DC_M1_IN1_Pin GPIO_PIN_7
+#define DC_M1_IN1_GPIO_Port GPIOC
+#define SD_DAT0_Pin GPIO_PIN_8
+#define SD_DAT0_GPIO_Port GPIOC
+#define SD_DAT1_Pin GPIO_PIN_9
+#define SD_DAT1_GPIO_Port GPIOC
+#define SD_CARD_DETECT_Pin GPIO_PIN_8
+#define SD_CARD_DETECT_GPIO_Port GPIOA
+#define IMU_INTn_Pin GPIO_PIN_9
+#define IMU_INTn_GPIO_Port GPIOA
+#define SWDIO_Pin GPIO_PIN_13
+#define SWDIO_GPIO_Port GPIOA
+#define SWCLK_Pin GPIO_PIN_14
+#define SWCLK_GPIO_Port GPIOA
+#define SD_DAT2_Pin GPIO_PIN_10
+#define SD_DAT2_GPIO_Port GPIOC
+#define SD_DAT3_Pin GPIO_PIN_11
+#define SD_DAT3_GPIO_Port GPIOC
+#define SD_CLOCK_Pin GPIO_PIN_12
+#define SD_CLOCK_GPIO_Port GPIOC
+#define SD_CMD_Pin GPIO_PIN_2
+#define SD_CMD_GPIO_Port GPIOD
+#define ENCODER2_OUT_A_Pin GPIO_PIN_4
+#define ENCODER2_OUT_A_GPIO_Port GPIOB
+#define ENCODER2_OUT_B_Pin GPIO_PIN_5
+#define ENCODER2_OUT_B_GPIO_Port GPIOB
+#define ENCODER1_OUT_A_Pin GPIO_PIN_6
+#define ENCODER1_OUT_A_GPIO_Port GPIOB
+#define ENCODER1_OUT_B_Pin GPIO_PIN_7
+#define ENCODER1_OUT_B_GPIO_Port GPIOB
+/* USER CODE BEGIN Private defines */
 
-/* Definition for I2Cx Pins */
-#define I2Cx_SCL_PIN                    GPIO_PIN_0
-#define I2Cx_SCL_GPIO_PORT              GPIOC
-#define I2Cx_SDA_PIN                    GPIO_PIN_1
-#define I2Cx_SDA_GPIO_PORT              GPIOC
-#define I2Cx_SCL_SDA_AF                 GPIO_AF4_I2C3
+/* USER CODE END Private defines */
 
-/* Size of Transmission buffer */
-#define TXBUFFERSIZE                      (COUNTOF(aTxBuffer) - 1)
-/* Size of Reception buffer */
-#define RXBUFFERSIZE                      TXBUFFERSIZE
+/**
+  * @}
+  */ 
 
-/* Exported macro ------------------------------------------------------------*/
-#define COUNTOF(__BUFFER__)   (sizeof(__BUFFER__) / sizeof(*(__BUFFER__)))
-/* Exported functions ------------------------------------------------------- */
+/**
+  * @}
+*/ 
 
 #endif /* __MAIN_H */
-
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
