@@ -42,12 +42,14 @@ in your terminal.
 	
 1. Instructions can be found [here.](http://code-worrier.com/blog/autocomplete-git/)
 
-
 # Visual GDB Licenses:
 NEU Micromouse - name.
 
 # Qt:
 [Qt](https://www.qt.io)
 
+# Firmware Dev Environment
+
+Requires Visual Studio Community with VisualGDB installed.
 
 
