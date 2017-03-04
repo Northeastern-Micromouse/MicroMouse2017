@@ -108,7 +108,7 @@
 #define ENCODER1_OUT_B_Pin GPIO_PIN_7
 #define ENCODER1_OUT_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
-
+int firmware_init(void);
 /* USER CODE END Private defines */
 
 /**

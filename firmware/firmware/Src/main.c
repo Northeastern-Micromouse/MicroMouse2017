@@ -64,7 +64,7 @@ void Error_Handler(void);
 
 /* USER CODE END 0 */
 
-int main(void)
+int firmware_init(void)
 {
 
   /* USER CODE BEGIN 1 */
@@ -97,13 +97,9 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
   /* USER CODE END WHILE */
 
   /* USER CODE BEGIN 3 */
-
-  }
   /* USER CODE END 3 */
 
 }
