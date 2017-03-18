@@ -2,9 +2,13 @@
 #include <iostream>
 #include "src/main/cc/maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
+#include "src/main/cc/util/logger.h"
 
 namespace robot {
 namespace impl {
+namespace {
+  util::logger log = util::logger(true, std::cout);
+}
 
 using maze::cell::Cell;
 using util::location::Location;
@@ -14,7 +18,7 @@ RobotImpl::RobotImpl() {
 }
 
 void RobotImpl::StartExploration() {
-  std::cout<< "RobotImpl - Start Exploration" << std::endl;
+  log.log("Robot - Start Exploration");
   if (curr_loc_.x() != 0 && curr_loc_.y() != 0) {
     ReturnToStart();
   }
