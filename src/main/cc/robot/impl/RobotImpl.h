@@ -12,6 +12,7 @@ namespace impl {
 class RobotImpl : public Robot {
  public:
   RobotImpl();
+  RobotImpl(bool enable_debugging);
 
   void StartExploration() override;
 
@@ -26,11 +27,12 @@ class RobotImpl : public Robot {
   util::location::Location curr_loc_ = util::location::Location(0, 0);
   util::location::Location goal_ = util::location::Location(8, 8);
   std::stack<maze::cell::Cell *> stack_;
+  bool enable_debugging_;
 
   void ReturnToStart();
   void GoBack(maze::cell::Cell::RelativeDirection dir);
   std::vector<maze::cell::Cell *> GetNeighbors();
-  void VisitCurrentCell();
+  bool VisitCurrentCell();
   void Move(maze::cell::Cell::RelativeDirection dir);
   maze::cell::Cell::RelativeDirection GetDirection(maze::cell::Cell* cell);
 };

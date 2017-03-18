@@ -12,9 +12,11 @@ class logger {
 
   void log(std::string message);
 
+  void should_log(bool should_log);
+
  private:
-  std::ostream& out_;
   bool should_log_;
+  std::ostream& out_;
 };
 
 }  // util

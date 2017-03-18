@@ -7,21 +7,27 @@
 namespace robot {
 namespace impl {
 namespace {
-  util::logger log = util::logger(true, std::cout);
+  util::logger log = util::logger(false, std::cout);
 }
 
 using maze::cell::Cell;
 using util::location::Location;
 
-RobotImpl::RobotImpl() {
+RobotImpl::RobotImpl() : enable_debugging_(false) {
   // No op.
 }
 
+RobotImpl::RobotImpl(bool enable_debugging) : enable_debugging_(enable_debugging) {
+  log.should_log(true);
+}
+
 void RobotImpl::StartExploration() {
-  log.log("Robot - Start Exploration");
+  log.log("--------------- Start Exploration ---------------");
+  // Make sure the robot starts out at the beginning.
   if (curr_loc_.x() != 0 && curr_loc_.y() != 0) {
     ReturnToStart();
   }
+
   Cell* curr_cell;
   std::vector<Cell*> neighbors;
   Cell::RelativeDirection prev_move = Cell::RelativeDirection::NONE;
@@ -29,33 +35,17 @@ void RobotImpl::StartExploration() {
   // Visit the first cell.
   VisitCurrentCell();
 
-  // While there are still possible moves to go.
   while (!stack_.empty()) {
     curr_cell = stack_.top();
     stack_.pop();
-    // If it is not visited we need to visit it.
     if (!curr_cell->isVisited()) {
       prev_move = GetDirection(curr_cell);
       // Move the robot to the cell.
       Move(prev_move);
       // Visit the cell.
-      curr_cell->VisitCell();
-      neighbors = GetNeighbors();
-      // If it is empty we cannot go forward any more, so move back.
-      if (!neighbors.empty()) {
-        // Loop through all of its possible neighbors.
-        for (Cell* neighbor : neighbors) {
-          // If they are not visited then push them onto the stack to visit later
-          if (!neighbor->isVisited()) {
-            stack_.push(neighbor);
-          }
-        }
-      } else {
+      if (!VisitCurrentCell()) {
         GoBack(prev_move);
       }
-    } else {
-      // Otherwise we have to move back
-      GoBack(prev_move);
     }
   }
 }
@@ -70,6 +60,7 @@ void RobotImpl::ComputeFastestPath() {
 
 void RobotImpl::ReturnToStart() {
   // TODO(matt): Implement
+  log.log("--------------- Return To Start ---------------");
 }
 
 void RobotImpl::GoBack(Cell::RelativeDirection dir) {
@@ -95,35 +86,74 @@ std::vector<Cell*> RobotImpl::GetNeighbors() {
   return maze_.GetNeighbors(curr_loc_.x(), curr_loc_.y());
 }
 
-void RobotImpl::VisitCurrentCell() {
+bool RobotImpl::VisitCurrentCell() {
   Cell* curr_cell = maze_(curr_loc_.x(), curr_loc_.y());
+  bool should_move_forward = false;
   if (!curr_cell->isVisited()) {
+    log.log("--------------- Visit A Cell ---------------");
+    log.log("X: " + std::to_string(curr_cell->x()));
+    log.log("Y: " + std::to_string(curr_cell->y()));
+    log.log("--------------------------------------------");
     curr_cell->VisitCell();
     for (Cell* neighbor : GetNeighbors()) {
       if (!neighbor->isVisited()) {
+        should_move_forward = true;
         stack_.push(neighbor);
       }
     }
   }
+  return should_move_forward;
 }
 
 void RobotImpl::Move(Cell::RelativeDirection dir) {
   switch (dir) {
     case Cell::RelativeDirection::NORTH:
-      //TODO(matt): Actually move forward
+      // TODO(matt): Actually move forward
+      log.log("--------------- Move from Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       curr_loc_.update(curr_loc_.x(), curr_loc_.y() + 1);
+      log.log("--------------- to Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       break;
     case Cell::RelativeDirection::SOUTH:
-      //TODO(matt): Actually move backward
+      // TODO(matt): Actually move backward
+      log.log("--------------- Move from Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       curr_loc_.update(curr_loc_.x(), curr_loc_.y() - 1);
+      log.log("--------------- to Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       break;
     case Cell::RelativeDirection::EAST:
-      //TODO(matt): Actually move left
+      // TODO(matt): Actually move left
+      log.log("--------------- Move from Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       curr_loc_.update(curr_loc_.x() + 1, curr_loc_.y());
+      log.log("--------------- to Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       break;
     case Cell::RelativeDirection::WEST:
-      //TODO(matt): Actually move right
+      // TODO(matt): Actually move right
+      log.log("--------------- Move from Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       curr_loc_.update(curr_loc_.x() - 1, curr_loc_.y());
+      log.log("--------------- to Cell ---------------");
+      log.log("X: " + std::to_string(curr_loc_.x()));
+      log.log("Y: " + std::to_string(curr_loc_.y()));
+      log.log("----------------------------------------------");
       break;
     default:
       break;

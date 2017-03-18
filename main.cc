@@ -3,7 +3,7 @@
 
 int main() {
   std::cout << "Starting the program" << std::endl;
-  robot::impl::RobotImpl winslow = robot::impl::RobotImpl();
+  robot::impl::RobotImpl winslow = robot::impl::RobotImpl(true);
   winslow.StartExploration();
   return 0;
 }

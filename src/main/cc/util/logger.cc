@@ -15,4 +15,8 @@ void logger::log(std::string message) {
   }
 }
 
+void logger::should_log(bool should_log) {
+  should_log_ = should_log;
+}
+
 }  // util
