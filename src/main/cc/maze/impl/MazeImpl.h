@@ -14,6 +14,7 @@ namespace impl {
 class MazeImpl : public Maze {
  public:
   MazeImpl();
+  ~MazeImpl();
 
   maze::cell::Cell *operator()(int x, int y) {
     if (x < 0 || y < 0) {
@@ -25,6 +26,8 @@ class MazeImpl : public Maze {
   std::vector<maze::cell::Cell *> GetNeighbors(int row, int col);
 
   std::string print();
+
+  void clear_maze();
 
  private:
   std::vector<maze::cell::Cell *> maze_;

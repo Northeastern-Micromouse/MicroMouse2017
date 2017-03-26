@@ -1,5 +1,6 @@
 #include <queue>
 #include <iostream>
+#include <src/main/c/com/micromouse/maze/cell.h>
 #include "src/main/cc/maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
 #include "src/main/cc/util/logger.h"
@@ -27,7 +28,7 @@ void RobotImpl::StartExploration() {
   if (curr_loc_.x() != 0 && curr_loc_.y() != 0) {
     ReturnToStart();
   }
-
+  maze_.clear_maze();
   Cell* curr_cell;
   std::vector<Cell*> neighbors;
   Cell::RelativeDirection prev_move = Cell::RelativeDirection::NONE;
@@ -55,7 +56,44 @@ void RobotImpl::GoToGoal() {
 }
 
 void RobotImpl::ComputeFastestPath() {
-  // TODO(matt): Implement
+  Cell* itr;
+  std::queue<maze::cell::Cell *> queue;
+  std::vector<maze::cell::Cell*> neighbors = maze_.GetNeighbors(0,0);
+  curr_loc_.update(0,0);
+  maze_.clear_maze();
+  maze_.operator()(0,0)->VisitCell();
+
+  for (Cell* cell : neighbors) {
+    cell->setParent(0, 0);
+    cell->VisitCell();
+    queue.push(cell);
+  }
+
+  while (!queue.empty()) {
+    itr = queue.front();
+    queue.pop();
+    if (itr->x() == 8 && itr->y() == 8) {
+      break;
+    }
+    neighbors = maze_.GetNeighbors(itr->x(), itr->y());
+    for (maze::cell::Cell* cell : neighbors) {
+      if (!cell->isVisited()) {
+        cell->setParent(itr->x(), itr->y());
+        cell->VisitCell();
+        queue.push(cell);
+      }
+    }
+    curr_loc_.update(itr->x(),itr->y());
+  }
+
+  curr_loc_.update(8,8);
+  util::location::Location temp(0,0);
+  while (curr_loc_.x() != 0 || curr_loc_.y() != 0) {
+    log.log("At location X: " + std::to_string(curr_loc_.x()) + " Y: " + std::to_string(curr_loc_.y()));
+    temp = maze_.operator()(curr_loc_.x(), curr_loc_.y())->getParent();
+    log.log("Moving to X: " + std::to_string(temp.x()) + " Y: " + std::to_string(temp.y()));
+    curr_loc_.update(temp.x(), temp.y());
+  }
 }
 
 void RobotImpl::ReturnToStart() {
@@ -177,11 +215,6 @@ Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
   }
   // TODO(matt): Implement error checking
   return Cell::RelativeDirection::NONE;
-}
-
-std::string RobotImpl::print() {
-  // TODO(matt): Implement
-  return "";
 }
 
 }  // impl

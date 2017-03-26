@@ -1,8 +1,11 @@
 #include <iostream>
+#include <src/main/cc/util/Location.h>
 #include "cell.h"
 
 namespace maze {
 namespace cell {
+
+using util::location::Location;
 
 Cell::Cell(int x, int y) {
   x_loc_ = x;
@@ -10,19 +13,33 @@ Cell::Cell(int x, int y) {
   visited_ = false;
 }
 
+Cell::Cell(const Cell &cell) {
+  x_loc_ = cell.x();
+  y_loc_ = cell.y();
+  visited_ = cell.isVisited();
+}
+
 Cell::Cell() : Cell(0,0) {
   // No op.
 }
 
-int Cell::x() {
+void Cell::setParent(int x, int y) {
+  parent_.update(x,y);
+}
+
+Location Cell::getParent() {
+  return parent_;
+}
+
+int Cell::x() const {
   return x_loc_;
 }
 
-int Cell::y() {
+int Cell::y() const {
   return y_loc_;
 }
 
-bool Cell::isVisited() {
+bool Cell::isVisited() const {
   return visited_;
 }
 
@@ -38,7 +55,10 @@ void Cell::VisitCell() {
 
 void Cell::UnVisitCell() {
   visited_ = false;
-  neighbors_.clear();
+}
+
+void Cell::Reset() {
+  visited_ = false;
 }
 
 std::vector<Cell::RelativeDirection> Cell::GetNeighbors() {

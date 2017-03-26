@@ -1,5 +1,6 @@
 #include "MazeImpl.h"
 #include <math.h>
+#include <src/main/c/com/micromouse/maze/cell.h>
 
 namespace maze {
 namespace impl {
@@ -12,6 +13,12 @@ MazeImpl::MazeImpl() {
   for (std::vector<Cell *>::iterator iter = maze_.begin(); iter != maze_.end(); iter++) {
     *iter = new Cell(count % maze_size, count / maze_size);
     count++;
+  }
+}
+
+MazeImpl::~MazeImpl() {
+  for (std::vector<Cell *>::iterator iter = maze_.begin(); iter != maze_.end(); iter++) {
+    delete *iter;
   }
 }
 
@@ -28,6 +35,12 @@ std::vector<Cell *> MazeImpl::GetNeighbors(int x, int y) {
     }
   }
   return neighbors;
+}
+
+void MazeImpl::clear_maze() {
+  for (maze::cell::Cell* c : maze_) {
+    c->Reset();
+  }
 }
 
 Cell * MazeImpl::getCell(int x, int y, Cell::RelativeDirection direction) {
