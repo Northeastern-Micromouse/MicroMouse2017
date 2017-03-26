@@ -25,6 +25,7 @@ class RobotImpl : public Robot {
   util::location::Location curr_loc_ = util::location::Location(0, 0);
   util::location::Location goal_ = util::location::Location(8, 8);
   std::stack<maze::cell::Cell *> stack_;
+  std::vector<maze::cell::Cell::RelativeDirection> path_;
   bool enable_debugging_;
 
   void ReturnToStart();
@@ -33,6 +34,8 @@ class RobotImpl : public Robot {
   bool VisitCurrentCell();
   void Move(maze::cell::Cell::RelativeDirection dir);
   maze::cell::Cell::RelativeDirection GetDirection(maze::cell::Cell* cell);
+  void CommitPathToFile(std::string filepath);
+  maze::cell::Cell::RelativeDirection Reverse(maze::cell::Cell::RelativeDirection dir);
 };
 
 

@@ -71,19 +71,19 @@ void Cell::print() {
   std::cout << "| Visited: " << (visited_ ? "True " : "False") << "   |" << std::endl;
   for (RelativeDirection neighbor : neighbors_) {
     switch (neighbor) {
-      case NORTH:
+      case cell::Cell::RelativeDirection::NORTH:
         std::cout << "| Neighbor: North  |" << std::endl;
         break;
-      case EAST:
+      case cell::Cell::RelativeDirection::EAST:
         std::cout << "| Neighbor: South  |" << std::endl;
         break;
-      case WEST:
+      case cell::Cell::RelativeDirection::WEST:
         std::cout << "| Neighbor: East   |" << std::endl;
         break;
-      case SOUTH:
+      case cell::Cell::RelativeDirection::SOUTH:
         std::cout << "| Neighbor: West   |" << std::endl;
         break;
-      case NONE:
+      case cell::Cell::RelativeDirection::NONE:
         std::cout << "| Neighbor: None    |" << std::endl;
         break;
       default:

@@ -1,5 +1,6 @@
 #include <queue>
 #include <iostream>
+#include <fstream>
 #include <src/main/c/com/micromouse/maze/cell.h>
 #include "src/main/cc/maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
@@ -91,9 +92,11 @@ void RobotImpl::ComputeFastestPath() {
   while (curr_loc_.x() != 0 || curr_loc_.y() != 0) {
     log.log("At location X: " + std::to_string(curr_loc_.x()) + " Y: " + std::to_string(curr_loc_.y()));
     temp = maze_.operator()(curr_loc_.x(), curr_loc_.y())->getParent();
+    path_.push_back(Reverse(GetDirection(maze_.operator()(temp.x(), temp.y()))));
     log.log("Moving to X: " + std::to_string(temp.x()) + " Y: " + std::to_string(temp.y()));
     curr_loc_.update(temp.x(), temp.y());
   }
+  CommitPathToFile("");
 }
 
 void RobotImpl::ReturnToStart() {
@@ -214,6 +217,53 @@ Cell::RelativeDirection RobotImpl::GetDirection(Cell* cell) {
     return Cell::RelativeDirection::WEST;
   }
   // TODO(matt): Implement error checking
+  return Cell::RelativeDirection::NONE;
+}
+
+void RobotImpl::CommitPathToFile(std::string filepath) {
+  if (filepath == "") {
+    filepath = "/";
+  }
+  std::ofstream output;
+  output.open("path.txt");
+  for (Cell::RelativeDirection d : path_) {
+    switch (d) {
+      case Cell::RelativeDirection::NORTH:
+        log.log("NORTH");
+        output << "North \n";
+        break;
+      case Cell::RelativeDirection::SOUTH:
+        log.log("SOUTH");
+        output << "South \n";
+        break;
+      case Cell::RelativeDirection::EAST:
+        log.log("EAST");
+        output << "East \n";
+        break;
+      case Cell::RelativeDirection::WEST:
+        log.log("WEST");
+        output << "West \n";
+        break;
+      default:
+        break;
+    }
+  }
+  output.close();
+}
+
+Cell::RelativeDirection RobotImpl::Reverse(maze::cell::Cell::RelativeDirection dir) {
+  switch (dir) {
+    case Cell::RelativeDirection::NORTH:
+      return Cell::RelativeDirection::SOUTH;
+    case Cell::RelativeDirection::SOUTH:
+      return Cell::RelativeDirection::NORTH;
+    case Cell::RelativeDirection::EAST:
+      return Cell::RelativeDirection::WEST;
+    case Cell::RelativeDirection::WEST:
+      return Cell::RelativeDirection::EAST;
+    default:
+      break;
+  }
   return Cell::RelativeDirection::NONE;
 }
 

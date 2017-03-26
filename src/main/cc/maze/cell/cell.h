@@ -18,7 +18,7 @@ namespace cell {
 class Cell {
  public:
   // Represents a relative direction
-  enum RelativeDirection {
+  enum class RelativeDirection {
     NORTH,
     SOUTH,
     EAST,
