@@ -6,7 +6,7 @@ const int cs = 40;
 
 class Cell
 {
-private:
+public:
     bool left;
     bool right;
     bool up;
