@@ -82,9 +82,9 @@ void drawPath(QGraphicsScene &sc, vector<string> dirs) {
             sc.addEllipse(cs * loc[1] + cs / 4, cs * loc[0] + cs / 4, cs/2, cs/2, QPen(), QBrush(QColor("#FFCCDD")));
         }
 
-        // FIGURE OUT DIRECTIONS NORTH = UP/DOWN????
+        // FIGURE OUT STARTING POINT. TOP LEFT CORNER OR BOTTOM LEFT????
         else if (s.compare("North ") == 0) {
-            loc[0] = loc[0] + 1;
+            loc[0] = loc[0] - 1;
             sc.addEllipse(cs * loc[1] + cs / 4, cs * loc[0] + cs / 4, cs/2, cs/2, QPen(), QBrush(QColor("#FFCCDD")));
         }
 
@@ -94,7 +94,7 @@ void drawPath(QGraphicsScene &sc, vector<string> dirs) {
         }
 
         else if (s.compare("South ") == 0) {
-            loc[0] = loc[0] - 1;
+            loc[0] = loc[0] + 1;
             sc.addEllipse(cs * loc[1] + cs / 4, cs * loc[1] + cs / 4,  cs/2, cs/2, QPen(), QBrush(QColor("#FFCCDD")));
         }
 
