@@ -1,26 +1,48 @@
 #ifndef ROBOT_H
 #define ROBOT_H
 
+#include "Motor.h"
+#include <math.h>
+
 namespace al
 {
 	class Robot
 	{
 	private:
+    	
+    	phil::Motor left_, right_;
 		
-		// Represents the distance taken by one step
-		const float STEP_DISTANCE = 0;
-		
-		// Represents the distance between the wheels
+		// The distance between the wheels in cm
 		const float ROBOT_WIDTH = 0;
+    	
+    	// The diameter of the wheels in cm
+    	const float WHEEL_RADIUS = 0;
+    	
+    	// The increment amount for traversing the path of the Hermite spline
+    	const float SPLINE_STEP = 0.01;
+    	
+    	// Radians/step of the motors
+    	const float RADIANS_PER_STEP = 0;
+    	
+    	// The distance taken by one step 
+    	const float DISTANCE_PER_STEP = WHEEL_RADIUS * RADIANS_PER_STEP;
+    	
+    	// The distance the left and right motors must travel to rotate the bot
+    	// by one degree
+    	// = (cm/rad_of_bot_rotation) * (rad/deg) = cm/deg
+    	const float ARC_LENGTH_PER_DEGREE = (ROBOT_WIDTH / 2.0) * (M_PI/180.0);
+    	
+    	// Steps per cell
+    	const uint32_t STEPS_PER_CELL = (uint32_t)(18.0 / DISTANCE_PER_STEP);
 		
-		void simpleDrive(float velocity);
-		void directedDrive(float velocity);
-		void discreteSplineDrive(float velocity);
-		void continuousSplineDrive(float velocity);
+		void SimpleDrive(float velocity);
+		void DirectedDrive(float velocity);
+		void DiscreteSplineDrive(float velocity);
+		void ContinuousSplineDrive(float velocity);
 		
 	public:
-		
-		Robot(phil::Motor& left, phil::Motor& right);
+    	
+    	Robot(phil::Motor& left, phil::Motor& right);
 		
 		/**** PHYSICAL CONTROL FUNCTIONS ****/
 		
@@ -53,9 +75,9 @@ namespace al
 		
 		// Drives the given number of cells using the given method at the given
 		// velocity (in cm/s).
-		void drive(int nCells, float velocity, DriveMethod method);
+		void Drive(int nCells, float velocity, DriveMethod method);
 		
-		void turn(int degrees);
+		void Turn(float degrees, float angularVelocity);
 		
 		/**** PHYSICAL MEASUREMENT FUNCTIONS ****/
 		

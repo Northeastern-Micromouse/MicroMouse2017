@@ -37,6 +37,8 @@
 
 /* USER CODE BEGIN Includes */
 
+#include "stm32l4xx_hal.h"
+
 /* USER CODE END Includes */
 
 /* Private define ------------------------------------------------------------*/
@@ -79,10 +81,6 @@
 #define DC_M2_IN2_GPIO_Port GPIOC
 #define DC_M1_IN1_Pin GPIO_PIN_7
 #define DC_M1_IN1_GPIO_Port GPIOC
-#define SD_DAT0_Pin GPIO_PIN_8
-#define SD_DAT0_GPIO_Port GPIOC
-#define SD_DAT1_Pin GPIO_PIN_9
-#define SD_DAT1_GPIO_Port GPIOC
 #define SD_CARD_DETECT_Pin GPIO_PIN_8
 #define SD_CARD_DETECT_GPIO_Port GPIOA
 #define IMU_INTn_Pin GPIO_PIN_9
@@ -91,14 +89,6 @@
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
-#define SD_DAT2_Pin GPIO_PIN_10
-#define SD_DAT2_GPIO_Port GPIOC
-#define SD_DAT3_Pin GPIO_PIN_11
-#define SD_DAT3_GPIO_Port GPIOC
-#define SD_CLOCK_Pin GPIO_PIN_12
-#define SD_CLOCK_GPIO_Port GPIOC
-#define SD_CMD_Pin GPIO_PIN_2
-#define SD_CMD_GPIO_Port GPIOD
 #define ENCODER2_OUT_A_Pin GPIO_PIN_4
 #define ENCODER2_OUT_A_GPIO_Port GPIOB
 #define ENCODER2_OUT_B_Pin GPIO_PIN_5
@@ -108,6 +98,24 @@
 #define ENCODER1_OUT_B_Pin GPIO_PIN_7
 #define ENCODER1_OUT_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
+
+int CMain(void);
+void Error_Handler();
+
+ADC_HandleTypeDef* getADC1Handle(void);
+ADC_HandleTypeDef* getADC2Handle(void);
+ADC_HandleTypeDef* getADC3Handle(void);
+DMA_HandleTypeDef* getDMAADC1Handle(void);
+DMA_HandleTypeDef* getDMAADC2Handle(void);
+DMA_HandleTypeDef* getDMAADC3Handle(void);
+
+I2C_HandleTypeDef* getI2C1Handle(void);
+I2C_HandleTypeDef* getI2C2Handle(void);
+
+TIM_HandleTypeDef* getTIM1Handle(void);
+TIM_HandleTypeDef* getTIM2Handle(void);
+TIM_HandleTypeDef* getTIM3Handle(void);
+TIM_HandleTypeDef* getTIM4Handle(void);
 
 /* USER CODE END Private defines */
 
