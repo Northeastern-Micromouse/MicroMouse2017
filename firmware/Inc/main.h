@@ -77,27 +77,19 @@
 #define BNO_RSTn_GPIO_Port GPIOB
 #define DIST_INT1_Pin GPIO_PIN_14
 #define DIST_INT1_GPIO_Port GPIOB
-#define DC_M2_IN2_Pin GPIO_PIN_6
-#define DC_M2_IN2_GPIO_Port GPIOC
-#define DC_M1_IN1_Pin GPIO_PIN_7
-#define DC_M1_IN1_GPIO_Port GPIOC
-#define SD_CARD_DETECT_Pin GPIO_PIN_8
-#define SD_CARD_DETECT_GPIO_Port GPIOA
+#define LED_Pin GPIO_PIN_15
+#define LED_GPIO_Port GPIOB
 #define IMU_INTn_Pin GPIO_PIN_9
 #define IMU_INTn_GPIO_Port GPIOA
 #define SWDIO_Pin GPIO_PIN_13
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
-#define ENCODER2_OUT_A_Pin GPIO_PIN_4
-#define ENCODER2_OUT_A_GPIO_Port GPIOB
-#define ENCODER2_OUT_B_Pin GPIO_PIN_5
-#define ENCODER2_OUT_B_GPIO_Port GPIOB
-#define ENCODER1_OUT_A_Pin GPIO_PIN_6
-#define ENCODER1_OUT_A_GPIO_Port GPIOB
-#define ENCODER1_OUT_B_Pin GPIO_PIN_7
-#define ENCODER1_OUT_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
+
+int CMain(void);
+void Error_Handler();
+
 ADC_HandleTypeDef hadc1;
 ADC_HandleTypeDef hadc2;
 ADC_HandleTypeDef hadc3;
@@ -110,26 +102,6 @@ I2C_HandleTypeDef hi2c2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
-TIM_HandleTypeDef htim3;
-TIM_HandleTypeDef htim4;
-
-int CMain(void);
-void Error_Handler();
-
-ADC_HandleTypeDef* getADC1Handle(void);
-ADC_HandleTypeDef* getADC2Handle(void);
-ADC_HandleTypeDef* getADC3Handle(void);
-DMA_HandleTypeDef* getDMAADC1Handle(void);
-DMA_HandleTypeDef* getDMAADC2Handle(void);
-DMA_HandleTypeDef* getDMAADC3Handle(void);
-
-I2C_HandleTypeDef* getI2C1Handle(void);
-I2C_HandleTypeDef* getI2C2Handle(void);
-
-TIM_HandleTypeDef* getTIM1Handle(void);
-TIM_HandleTypeDef* getTIM2Handle(void);
-TIM_HandleTypeDef* getTIM3Handle(void);
-TIM_HandleTypeDef* getTIM4Handle(void);
 
 /* USER CODE END Private defines */
 

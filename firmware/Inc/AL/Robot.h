@@ -76,8 +76,7 @@ namespace al
 		// Drives the given number of cells using the given method at the given
 		// velocity (in cm/s).
 		void Drive(int nCells, float velocity, DriveMethod method);
-		
-		void Turn(float degrees, float angularVelocity);
+    	void Turn(float degrees, float angularVelocity);
 		
 		/**** PHYSICAL MEASUREMENT FUNCTIONS ****/
 		

@@ -20,6 +20,13 @@ namespace pal {
         HAL_StatusTypeDef SetTiming(uint16_t prescaler, uint16_t period);
         void Enable();
         void Disable();
+        void SetCount(uint32_t count);
+        uint32_t GetCount();
+        bool GetUpdateFlag();
+        void ClearUpdateFlag();
+        
+        void EnableWithInt();
+        void DisableWithInt();
         void SetISR(std::function<void()> callback);
         void ISR();
         TIM_HandleTypeDef* GetHandle();

@@ -71,10 +71,34 @@ HAL_StatusTypeDef pal::Tim::SetTiming(uint16_t prescaler, uint16_t period) {
 }
 
 void pal::Tim::Enable() {
-    HAL_TIM_Base_Start_IT(tim_);
+    HAL_TIM_Base_Start(tim_);
 }
 
 void pal::Tim::Disable() {
+    HAL_TIM_Base_Stop(tim_);
+}
+
+void pal::Tim::SetCount(uint32_t count) {
+    __HAL_TIM_SetCounter(tim_, count);
+}
+
+uint32_t pal::Tim::GetCount() {
+    return __HAL_TIM_GetCounter(tim_);
+}
+
+bool pal::Tim::GetUpdateFlag() {
+    return __HAL_TIM_GET_FLAG(tim_, TIM_FLAG_UPDATE);
+}
+
+void pal::Tim::ClearUpdateFlag() {
+    __HAL_TIM_CLEAR_FLAG(tim_, TIM_FLAG_UPDATE);
+}
+
+void pal::Tim::EnableWithInt() {
+    HAL_TIM_Base_Start_IT(tim_);
+}
+
+void pal::Tim::DisableWithInt() {
     HAL_TIM_Base_Stop_IT(tim_);
 }
 
