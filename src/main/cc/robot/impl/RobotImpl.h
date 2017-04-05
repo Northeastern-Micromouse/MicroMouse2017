@@ -26,12 +26,20 @@ class RobotImpl : public Robot {
   util::location::Location goal_ = util::location::Location(8, 8);
   std::stack<maze::cell::Cell *> stack_;
   bool enable_debugging_;
+  maze::cell::Cell::RelativeDirection orientation_;
 
   void ReturnToStart();
   void GoBack(maze::cell::Cell::RelativeDirection dir);
   std::vector<maze::cell::Cell *> GetNeighbors();
   bool VisitCurrentCell();
   void Move(maze::cell::Cell::RelativeDirection dir);
+  void MoveNorth();
+  void RealMoveForward();
+  void TurnEast();
+  void TurnWest();
+  void MoveEast();
+  void MoveSouth();
+  void MoveWest();
   maze::cell::Cell::RelativeDirection GetDirection(maze::cell::Cell* cell);
 };
 

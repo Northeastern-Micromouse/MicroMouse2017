@@ -14,11 +14,13 @@ namespace {
 using maze::cell::Cell;
 using util::location::Location;
 
-RobotImpl::RobotImpl() : enable_debugging_(false) {
+RobotImpl::RobotImpl() : enable_debugging_(false),
+                         orientation_(Cell::RelativeDirection::NORTH) {
   // No op.
 }
 
-RobotImpl::RobotImpl(bool enable_debugging) : enable_debugging_(enable_debugging) {
+RobotImpl::RobotImpl(bool enable_debugging) : enable_debugging_(enable_debugging),
+                                              orientation_(Cell::RelativeDirection::NORTH) {
   log.should_log(true);
 }
 
@@ -143,10 +145,89 @@ bool RobotImpl::VisitCurrentCell() {
   return should_move_forward;
 }
 
+void RobotImpl::MoveNorth() {
+  if (orientation_ == Cell::RelativeDirection::NORTH) {
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::EAST) {
+    TurnWest();
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::WEST) {
+    TurnEast();
+    RealMoveForward();
+  } else {
+    TurnEast();
+    TurnEast();
+    RealMoveForward();
+  }
+  orientation_ = Cell::RelativeDirection::NORTH;
+}
+
+void RobotImpl::MoveEast() {
+  if (orientation_ == Cell::RelativeDirection::NORTH) {
+    TurnEast();
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::EAST) {
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::WEST) {
+    TurnEast();
+    TurnEast();
+    RealMoveForward();
+  } else {
+    TurnWest();
+    RealMoveForward();
+  }
+  orientation_ = Cell::RelativeDirection::EAST;
+}
+
+void RobotImpl::MoveSouth() {
+  if (orientation_ == Cell::RelativeDirection::NORTH) {
+    TurnEast();
+    TurnEast();
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::EAST) {
+    TurnEast();
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::WEST) {
+    TurnWest();
+    RealMoveForward();
+  } else {
+    RealMoveForward();
+  }
+  orientation_ = Cell::RelativeDirection::SOUTH;
+}
+
+void RobotImpl::MoveWest() {
+  if (orientation_ == Cell::RelativeDirection::NORTH) {
+    TurnWest();
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::EAST) {
+    TurnEast();
+    TurnEast();
+    RealMoveForward();
+  } else if (orientation_ == Cell::RelativeDirection::WEST) {
+    RealMoveForward();
+  } else {
+    TurnEast();
+    RealMoveForward();
+  }
+  orientation_ = Cell::RelativeDirection::WEST;
+}
+
+void RobotImpl::RealMoveForward() {
+  // TODO(matt): Implement
+}
+
+void RobotImpl::TurnEast() {
+  // TODO(matt): Implement.
+}
+
+void RobotImpl::TurnWest() {
+  // TODO(matt): Implement.
+}
+
 void RobotImpl::Move(Cell::RelativeDirection dir) {
   switch (dir) {
     case Cell::RelativeDirection::NORTH:
-      // TODO(matt): Actually move forward
       log.log("--------------- Move from Cell ---------------");
       log.log("X: " + std::to_string(curr_loc_.x()));
       log.log("Y: " + std::to_string(curr_loc_.y()));
@@ -156,6 +237,7 @@ void RobotImpl::Move(Cell::RelativeDirection dir) {
       log.log("X: " + std::to_string(curr_loc_.x()));
       log.log("Y: " + std::to_string(curr_loc_.y()));
       log.log("----------------------------------------------");
+      MoveNorth();
       break;
     case Cell::RelativeDirection::SOUTH:
       // TODO(matt): Actually move backward
@@ -168,6 +250,7 @@ void RobotImpl::Move(Cell::RelativeDirection dir) {
       log.log("X: " + std::to_string(curr_loc_.x()));
       log.log("Y: " + std::to_string(curr_loc_.y()));
       log.log("----------------------------------------------");
+      MoveSouth();
       break;
     case Cell::RelativeDirection::EAST:
       // TODO(matt): Actually move left
@@ -180,6 +263,7 @@ void RobotImpl::Move(Cell::RelativeDirection dir) {
       log.log("X: " + std::to_string(curr_loc_.x()));
       log.log("Y: " + std::to_string(curr_loc_.y()));
       log.log("----------------------------------------------");
+      MoveEast();
       break;
     case Cell::RelativeDirection::WEST:
       // TODO(matt): Actually move right
@@ -192,6 +276,7 @@ void RobotImpl::Move(Cell::RelativeDirection dir) {
       log.log("X: " + std::to_string(curr_loc_.x()));
       log.log("Y: " + std::to_string(curr_loc_.y()));
       log.log("----------------------------------------------");
+      MoveWest();
       break;
     default:
       break;
