@@ -3,13 +3,13 @@
 #include <algorithm>
 
 namespace {
-    const int LSB_OFFSET = 3179;
-    const int LOOKUP_SIZE = 801;
+    int LSB_OFFSET[3] = { 2710, 2531, 3330 };
+    int LOOKUP_SIZE[3] = { 1249, 1417, 652 };
 }
 
 namespace phil {
-    Reflectance::Reflectance(pal::Adc& adc, int chan, int pos) :
-        adc_(adc), chan_(chan), pos_(pos)
+    Reflectance::Reflectance(pal::Adc& adc, int chan, int pos, int lookup) :
+        adc_(adc), chan_(chan), pos_(pos), lookup_(lookup)
     {
         adc_.RegisterChannel(chan_, pos_);
     }
@@ -20,10 +20,22 @@ namespace phil {
         , pos_(pos) {}
     */
     
-    float Reflectance::GetDistance() {
+    float Reflectance::GetDistance(bool* max) {
         uint16_t adc_data = adc_.GetData(chan_);
-        int index = std::max(LSB_OFFSET, std::min(static_cast<int>(adc_data),
-            LSB_OFFSET + LOOKUP_SIZE));
-        return REFLECTANCE_LOOKUP[index - LSB_OFFSET];
+        int index = std::max(LSB_OFFSET[lookup_], std::min(static_cast<int>(adc_data),
+            LSB_OFFSET[lookup_] + LOOKUP_SIZE[lookup_]));
+        if (index == LSB_OFFSET[lookup_] + LOOKUP_SIZE[lookup_]) {
+            *max = true;
+        }
+        switch (lookup_) {
+        case 0:
+            return REFLECTANCE_LOOKUP_LEFT[index - LSB_OFFSET[lookup_]];
+        case 1:
+            return REFLECTANCE_LOOKUP_RIGHT[index - LSB_OFFSET[lookup_]];
+        case 2:
+            return REFLECTANCE_LOOKUP_FRONT[index - LSB_OFFSET[lookup_]];
+        default:
+            return -1;
+        }
     }
 }

@@ -5,11 +5,12 @@
 namespace phil {
     class Reflectance {
     public:
-        Reflectance(pal::Adc& adc, int chan, int pos);
+        Reflectance(pal::Adc& adc, int chan, int pos, int lookup);
         //Reflectance(pal::Adc&& adc, int chan, int pos);
-        float GetDistance();
+        float GetDistance(bool* max);
     private:
         pal::Adc& adc_;
         int chan_, pos_;
+        int lookup_;
     };
 }
