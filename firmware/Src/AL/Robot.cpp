@@ -39,9 +39,27 @@ void al::Robot::DirectedDrive(float distance, float velocity) {
 
 void al::Robot::CorrectiveDrive(float distance, float velocity) {
     
+    // Manage a PID controller, where the process variable is the horizontal
+    // offset within a cell and the output will determine the additional steps
+    // to be taken by a side
+    util::PID pid(PID_KP, PID_KI, PID_KD);
+    pid.Set(0);
+    
+    for (int i = 0; i < PID_UPDATES; i++) {
+        
+        // First, update the controller with current information
+        float offset = pid.Update(GetHorizontalLocation(), 
+            (distance / PID_UPDATES) / velocity);
+        
+        float left_distance = distance / PID_UPDATES - offset;
+        float right_distance = distance / PID_UPDATES + offset;
+        
+        drive_system_->DriveRelative(left_distance, right_distance, velocity);
+    }
+    
 }
 
-void al::Robot::DiscreteSplineDrive(float distance, float velocity) {
+void al::Robot::DiscreteSplineDrive(float velocity) {
     // First, use our current horizontal position to compute the parametric
     // Hermite spline
     // Next, take the positive offset curve to represent the path of the right
@@ -55,8 +73,10 @@ void al::Robot::DiscreteSplineDrive(float distance, float velocity) {
     
     // First, plan the entire path in an array with the arc lengths
     float spline_step = 1.0 / SPLINE_SEGMENTS;
+
     // TODO: add wall parsing before this call VVV
     float starting_x = GetHorizontalLocation(true, true);
+  
     float left_path[SPLINE_SEGMENTS];
     float right_path[SPLINE_SEGMENTS];
     
@@ -64,30 +84,38 @@ void al::Robot::DiscreteSplineDrive(float distance, float velocity) {
         left_path[i] = 
             util::HermiteSplineArcLength(
                 starting_x, 
-                -drive_system_->GetWidth() / 2.0,
+                -drive_system_->GetWidth() * SPLINE_UNITS_PER_MM / 2.0,
                 i*spline_step,
-                (i+1)*spline_step,
+                (i + 1)*spline_step,
                 SPLINE_ARC_SEGMENTS
             );
         
         right_path[i] =
             util::HermiteSplineArcLength(
                 starting_x, 
-                drive_system_->GetWidth() / 2.0,
+                drive_system_->GetWidth() * SPLINE_UNITS_PER_MM / 2.0,
                 i*spline_step,
                 (i + 1)*spline_step,
                 SPLINE_ARC_SEGMENTS
             );
     }
     
+    HAL_Delay(1);
+    
     // Now our path is populated, travel it
     for (int i = 0; i < SPLINE_SEGMENTS; i++) {
-        drive_system_->DriveRelative(left_path[i]*distance, right_path[i]*distance, velocity);
+        drive_system_->DriveRelative(left_path[i] / SPLINE_UNITS_PER_MM,
+                                     right_path[i] / SPLINE_UNITS_PER_MM,
+                                     velocity);
     }
 }
 		
-void al::Robot::Turn(float degrees, float angularVelocity) {
-    
+void al::Robot::Turn(float degrees, float angular_velocity) {
+    drive_system_->Turn(degrees * M_PI / 180.0, angular_velocity);
+}
+
+phil::DriveSystem* al::Robot::GetDriveSystem() const {
+    return drive_system_;
 }
 
 float al::Robot::GetVerticalLocation() {

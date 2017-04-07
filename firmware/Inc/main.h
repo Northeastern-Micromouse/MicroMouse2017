@@ -77,6 +77,8 @@
 #define BNO_RSTn_GPIO_Port GPIOB
 #define DIST_INT1_Pin GPIO_PIN_14
 #define DIST_INT1_GPIO_Port GPIOB
+#define LED_Pin GPIO_PIN_15
+#define LED_GPIO_Port GPIOB
 #define DC_M2_IN2_Pin GPIO_PIN_6
 #define DC_M2_IN2_GPIO_Port GPIOC
 #define DC_M1_IN1_Pin GPIO_PIN_7
@@ -87,14 +89,6 @@
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
-#define ENCODER2_OUT_A_Pin GPIO_PIN_4
-#define ENCODER2_OUT_A_GPIO_Port GPIOB
-#define ENCODER2_OUT_B_Pin GPIO_PIN_5
-#define ENCODER2_OUT_B_GPIO_Port GPIOB
-#define ENCODER1_OUT_A_Pin GPIO_PIN_6
-#define ENCODER1_OUT_A_GPIO_Port GPIOB
-#define ENCODER1_OUT_B_Pin GPIO_PIN_7
-#define ENCODER1_OUT_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 int CMain(void);

@@ -20,7 +20,7 @@ phil::DriveSystem::DriveSystem(
      
     
     // Configure the timer to tick every us
-    us_tick_->SetTiming(1, 80000000 / 1000000);  
+    us_tick_->SetTiming(1, 80000000 / 8000000);  
 }
 
 void phil::DriveSystem::DriveEquidistant(float distance, float velocity) {
@@ -28,8 +28,8 @@ void phil::DriveSystem::DriveEquidistant(float distance, float velocity) {
     // (rad/step) / (rad/s) = (s/step)
     // Also calculate required angular velocity
     // v = rw -> w = v/r
-    uint32_t periodUs = (uint32_t)(RADIANS_PER_STEP / 
-                    (velocity/WHEEL_RADIUS) * 1000000.0);
+    uint32_t period_us = (uint32_t)(RADIANS_PER_STEP / 
+                    (velocity / WHEEL_RADIUS) * 1000000.0);
     
     // now figure out how long the whole move should take in us
     //uint32_t time = distance / velocity * 1000000;
@@ -57,7 +57,7 @@ void phil::DriveSystem::DriveEquidistant(float distance, float velocity) {
             us_tick_->ClearUpdateFlag();
         }
         
-        if (us % periodUs == 0) {
+        if (us % period_us == 0) {
             // Time to raise the step pin
             left_step_->Set(true);
             right_step_->Set(true);
@@ -87,6 +87,9 @@ void phil::DriveSystem::DriveRelative(
     float right_distance, 
     float average_velocity) {
         
+    left_dir_->Set(false);
+    right_dir_->Set(true);
+        
     // First, figure out how much time the entire operation will take using the
     // given average velocity
     float time = ((left_distance + right_distance) / 2.0) / average_velocity;
@@ -100,21 +103,23 @@ void phil::DriveSystem::DriveRelative(
     // Also calculate required angular velocity
     // v = rw -> w = r/v
     uint32_t left_period = (uint32_t)(RADIANS_PER_STEP / 
-                            (WHEEL_RADIUS / left_velocity) * 1000000.0);
+                            (left_velocity / WHEEL_RADIUS) * 1000000.0);
     uint32_t right_period = (uint32_t)(RADIANS_PER_STEP / 
-                            (WHEEL_RADIUS / right_velocity) * 1000000.0);
+                            (right_velocity / WHEEL_RADIUS) * 1000000.0);
+        
+    uint32_t left_steps = left_distance / (WHEEL_RADIUS * RADIANS_PER_STEP);
+    uint32_t right_steps = right_distance / (WHEEL_RADIUS * RADIANS_PER_STEP);
+        
+    ResetLeftStepCount();
+    ResetRightStepCount();
         
     // Now use the tick to drive the wheels with the appropriate timing
     us_tick_->SetCount(0);
     us_tick_->Enable();
         
-    ResetLeftStepCount();
-    ResetRightStepCount();
-        
-    uint32_t left_steps = left_distance / (WHEEL_RADIUS * RADIANS_PER_STEP);
-    uint32_t right_steps = left_distance / (WHEEL_RADIUS * RADIANS_PER_STEP);
-    
     uint32_t us = 0;
+    uint32_t left_period_start = 0;
+    uint32_t right_period_start = 0;
     
     while (left_step_count_ < left_steps && right_step_count_ < right_steps) {
         
@@ -123,10 +128,6 @@ void phil::DriveSystem::DriveRelative(
             us++;
             us_tick_->ClearUpdateFlag();
         }
-        
-        // Now handle the stepping
-        uint32_t left_period_start = 0;
-        uint32_t right_period_start = 0;
         
         if (us % left_period == 0) {
             // Time to raise the step pin
@@ -160,7 +161,7 @@ void phil::DriveSystem::DriveRadius(
     // We are basically driving each wheel along two different arcs, each at a
     // slightly different radius based on the width of the robot. We can just
     // compute the length of these arcs and call DriveRelative:
-    float angle = arc_length / radius;
+    float angle = arc_length / fabs(radius);
     float left_radius = fabs(radius) + 
             (radius > 0 ? 1.0 : -1.0) * WIDTH / 2.0;
     float right_radius = fabs(radius) - 

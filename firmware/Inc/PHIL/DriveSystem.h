@@ -82,7 +82,6 @@ namespace phil {
         
         float GetWidth() const;
         float GetWheelRadius() const;
-        
     };
     
 }
