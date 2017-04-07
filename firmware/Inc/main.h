@@ -53,16 +53,16 @@
 #define S_MOTOR_A_STEP_GPIO_Port GPIOC
 #define DRIVER_RSTn_Pin GPIO_PIN_2
 #define DRIVER_RSTn_GPIO_Port GPIOC
-#define REFL_DIST_C_OUT_Pin GPIO_PIN_3
-#define REFL_DIST_C_OUT_GPIO_Port GPIOC
-#define GP2Y_DIST_A_OUT_Pin GPIO_PIN_0
-#define GP2Y_DIST_A_OUT_GPIO_Port GPIOA
-#define GP2Y_DIST_B_OUT_Pin GPIO_PIN_1
-#define GP2Y_DIST_B_OUT_GPIO_Port GPIOA
-#define REFL_DIST_A_OUT_Pin GPIO_PIN_2
-#define REFL_DIST_A_OUT_GPIO_Port GPIOA
-#define REFL_DIST_B_OUT_Pin GPIO_PIN_3
-#define REFL_DIST_B_OUT_GPIO_Port GPIOA
+#define REFL_DIST_FRONT_OUT_Pin GPIO_PIN_3
+#define REFL_DIST_FRONT_OUT_GPIO_Port GPIOC
+#define GP2Y_DIST_RIGHT_OUT_Pin GPIO_PIN_0
+#define GP2Y_DIST_RIGHT_OUT_GPIO_Port GPIOA
+#define GP2Y_DIST_LEFT_OUT_Pin GPIO_PIN_1
+#define GP2Y_DIST_LEFT_OUT_GPIO_Port GPIOA
+#define REFL_DIST_LEFT_OUT_Pin GPIO_PIN_2
+#define REFL_DIST_LEFT_OUT_GPIO_Port GPIOA
+#define REFL_DIST_RIGHT_OUT_Pin GPIO_PIN_3
+#define REFL_DIST_RIGHT_OUT_GPIO_Port GPIOA
 #define REFL_DIST_D_OUT_Pin GPIO_PIN_4
 #define REFL_DIST_D_OUT_GPIO_Port GPIOC
 #define DC_M2_IN1_Pin GPIO_PIN_5
@@ -77,14 +77,24 @@
 #define BNO_RSTn_GPIO_Port GPIOB
 #define DIST_INT1_Pin GPIO_PIN_14
 #define DIST_INT1_GPIO_Port GPIOB
-#define LED_Pin GPIO_PIN_15
-#define LED_GPIO_Port GPIOB
+#define DC_M2_IN2_Pin GPIO_PIN_6
+#define DC_M2_IN2_GPIO_Port GPIOC
+#define DC_M1_IN1_Pin GPIO_PIN_7
+#define DC_M1_IN1_GPIO_Port GPIOC
 #define IMU_INTn_Pin GPIO_PIN_9
 #define IMU_INTn_GPIO_Port GPIOA
 #define SWDIO_Pin GPIO_PIN_13
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
+#define ENCODER2_OUT_A_Pin GPIO_PIN_4
+#define ENCODER2_OUT_A_GPIO_Port GPIOB
+#define ENCODER2_OUT_B_Pin GPIO_PIN_5
+#define ENCODER2_OUT_B_GPIO_Port GPIOB
+#define ENCODER1_OUT_A_Pin GPIO_PIN_6
+#define ENCODER1_OUT_A_GPIO_Port GPIOB
+#define ENCODER1_OUT_B_Pin GPIO_PIN_7
+#define ENCODER1_OUT_B_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 int CMain(void);
@@ -102,6 +112,8 @@ I2C_HandleTypeDef hi2c2;
 
 TIM_HandleTypeDef htim1;
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim4;
 
 /* USER CODE END Private defines */
 

@@ -11,7 +11,7 @@ namespace pal {
     Adc::Adc(ADC_HandleTypeDef adc_handle, size_t num_channels) {
         adc_handle_ = adc_handle;
         p_data_ = new uint16_t[num_channels];
-        HAL_ADC_Start_DMA(&adc_handle_, reinterpret_cast<uint32_t*>(p_data_), ADC_DATA_SIZE);
+        HAL_ADC_Start_DMA(&adc_handle_, reinterpret_cast<uint32_t*>(p_data_), num_channels);
     }
  
     Adc::~Adc() {
