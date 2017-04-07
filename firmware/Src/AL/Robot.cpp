@@ -118,10 +118,6 @@ phil::DriveSystem* al::Robot::GetDriveSystem() const {
     return drive_system_;
 }
 
-float al::Robot::GetHorizontalLocation() {
-    return 0;
-}
-
 float al::Robot::GetVerticalLocation() {
     bool max = false;
     float front_sensor_reading = refl_center_->GetDistance(&max);
