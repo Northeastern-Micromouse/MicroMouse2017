@@ -1,5 +1,4 @@
 #include <iostream>
-#include <src/main/cc/util/Location.h>
 #include "cell.h"
 
 namespace maze {

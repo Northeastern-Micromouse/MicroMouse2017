@@ -1,6 +1,4 @@
 #include "MazeImpl.h"
-#include <math.h>
-#include <src/main/c/com/micromouse/maze/cell.h>
 
 namespace maze {
 namespace impl {

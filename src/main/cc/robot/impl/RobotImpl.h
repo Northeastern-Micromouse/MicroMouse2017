@@ -2,9 +2,10 @@
 #define CC_ROBOT_IMPL_ROBOTIMPL_H_
 
 #include <stack>
-#include "src/main/cc/robot/robot.h"
-#include "src/main/cc/maze/impl/MazeImpl.h"
-#include "src/main/cc/util/Location.h"
+#include "../robot.h"
+#include "../../maze/impl/MazeImpl.h"
+#include "../../util/Location.h"
+#include "../../maze/cell/cell.h"
 
 namespace robot {
 namespace impl {

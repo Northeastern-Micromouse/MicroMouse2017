@@ -1,11 +1,11 @@
 #ifndef CC_MAZE_IMPL_MAZEIMPL_H_
 #define CC_MAZE_IMPL_MAZEIMPL_H_
 
-#include "src/main/cc/maze/cell/cell.h"
-#include "src/main/cc/maze/maze.h"
 #include <vector>
 #include <exception>
 #include <iostream>
+#include "../maze.h"
+#include "../cell/cell.h"
 
 namespace maze {
 namespace impl {

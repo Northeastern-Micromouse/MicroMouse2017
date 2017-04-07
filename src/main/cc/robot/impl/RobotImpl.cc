@@ -1,9 +1,7 @@
 #include <queue>
 #include <iostream>
-#include <src/main/c/com/micromouse/maze/cell.h>
-#include "src/main/cc/maze/impl/MazeImpl.h"
 #include "RobotImpl.h"
-#include "src/main/cc/util/logger.h"
+#include "../../util/logger.h"
 
 namespace robot {
 namespace impl {
