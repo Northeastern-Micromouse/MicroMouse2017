@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.6)
-project(MicroMouse)
+project(Micromouse)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
+include_directories(.)
+include_directories(../)
+include_directories(../../)
 include_directories(../../firmware)
 include_directories(../../firmware/inc)
 include_directories(../../firmware/inc/AL)
@@ -17,5 +20,5 @@ FILE(GLOB_RECURSE SRCFILES *.cpp *.c **/*.cpp ../inc/*.h ../inc/**/*.h)
 
 set(SOURCE_FILES ${SRCFILES} main.c)
 
-add_executable(Firmware ${SOURCE_FILES})
+add_library(Firmware ${SOURCE_FILES})
 
