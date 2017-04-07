@@ -8,6 +8,7 @@ namespace {
 }
 
 namespace phil {
+    
     Reflectance::Reflectance(pal::Adc& adc, int chan, int pos) :
         adc_(adc), chan_(chan), pos_(pos)
     {
