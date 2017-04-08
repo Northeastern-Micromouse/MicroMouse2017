@@ -43,7 +43,7 @@ class Cell {
   bool isVisited() const;
 
   // Visits the cell.
-  void VisitCell();
+  void VisitCell(int left, int right, int top);
 
   // UnVisits the cell. This should undo all of the actions taken in VisitCell.
   void UnVisitCell();

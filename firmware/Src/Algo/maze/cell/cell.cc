@@ -42,14 +42,21 @@ bool Cell::isVisited() const {
   return visited_;
 }
 
-void Cell::VisitCell() {
+void Cell::VisitCell(int left, int right, int top) {
   visited_ = true;
-  // For now just return all the directions.
-  // TODO(matt): Query the seneors here.
-  neighbors_.push_back(RelativeDirection::NORTH);
+  if (neighbors_.size() > 0) {
+    return;
+  }
   neighbors_.push_back(RelativeDirection::SOUTH);
-  neighbors_.push_back(RelativeDirection::EAST);
-  neighbors_.push_back(RelativeDirection::WEST);
+  if (left) {
+    neighbors_.push_back(RelativeDirection::WEST);
+  }
+  if (right) {
+    neighbors_.push_back(RelativeDirection::EAST);
+  }
+  if (top) {
+    neighbors_.push_back(RelativeDirection::NORTH);
+  }
 }
 
 void Cell::UnVisitCell() {

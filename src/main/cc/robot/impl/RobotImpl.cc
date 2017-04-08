@@ -61,11 +61,11 @@ void RobotImpl::ComputeFastestPath() {
   std::vector<maze::cell::Cell*> neighbors = maze_.GetNeighbors(0,0);
   curr_loc_.update(0,0);
   maze_.clear_maze();
-  maze_.operator()(0,0)->VisitCell();
+  maze_.operator()(0,0)->VisitCell(0,0,0);
 
   for (Cell* cell : neighbors) {
     cell->setParent(0, 0);
-    cell->VisitCell();
+    cell->VisitCell(0,0,0);
     queue.push(cell);
   }
 
@@ -79,7 +79,7 @@ void RobotImpl::ComputeFastestPath() {
     for (maze::cell::Cell* cell : neighbors) {
       if (!cell->isVisited()) {
         cell->setParent(itr->x(), itr->y());
-        cell->VisitCell();
+        cell->VisitCell(0,0,0);
         queue.push(cell);
       }
     }
@@ -132,7 +132,7 @@ bool RobotImpl::VisitCurrentCell() {
     log.log("X: " + std::to_string(curr_cell->x()));
     log.log("Y: " + std::to_string(curr_cell->y()));
     log.log("--------------------------------------------");
-    curr_cell->VisitCell();
+    curr_cell->VisitCell(1, 1, 1);
     for (Cell* neighbor : GetNeighbors()) {
       if (!neighbor->isVisited()) {
         should_move_forward = true;
