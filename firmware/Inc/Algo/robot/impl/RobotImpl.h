@@ -38,10 +38,9 @@ class RobotImpl : public AlgoRobot {
   bool VisitCell(maze::cell::Cell* cell, int left, int right, int top);
   void Move(maze::cell::Cell::RelativeDirection dir);
   void Rotate(maze::cell::Cell::RelativeDirection dir);
+  void Rotate(int degrees);
   void MoveNorth();
   void RealMoveForward();
-  void TurnEast();
-  void TurnWest();
   void MoveEast();
   void MoveSouth();
   void MoveWest();

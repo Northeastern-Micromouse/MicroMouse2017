@@ -52,6 +52,15 @@ void RobotImpl::StartExploration() {
       int left = winslow_.GetNextLeftWall();
       int right = winslow_.GetNextRightWall();
       int top = 0;
+      // If any of the sensor values give bogus values retry.
+      while (left == -1 || right == -1 || top == -1) {
+        if (left == -1) {
+            left = winslow_.GetNextLeftWall();
+        }
+        if (right == -1) {
+            right = winslow_.GetNextRightWall();
+        }
+      }
       // Visit the cell.
         int x = curr_loc_.x();
         int y = curr_loc_.y();
@@ -173,56 +182,52 @@ bool RobotImpl::VisitCell(Cell* cell, int left, int right, int top) {
 
 void RobotImpl::MoveNorth() {
   if (orientation_ == Cell::RelativeDirection::NORTH) {
-     // Do nothing.
+    // Do nothing.
   } else if (orientation_ == Cell::RelativeDirection::EAST) {
-    TurnWest();
+    Rotate(-90);
   } else if (orientation_ == Cell::RelativeDirection::WEST) {
-    TurnEast();
+    Rotate(90);
   } else {
-    TurnEast();
-    TurnEast();
+    Rotate(180);
   }
   orientation_ = Cell::RelativeDirection::NORTH;
 }
 
 void RobotImpl::MoveEast() {
   if (orientation_ == Cell::RelativeDirection::NORTH) {
-    TurnEast();
+    Rotate(90);
   } else if (orientation_ == Cell::RelativeDirection::EAST) {
-      // Do nothing.
+    // Do nothing.
   } else if (orientation_ == Cell::RelativeDirection::WEST) {
-    TurnEast();
-    TurnEast();
+    Rotate(180);
   } else {
-    TurnWest();
+    Rotate(-90);
   }
   orientation_ = Cell::RelativeDirection::EAST;
 }
 
 void RobotImpl::MoveSouth() {
   if (orientation_ == Cell::RelativeDirection::NORTH) {
-    TurnEast();
-    TurnEast();
+    Rotate(180);
   } else if (orientation_ == Cell::RelativeDirection::EAST) {
-    TurnEast();
+    Rotate(90);
   } else if (orientation_ == Cell::RelativeDirection::WEST) {
-    TurnWest();
+    Rotate(-90);
   } else {
-      // Do nothing.
+    // Do nothing.
   }
   orientation_ = Cell::RelativeDirection::SOUTH;
 }
 
 void RobotImpl::MoveWest() {
   if (orientation_ == Cell::RelativeDirection::NORTH) {
-    TurnWest();
+    Rotate(-90);
   } else if (orientation_ == Cell::RelativeDirection::EAST) {
-    TurnEast();
-    TurnEast();
+    Rotate(180);
   } else if (orientation_ == Cell::RelativeDirection::WEST) {
-      // DO nothing.
+    // Do nothing.
   } else {
-    TurnEast();
+    Rotate(90);
   }
   orientation_ = Cell::RelativeDirection::WEST;
 }
@@ -231,12 +236,8 @@ void RobotImpl::Move(Cell::RelativeDirection dir) {
   // TODO(matt): Implement
 }
 
-void RobotImpl::TurnEast() {
-  // TODO(matt): Implement.
-}
-
-void RobotImpl::TurnWest() {
-  // TODO(matt): Implement.
+void RobotImpl::Rotate(int degrees) {
+  // TODO(matt): Implement
 }
 
 void RobotImpl::Rotate(Cell::RelativeDirection dir) {
