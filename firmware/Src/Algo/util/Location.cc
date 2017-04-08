@@ -1,6 +1,6 @@
 #include <stdexcept>
 #include <iostream>
-#include "Location.h"
+#include "Algo/util/Location.h"
 
 namespace util {
 namespace location {

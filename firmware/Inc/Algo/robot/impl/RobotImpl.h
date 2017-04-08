@@ -2,18 +2,19 @@
 #define CC_ROBOT_IMPL_ROBOTIMPL_H_
 
 #include <stack>
-#include "../robot.h"
-#include "../../maze/impl/MazeImpl.h"
-#include "../../util/Location.h"
-#include "../../maze/cell/cell.h"
+#include "Robot.h"
+#include "Algo/robot/Algorobot.h"
+#include "Algo/maze/impl/MazeImpl.h"
+#include "Algo/util/Location.h"
+#include "Algo/maze/cell/cell.h"
 
 namespace robot {
 namespace impl {
 
-class RobotImpl : public Robot {
+class RobotImpl : public AlgoRobot {
  public:
-  RobotImpl();
-  RobotImpl(bool enable_debugging);
+  RobotImpl(al::Robot winslow);
+  RobotImpl(al::Robot winslow, bool enable_debugging);
 
   void StartExploration() override;
 
@@ -28,7 +29,9 @@ class RobotImpl : public Robot {
   std::stack<maze::cell::Cell *> stack_;
   bool enable_debugging_;
   maze::cell::Cell::RelativeDirection orientation_;
+  al::Robot winslow_;
 
+  void MakeWinslow();
   void ReturnToStart();
   void GoBack(maze::cell::Cell::RelativeDirection dir);
   std::vector<maze::cell::Cell *> GetNeighbors();

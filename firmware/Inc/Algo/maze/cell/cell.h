@@ -2,7 +2,7 @@
 #define CC_CELL_CELL_H_
 
 #include <vector>
-#include "../../util/Location.h"
+#include "Algo/util/Location.h"
 
 namespace maze {
 namespace cell {

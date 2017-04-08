@@ -2,7 +2,7 @@
 #define CC_ROBOT_ROBOT_H_
 
 // Abstract class to represent a robot.
-class Robot {
+class AlgoRobot {
  public:
   // Given an unknown maze start exploration will map the entire maze.
   // Mapping the maze will find all of the locations of the walls and obstacles.
@@ -13,6 +13,11 @@ class Robot {
 
   // Moves the robot to the goal using the path found in ComputeFastestPath.
   virtual void GoToGoal() = 0;
+  
+  // Virtual destructor for inheritence
+    virtual ~AlgoRobot() {
+        // No op implemented for inheritence
+    }
 };
 
 #endif  // CC_ROBOT_ROBOT_H_

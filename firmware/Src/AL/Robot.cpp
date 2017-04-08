@@ -48,7 +48,7 @@ void al::Robot::CorrectiveDrive(float distance, float velocity) {
     for (int i = 0; i < PID_UPDATES; i++) {
         
         // First, update the controller with current information
-        float offset = pid.Update(GetHorizontalLocation(), 
+        float offset = pid.Update(GetHorizontalLocation(true, true), 
             (distance / PID_UPDATES) / velocity);
         
         float left_distance = distance / PID_UPDATES - offset;

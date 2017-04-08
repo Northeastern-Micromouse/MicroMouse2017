@@ -1,5 +1,5 @@
 #include <iostream>
-#include "cell.h"
+#include "Algo/maze/cell/cell.h"
 
 namespace maze {
 namespace cell {

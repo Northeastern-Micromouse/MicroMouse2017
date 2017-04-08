@@ -1,7 +1,7 @@
 #include <queue>
 #include <iostream>
-#include "RobotImpl.h"
-#include "../../util/logger.h"
+#include "Algo/robot/impl/RobotImpl.h"
+#include "Algo/util/logger.h"
 
 namespace robot {
 namespace impl {
@@ -12,14 +12,19 @@ namespace {
 using maze::cell::Cell;
 using util::location::Location;
 
-RobotImpl::RobotImpl() : enable_debugging_(false),
-                         orientation_(Cell::RelativeDirection::NORTH) {
-  // No op.
+RobotImpl::RobotImpl(al::Robot winslow) : enable_debugging_(false),
+                         orientation_(Cell::RelativeDirection::NORTH), winslow_(winslow) {
+                           // No op.
 }
 
-RobotImpl::RobotImpl(bool enable_debugging) : enable_debugging_(enable_debugging),
-                                              orientation_(Cell::RelativeDirection::NORTH) {
+RobotImpl::RobotImpl(al::Robot winslow, bool enable_debugging) : enable_debugging_(enable_debugging),
+                                              orientation_(Cell::RelativeDirection::NORTH), winslow_(winslow) {
   log.should_log(true);
+                                                  MakeWinslow();
+}
+    
+void RobotImpl::MakeWinslow() {
+  // No op. 
 }
 
 void RobotImpl::StartExploration() {

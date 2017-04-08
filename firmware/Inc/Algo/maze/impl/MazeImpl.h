@@ -4,8 +4,8 @@
 #include <vector>
 #include <exception>
 #include <iostream>
-#include "../maze.h"
-#include "../cell/cell.h"
+#include "Algo/maze/maze.h"
+#include "Algo/maze/cell/cell.h"
 
 namespace maze {
 namespace impl {
@@ -18,7 +18,7 @@ class MazeImpl : public Maze {
 
   maze::cell::Cell *operator()(int x, int y) {
     if (x < 0 || y < 0) {
-      throw std::range_error("Index out of bounds");
+        return nullptr;
     }
     return maze_[x + (maze_size * y)];
   }
