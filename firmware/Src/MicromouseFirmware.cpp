@@ -24,6 +24,7 @@ extern "C" {
 
 int main(void) {
     CMain();
+
     pal::Adc adc1(hadc1, 2);
     pal::Adc adc2(hadc2, 3);
     pal::Adc adc3(hadc3, 1);
@@ -34,7 +35,6 @@ int main(void) {
     pal::Gpio right_dir = pal::Gpio(S_MOTOR_A_DIR_GPIO_Port, S_MOTOR_A_DIR_Pin);
     pal::Gpio driver_rst = pal::Gpio(DRIVER_RSTn_GPIO_Port, DRIVER_RSTn_Pin);
     pal::Tim drive_tick = pal::Tim(&htim1);
-    //driver_rst.Set(true);
 
     phil::Distance distA(adc1, 5, 0);
     phil::Distance distB(adc2, 6, 0);
@@ -43,12 +43,19 @@ int main(void) {
     phil::Reflectance reflC(adc3, 4, 0, 2);
     phil::IMU imu(&i2c, BNO055_ADDRESS_A);
     imu.Initialize();
-    phil::DriveSystem drive_system(&left_step, &left_dir, &right_step, &right_dir, &drive_tick, 106, 30, M_PI / 100);
+    phil::DriveSystem drive_system(&left_step, &left_dir, &right_step, &right_dir, &drive_tick, 106, 30, M_PI/(100*16));
     
-    al::Robot winslow_ = al::Robot(&drive_system, &imu, &distB, &distA, &reflA, &reflB, &reflC);
-    AlgoRobot* winslow = new robot::impl::RobotImpl(winslow_, true);
-    winslow->StartExploration();
-    winslow->ComputeFastestPath();
-    winslow->GoToGoal();
-    delete winslow;
-  }
+    robot.CorrectiveDrive(180, 350);
+    while (1) {
+        robot.Turn(90, 2*M_PI);
+        robot.CorrectiveDrive(360, 350);
+    }
+    
+
+  //  al::Robot winslow_ = al::Robot(&drive_system, &imu, &distB, &distA, &reflA, &reflB, &reflC);
+  //  AlgoRobot* winslow = new robot::impl::RobotImpl(winslow_, true);
+  //  winslow->StartExploration();
+  //  winslow->ComputeFastestPath();
+  //  winslow->GoToGoal();
+  //  delete winslow;
+}

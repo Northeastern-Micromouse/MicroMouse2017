@@ -174,8 +174,8 @@ void phil::DriveSystem::Turn(float radians, float angularVelocity) {
     // Set motors in opposite directions and drive an equal distance on each
     // wheel. Positive values for radians means a clockwise turn, negative
     // means counter clockwise
-    left_dir_->Set(radians > 0);
-    right_dir_->Set(radians > 0);
+    left_dir_->Set(radians < 0);
+    right_dir_->Set(radians < 0);
     
     // Calculate the distance each wheel needs to drive
     // This is the arc length around the circle formed with the center being

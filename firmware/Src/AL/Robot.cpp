@@ -1,6 +1,7 @@
 #include "Robot.h"
 #include "stm32l4xx_hal_def.h"
 #include "SensorLookupTables.h"
+#include <algorithm>
 
 namespace {
     // distance between the two reflectance sensors
@@ -8,6 +9,24 @@ namespace {
     float CENTER_TO_WALL_HORIZ = 37.7;
     float CENTER_TO_WALL_VERT = 31.0;
     float CENTER_HORIZ = 84.0;
+    
+    // The amount of points at which to sample the Hermite spline
+    const int SPLINE_SEGMENTS = 10;
+    	
+    // The number of discrete segments to divide each Hermite spline
+    // segment into
+    const int SPLINE_ARC_SEGMENTS = 5;
+    	
+    // The amount of times the PID should be updated during a drive
+    const int PID_UPDATES = 5;
+    	
+    // PID gains
+    const float PID_KP = 0.05;
+    const float PID_KI = 0.001;
+    const float PID_KD = 0.01;
+    	
+    // Conversion between the special spline units and mm
+    const float SPLINE_UNITS_PER_MM = 1.0 / 100;
 }
 
 al::Robot::Robot(phil::DriveSystem* drive_system): 
@@ -43,7 +62,13 @@ void al::Robot::CorrectiveDrive(float distance, float velocity) {
     // offset within a cell and the output will determine the additional steps
     // to be taken by a side
     util::PID pid(PID_KP, PID_KI, PID_KD);
-    pid.Set(0);
+    pid.Set(target_angle_);
+    
+    // This represents the distance we've actually travelled in the direction we want to go
+    float contributed_distance = 0;
+    HAL_Delay(1);
+    
+    float contr_amt = 0;
     
     for (int i = 0; i < PID_UPDATES; i++) {
         
@@ -51,11 +76,27 @@ void al::Robot::CorrectiveDrive(float distance, float velocity) {
         float offset = pid.Update(GetHorizontalLocation(true, true), 
             (distance / PID_UPDATES) / velocity);
         
-        float left_distance = distance / PID_UPDATES - offset;
-        float right_distance = distance / PID_UPDATES + offset;
+        float left_distance = distance / PID_UPDATES + offset;
+        float right_distance = distance / PID_UPDATES - offset;
         
         drive_system_->DriveRelative(left_distance, right_distance, velocity);
+        
+        //float heading;
+        //imu_->GetHeading(heading);
+        //heading = util::DeltaAngle(0, heading);
+        //contr_amt += (distance / PID_UPDATES) * cos(heading * M_PI / 180.0);
     }
+    
+    // Update our contributed distance using heading
+    //float final_heading;
+    //imu_->GetHeading(final_heading);
+    //final_heading = util::DeltaAngle(0, final_heading);
+    
+   // contributed_distance = ((distance) / 2.0) * cos(initial_heading * M_PI / 180.0) + 
+     //                       ((distance) / 2.0) * cos(final_heading * M_PI / 180.0);
+    
+    // Now correct for any less distance travelled
+    //SimpleDrive(distance - contributed_distance, velocity);
     
 }
 
@@ -75,7 +116,7 @@ void al::Robot::DiscreteSplineDrive(float velocity) {
     float spline_step = 1.0 / SPLINE_SEGMENTS;
 
     // TODO: add wall parsing before this call VVV
-    float starting_x = GetHorizontalLocation(true, true);
+    float starting_x = (31 - GetHorizontalLocation(true, true)) * SPLINE_UNITS_PER_MM;
   
     float left_path[SPLINE_SEGMENTS];
     float right_path[SPLINE_SEGMENTS];
@@ -110,7 +151,8 @@ void al::Robot::DiscreteSplineDrive(float velocity) {
     }
 }
 		
-void al::Robot::Turn(float degrees, float angular_velocity) {
+void al::Robot::Turn(int degrees, float angular_velocity) {
+    target_angle_ = (target_angle_ + degrees) % 360;
     drive_system_->Turn(degrees * M_PI / 180.0, angular_velocity);
 }
 

@@ -3,8 +3,8 @@
 #include <algorithm>
 
 namespace {
-    int LSB_OFFSET[3] = { 2710, 2531, 3330 };
-    int LOOKUP_SIZE[3] = { 1249, 1417, 652 };
+    int LSB_OFFSET[3] = { 3204, 2850, 3155 };
+    int LOOKUP_SIZE[3] = { 767, 1109, 826 };
 }
 
 namespace phil {
